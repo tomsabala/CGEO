@@ -1,0 +1,4 @@
+# ninja log v5
+0	991	1669673571575930523	CMakeFiles/CGEO.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o	352d36bdf988b41f
+0	494	1669637571171798579	CMakeFiles/CGEO.dir/DataStructures/BBST.cpp.o	2f1a1c6d52205bef
+1	416	1669637571095798582	CMakeFiles/CGEO.dir/DataStructures/TreeNode.cpp.o	21275742c5ea7ab4
