@@ -358,6 +358,60 @@ Geo_2D/fast:
 	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.s
 .PHONY : 2D/Shapes_2D/Segment2d.cpp.s
 
+DataStructures/BBST.o: DataStructures/BBST.cpp.o
+
+.PHONY : DataStructures/BBST.o
+
+# target to build an object file
+DataStructures/BBST.cpp.o:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o
+.PHONY : DataStructures/BBST.cpp.o
+
+DataStructures/BBST.i: DataStructures/BBST.cpp.i
+
+.PHONY : DataStructures/BBST.i
+
+# target to preprocess a source file
+DataStructures/BBST.cpp.i:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.i
+.PHONY : DataStructures/BBST.cpp.i
+
+DataStructures/BBST.s: DataStructures/BBST.cpp.s
+
+.PHONY : DataStructures/BBST.s
+
+# target to generate assembly for a file
+DataStructures/BBST.cpp.s:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.s
+.PHONY : DataStructures/BBST.cpp.s
+
+DataStructures/TreeNode.o: DataStructures/TreeNode.cpp.o
+
+.PHONY : DataStructures/TreeNode.o
+
+# target to build an object file
+DataStructures/TreeNode.cpp.o:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o
+.PHONY : DataStructures/TreeNode.cpp.o
+
+DataStructures/TreeNode.i: DataStructures/TreeNode.cpp.i
+
+.PHONY : DataStructures/TreeNode.i
+
+# target to preprocess a source file
+DataStructures/TreeNode.cpp.i:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.i
+.PHONY : DataStructures/TreeNode.cpp.i
+
+DataStructures/TreeNode.s: DataStructures/TreeNode.cpp.s
+
+.PHONY : DataStructures/TreeNode.s
+
+# target to generate assembly for a file
+DataStructures/TreeNode.cpp.s:
+	$(MAKE) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.s
+.PHONY : DataStructures/TreeNode.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -392,6 +446,12 @@ help:
 	@echo "... 2D/Shapes_2D/Segment2d.o"
 	@echo "... 2D/Shapes_2D/Segment2d.i"
 	@echo "... 2D/Shapes_2D/Segment2d.s"
+	@echo "... DataStructures/BBST.o"
+	@echo "... DataStructures/BBST.i"
+	@echo "... DataStructures/BBST.s"
+	@echo "... DataStructures/TreeNode.o"
+	@echo "... DataStructures/TreeNode.i"
+	@echo "... DataStructures/TreeNode.s"
 .PHONY : help
 
 

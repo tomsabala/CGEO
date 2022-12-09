@@ -5,7 +5,7 @@
 #include <math.h>
 #include <float.h>
 #include <unordered_set>
-#include "../../DataStructures/BBST.h"
+#include <map>
 #include "../Shapes_2D/Segment2d.h"
 #include "../Shapes_2D/Line2d.h"
 
@@ -14,12 +14,22 @@
 #define SEG_END         1
 #define SEG_INTERSECT   2
 
-struct seg_hashFunction
+struct pair_hashFunction
 {
     size_t operator()(const std::pair<int, int> &x) const
     {
         std::hash<int> int_hasher;
         return int_hasher(x.first) ^ int_hasher(x.second);
+    }
+};
+
+struct seg_hashFunction
+{
+    size_t operator()(const Shapes2D::Segment2d &seg)
+    {
+        std::hash<std::string> str_hasher;
+        return str_hasher(std::to_string(seg.getUpper()->getX()) + std::to_string(seg.getUpper()->getY()) +
+                                  std::to_string(seg.getLower()->getX()) + std::to_string(seg.getLower()->getY()));
     }
 };
 
@@ -70,23 +80,23 @@ public:
                 if (sweep.getX() < b_x.second) {
                     return 1;
                 } else {
-                    return -1;
+                    return 0;
                 }
             } else if (b_x.second > a.getLower()->getX()) {
                 return 1;
             } else {
-                return -1;
+                return 0;
             }
         }
         else {
             if (b.getUpper()->getX() <= a_x.second && b.getLower()->getX() >= a_x.second) {
                 if (sweep.getX() < a_x.second) {
-                    return -1;
+                    return 0;
                 } else {
                     return 1;
                 }
             } else if (a_x.second > b.getLower()->getX()) {
-                return -1;
+                return 0;
             } else {
                 return 1;
             }
@@ -104,7 +114,7 @@ class SegmentIntersection2d {
 public:
     SegmentIntersection2d() = default;
 
-    std::pair<bool, Shapes2D::Point2d>
+    std::pair<bool, Shapes2D::Point2d>*
     intersect(const Shapes2D::Segment2d & a,
               const Shapes2D::Segment2d & b,
               bool test);
@@ -121,11 +131,15 @@ public:
                      std::vector<Shapes2D::Point2d> *intersections);
 
     std::vector<int>
-    findInteriorMap(std::multimap<std::pair<Shapes2D::Point2d, int>, int, event_comp>::iterator e,
-                    std::multimap<Shapes2D::Segment2d, int, status_comp> sweep,
+    findInteriorMap(std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp>::iterator e,
+                    std::multimap<Shapes2D::Segment2d, int, status_comp> *sweep,
                     std::vector<Shapes2D::Segment2d> segments);
 
-    void print_it(std::multimap<Shapes2D::Segment2d, int, status_comp> sweep);
+    bool isInterior(Shapes2D::Segment2d s, Shapes2D::Point2d p);
+
+    void print_status(std::multimap<Shapes2D::Segment2d, int, status_comp> sweep);
+
+    void print_events(std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp> *events);
 
     std::vector<Shapes2D::Point2d>
     solve(std::vector<Shapes2D::Segment2d> & segments);
@@ -135,10 +149,10 @@ public:
     void insert2Hash(int x, int y);
 
     void
-    handle_segments(std::multimap<Shapes2D::Segment2d, int>::iterator it1,
-                                                                          std::multimap<Shapes2D::Segment2d, int>::iterator it2,
-                                                                          std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp> *events,
-                                                                          std::vector<Shapes2D::Point2d> * intersections);
+    handle_segments(std::multimap<Shapes2D::Segment2d, int>::iterator *it1,
+                    std::multimap<Shapes2D::Segment2d, int>::iterator *it2,
+                    Shapes2D::Point2d p,
+                    std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp> *events);
 };
 
 

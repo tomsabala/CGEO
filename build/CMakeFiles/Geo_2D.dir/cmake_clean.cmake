@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Point2d.cpp.o"
   "CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Polygon.cpp.o"
   "CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o"
+  "CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o"
+  "CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o"
   "libGeo_2D.pdb"
   "libGeo_2D.so"
 )
