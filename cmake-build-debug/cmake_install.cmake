@@ -47,7 +47,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/tomsabala/workspace/PersonalP/CGEO/cmake-build-debug/extern/pybind11/cmake_install.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so")
     file(RPATH_CHECK

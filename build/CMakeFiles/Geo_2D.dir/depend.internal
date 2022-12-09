@@ -130,7 +130,6 @@ CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Line2d.h
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Point2d.h
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.h
- /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/BBST.h
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Line2d.cpp.o
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Exception2D.h
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Line2d.cpp
@@ -151,3 +150,17 @@ CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Point2d.h
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.cpp
  /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Exception2D.h
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Line2d.h
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Point2d.h
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.h
+ /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/BBST.cpp
+ /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/BBST.h
+ /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/TreeNode.h
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Exception2D.h
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Point2d.h
+ /home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.h
+ /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/TreeNode.cpp
+ /home/tomsabala/workspace/PersonalP/CGEO/DataStructures/TreeNode.h

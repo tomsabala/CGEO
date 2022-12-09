@@ -129,7 +129,6 @@ CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: ../2D/Except
 CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: ../2D/Shapes_2D/Line2d.h
 CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: ../2D/Shapes_2D/Point2d.h
 CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: ../2D/Shapes_2D/Segment2d.h
-CMakeFiles/Geo_2D.dir/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: ../DataStructures/BBST.h
 
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Line2d.cpp.o: ../2D/Exception2D.h
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Line2d.cpp.o: ../2D/Shapes_2D/Line2d.cpp
@@ -150,4 +149,18 @@ CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o: ../2D/Exception2D.h
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o: ../2D/Shapes_2D/Point2d.h
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o: ../2D/Shapes_2D/Segment2d.cpp
 CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o: ../2D/Shapes_2D/Segment2d.h
+
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../2D/Exception2D.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../2D/Shapes_2D/Line2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../2D/Shapes_2D/Point2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../2D/Shapes_2D/Segment2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../DataStructures/BBST.cpp
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../DataStructures/BBST.h
+CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o: ../DataStructures/TreeNode.h
+
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o: ../2D/Exception2D.h
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o: ../2D/Shapes_2D/Point2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o: ../2D/Shapes_2D/Segment2d.h
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o: ../DataStructures/TreeNode.cpp
+CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o: ../DataStructures/TreeNode.h
 

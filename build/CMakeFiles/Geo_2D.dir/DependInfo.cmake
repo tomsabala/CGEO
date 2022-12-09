@@ -11,6 +11,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Point2d.cpp" "/home/tomsabala/workspace/PersonalP/CGEO/build/CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Point2d.cpp.o"
   "/home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Polygon.cpp" "/home/tomsabala/workspace/PersonalP/CGEO/build/CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Polygon.cpp.o"
   "/home/tomsabala/workspace/PersonalP/CGEO/2D/Shapes_2D/Segment2d.cpp" "/home/tomsabala/workspace/PersonalP/CGEO/build/CMakeFiles/Geo_2D.dir/2D/Shapes_2D/Segment2d.cpp.o"
+  "/home/tomsabala/workspace/PersonalP/CGEO/DataStructures/BBST.cpp" "/home/tomsabala/workspace/PersonalP/CGEO/build/CMakeFiles/Geo_2D.dir/DataStructures/BBST.cpp.o"
+  "/home/tomsabala/workspace/PersonalP/CGEO/DataStructures/TreeNode.cpp" "/home/tomsabala/workspace/PersonalP/CGEO/build/CMakeFiles/Geo_2D.dir/DataStructures/TreeNode.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

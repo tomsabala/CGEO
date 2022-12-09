@@ -55,6 +55,8 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def_property("target", &Shapes2D::Segment2d::getTarget, &Shapes2D::Segment2d::setTarget)
             .def("getSlope", &Shapes2D::Segment2d::getSlope, "get the slope of the segment")
             .def("getLength", &Shapes2D::Segment2d::getLength, "get the length of the segment")
+            .def("getUpper", &Shapes2D::Segment2d::getUpper, "get the upper point of the segment")
+            .def("getLower", &Shapes2D::Segment2d::getLower, "get the lower point of the segment")
             .def("adder", &Shapes2D::Segment2d::adder, "shift segment with point threshold",
                  py::arg("point"))
             .def("rotate", &Shapes2D::Segment2d::rotate, "rotate segment direction with given degree",
@@ -100,11 +102,13 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("isConvex", &Shapes2D::Polygon::isConvex, "check whether polygon is convex")
             .def("isY_Monotone", &Shapes2D::Polygon::isY_Monotone, "check whether polygon is y-monotone")
             .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp");
+
     py::class_<status_comp> cls(h, "Status_comp");
     cls.attr("height") = py::cast(status_comp::sweep);
             cls.def(py::init<>())
             .def_property_readonly_static("height", [](py::object) { return status_comp::sweep;})
             .def("setHeight", &status_comp::setSweep, "set height");
+
     py::class_<ConvexHull>(h, "ConvexHullUtilities")
             .def(py::init<>())
             .def("grahamConvexHull", &ConvexHull::grahamConvexHull, "graham convex hull algorithm")
@@ -113,4 +117,20 @@ PYBIND11_MODULE(libGeo_2D, h) {
     py::class_<SegmentIntersection2d>(h, "SegmentIntersect")
             .def(py::init<>())
             .def("intersection", &SegmentIntersection2d::solve, "solve segment intersection");
+
+    py::class_<TreeNode>(h, "TreeNode")
+            .def(py::init<Shapes2D::Segment2d>())
+            .def("getSegment", &TreeNode::getSegment, "get segment value");
+
+    py::class_<BST>(h, "SegmentTree")
+            .def(py::init<>())
+            .def("getSize", &BST::getSize, "return the size of the tree")
+            .def("getRoot", &BST::getRoot, "return the root pointer of the tree")
+            .def("insert", &BST::insertSegment, "insert a new segment to the tree")
+            .def("search", &BST::search, "search a segment inside the tree and return its pointer")
+            .def("maxx", &BST::maxx, "return the maximum segment in the tree")
+            .def("minn", &BST::minn, "return the minimum segment in the tree")
+            .def("InOrder", &BST::walkInOrder, "print the tree segment in an in-order walk")
+            .def("remove", &BST::removeSegment, "remove a segment from the tree")
+            .def("setHeight", &BST::setHeight, "set the height of the tree");
 }

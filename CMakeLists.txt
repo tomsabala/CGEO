@@ -10,7 +10,9 @@ add_library(Geo_2D MODULE 2D/2D_bindings.cpp
                           2D/Shapes_2D/Polygon.cpp
                           2D/Algorithms_2D/ConvexHull2D.cpp
                           2D/Algorithms_2D/SegmentIntersection2D.cpp
-                          2D/Shapes_2D/Line2d.cpp)
+                          2D/Shapes_2D/Line2d.cpp
+                          DataStructures/TreeNode.cpp
+                          DataStructures/BBST.cpp)
 target_link_libraries(Geo_2D PUBLIC pybind11::module)
 
 install(TARGETS Geo_2D

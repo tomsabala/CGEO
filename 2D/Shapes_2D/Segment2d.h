@@ -13,6 +13,7 @@ namespace Shapes2D {
         /* constructors */
         Segment2d();
         Segment2d(Shapes2D::Point2d *p, Shapes2D::Point2d *q);
+        explicit Segment2d(const Segment2d *s);
         explicit Segment2d(Segment2d *s);
 
         /* getter and setter */
@@ -21,7 +22,7 @@ namespace Shapes2D {
         Point2d* getUpper() const;
         Point2d* getLower() const;
         void setUpper(Point2d p) const;
-        void setLower(Point2d* p);
+        void setLower(Point2d p) const;
         void setOrigin(Point2d *new_p) noexcept(false);
         void setTarget(Point2d *new_p) noexcept(false);
         double getSlope();
@@ -49,6 +50,6 @@ namespace Shapes2D {
         double dist(Point2d *p) noexcept(false);
         bool isIntersect(Segment2d *s);
         Point2d* getIntersect(Segment2d *s);
-        bool containPoint(Point2d p);
+        bool containPoint(Point2d p) const;
     };
 }

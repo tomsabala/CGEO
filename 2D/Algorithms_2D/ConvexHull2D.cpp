@@ -66,7 +66,7 @@ Shapes2D::Polygon *ConvexHull::grahamConvexHull(Shapes2D::Polygon poly) {
 }
 
 /**
- * this function resposinble for sorting the Points in the Polygon poly. by their x-axis.
+ * this function responsible for sorting the Points in the Polygon poly. by their x-axis.
  * @param poly Polygon type object
  * @return vector of type Point2d
  */

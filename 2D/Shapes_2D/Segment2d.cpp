@@ -34,6 +34,10 @@ Segment2d::Segment2d(Point2d *p, Point2d *q) : origin(p), target(q) {
 Segment2d::Segment2d(Segment2d *s) :
 origin(s->getOrigin()), target(s->getTarget()){}
 
+
+Segment2d::Segment2d(const Segment2d *s) :
+origin(s->getOrigin()), target(s->getTarget()){}
+
 /**
  * getter and setter methods
  */
@@ -95,9 +99,20 @@ void Segment2d::setUpper(Point2d p) const {
  * set lower point to new point
  * @param p new point object
  */
-void Segment2d::setLower(Point2d *p) {
-    Point2d* old_lower = this->getLower();
-    old_lower = p;
+void Segment2d::setLower(Point2d p) const {
+    Point2d *new_point;
+    new_point = (Point2d *) malloc(sizeof(Point2d));
+    if(new_point == nullptr)
+        throw Exception2D("an error occurred\n");
+
+    new_point = new Point2d(p.getX(), p.getY());
+    if(this->getLower()->_eq_(this->getTarget())){
+        this->target->setX(new_point->getX());
+        this->target->setY(new_point->getY());
+    } else {
+        this->origin->setX(new_point->getX());
+        this->origin->setY(new_point->getY());
+    }
 }
 
 /**
@@ -317,8 +332,8 @@ Point2d *Segment2d::getIntersect(Segment2d *s) {
  * function checks if segment contains point
  * @return boolean value
  */
-bool Segment2d::containPoint(Point2d p) {
-    if(this->oriePred(&p) <= eps) {
+bool Segment2d::containPoint(Point2d p) const {
+    if(std::abs(this->oriePred(&p)) <= eps) {
         return this->getUpper()->getY() >= p.getY() && this->getLower()->getY() <= p.getY();
     }
     return false;
@@ -328,6 +343,7 @@ std::string Segment2d::toStr() const{
     std::string res = this->getUpper()->toStr() + " ----> " + this->getLower()->toStr() + "\n";
     return res;
 }
+
 
 
 
