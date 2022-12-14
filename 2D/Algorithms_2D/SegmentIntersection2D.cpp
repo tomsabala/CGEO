@@ -8,6 +8,93 @@ std::unordered_set<Shapes2D::Point2d, point_hashFunction> checked_points;
 std::map<Shapes2D::Point2d, std::vector<std::pair<Shapes2D::Segment2d, int>>> Upper_end_point;
 std::map<Shapes2D::Point2d, std::vector<std::pair<Shapes2D::Segment2d, int>>> Lower_end_point;
 
+/**
+ * base function. recieve a segments vector and return all intersection points
+ * @param segments segments vector
+ * @return points vector
+ */
+std::vector<Shapes2D::Point2d>
+SegmentIntersection2d::solve(std::vector<Shapes2D::Segment2d> &segments)
+{
+    /* to be deletted */
+    for(Shapes2D::Segment2d  s : segments) {
+        if (s.getLower()->getY() == s.getUpper()->getY())
+            throw Exception2D("invalid input\n");
+    }
+
+    std::vector<Shapes2D::Point2d> res;
+    intersect(segments, &res);
+    return res;
+}
+
+/**
+ * find all intersection points
+ * @param segments vector
+ * @param intersections dynamic vector of all intersection points
+ */
+void
+SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d> & segments,
+                                 std::vector<Shapes2D::Point2d> * intersections)
+{
+    /* this multimap holds the y coordinate of a point,
+     * the segment this point belongs to (by the index k with in segments),
+     * and whether this is the upper point or lower point in the segment
+     */
+    std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp> events;
+
+    /*
+     * this multimap holds the point representing an event
+     * and the index s, of the segment this point belongs to in segments.
+     */
+    std::multimap<Shapes2D::Segment2d, int, status_comp> sweep;
+
+    /* insert upper and lower points */
+    for (int k = 0; k < (int)segments.size(); ++k) {
+        if(Lower_end_point.find(*segments[k].getLower()) != Lower_end_point.end())
+            Lower_end_point[*segments[k].getLower()].push_back(std::make_pair(segments[k], k));
+        else
+            Lower_end_point[*segments[k].getLower()] = std::vector<std::pair<Shapes2D::Segment2d, int>>{std::make_pair(segments[k], k)};
+
+        if(Upper_end_point.find(*segments[k].getUpper()) != Upper_end_point.end())
+            Upper_end_point[*segments[k].getUpper()].push_back(std::make_pair(segments[k], k));
+        else
+            Upper_end_point[*segments[k].getUpper()] = std::vector<std::pair<Shapes2D::Segment2d, int>>{std::make_pair(segments[k], k)};
+
+        if(checked_points.find(*segments[k].getUpper()) == checked_points.end()){
+            events.insert(std::make_pair(std::make_pair(segments[k].getUpper(),SEG_START), std::make_pair(k, k)));
+            checked_points.insert(*segments[k].getUpper());
+        }
+        if(checked_points.find(*segments[k].getLower()) == checked_points.end()){
+            events.insert(std::make_pair(std::make_pair(segments[k].getLower(),SEG_END), std::make_pair(k, k)));
+            checked_points.insert(*segments[k].getLower());
+        }
+    }
+
+    /* start scanning the events */
+    int count = 1;
+    while (!events.empty()) {
+        /*pick-up first event -- {reminder: multimap holds keys in sorted form}*/
+        std::cout<<"iter number " << count <<'\n'; count ++;
+        std::cout << "events.size is : " << events.size() << '\n';
+
+        std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp>::iterator first = events.begin();
+
+        std::cout << "event point is : " << first->first.first.toStr() << '\n';
+
+        handleEventPoint(first, &events, &sweep, segments, intersections);
+        events.erase(first);
+        checked_points.insert(first->first.first);
+
+        std::cout <<'\n';
+        std::cout<<"sweep after event:\n";
+        this->print_status(sweep);
+        std::cout<<"events after event:\n";
+        this->print_events(&events);
+        std::cout << '\n';
+    }
+
+}
+
 /** check whether two segments intersect */
 std::pair<bool, Shapes2D::Point2d>*
         SegmentIntersection2d::intersect(const Shapes2D::Segment2d & a,
@@ -189,69 +276,6 @@ SegmentIntersection2d::handleEventPoint(std::multimap<std::pair<Shapes2D::Point2
     }
 }
 
-//find all intersection points
-void
-SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d> & segments,
-                                 std::vector<Shapes2D::Point2d> * intersections)
-{
-    /* this multimap holds the y coordinate of a point,
-     * the segment this point belongs to (by the index k with in segments),
-     * and whether this is the upper point or lower point in the segment
-     */
-    std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp> events;
-
-    /*
-     * this multimap holds the point representing an event
-     * and the index s, of the segment this point belongs to in segments.
-     */
-    std::multimap<Shapes2D::Segment2d, int, status_comp> sweep;
-
-    /* insert upper and lower points */
-    for (int k = 0; k < (int)segments.size(); ++k) {
-        if(Lower_end_point.find(*segments[k].getLower()) != Lower_end_point.end())
-            Lower_end_point[*segments[k].getLower()].push_back(std::make_pair(segments[k], k));
-        else
-            Lower_end_point[*segments[k].getLower()] = std::vector<std::pair<Shapes2D::Segment2d, int>>{std::make_pair(segments[k], k)};
-
-        if(Upper_end_point.find(*segments[k].getUpper()) != Upper_end_point.end())
-            Upper_end_point[*segments[k].getUpper()].push_back(std::make_pair(segments[k], k));
-        else
-            Upper_end_point[*segments[k].getUpper()] = std::vector<std::pair<Shapes2D::Segment2d, int>>{std::make_pair(segments[k], k)};
-
-        if(checked_points.find(*segments[k].getUpper()) == checked_points.end()){
-            events.insert(std::make_pair(std::make_pair(segments[k].getUpper(),SEG_START), std::make_pair(k, k)));
-            checked_points.insert(*segments[k].getUpper());
-        }
-        if(checked_points.find(*segments[k].getLower()) == checked_points.end()){
-            events.insert(std::make_pair(std::make_pair(segments[k].getLower(),SEG_END), std::make_pair(k, k)));
-            checked_points.insert(*segments[k].getLower());
-        }
-    }
-
-    /* start scanning the events */
-    int count = 1;
-    while (!events.empty()) {
-        /*pick-up first event -- {reminder: multimap holds keys in sorted form}*/
-        std::cout<<"iter number " << count <<'\n'; count ++;
-        std::cout << "events.size is : " << events.size() << '\n';
-
-        std::multimap<std::pair<Shapes2D::Point2d, int>, std::pair<int, int>, event_comp>::iterator first = events.begin();
-
-        std::cout << "event point is : " << first->first.first.toStr() << '\n';
-
-        handleEventPoint(first, &events, &sweep, segments, intersections);
-        events.erase(first);
-        checked_points.insert(first->first.first);
-
-        std::cout <<'\n';
-        std::cout<<"sweep after event:\n";
-        this->print_status(sweep);
-        std::cout<<"events after event:\n";
-        this->print_events(&events);
-        std::cout << '\n';
-    }
-
-}
 
 
 /**
@@ -322,19 +346,6 @@ bool SegmentIntersection2d::isInterior(Shapes2D::Segment2d s, Shapes2D::Point2d 
 
 
 
-std::vector<Shapes2D::Point2d>
-SegmentIntersection2d::solve(std::vector<Shapes2D::Segment2d> &segments)
-{
-    for(Shapes2D::Segment2d  s : segments) {
-        if (s.getLower()->getY() == s.getUpper()->getY())
-            throw Exception2D("in valid input\n");
-    }
-
-    std::vector<Shapes2D::Point2d> res;
-    intersect(segments, &res);
-    return res;
-}
-
 bool
 SegmentIntersection2d::seg_isChecked(int x, int y)
 {
@@ -368,6 +379,11 @@ void SegmentIntersection2d::handle_segments(std::multimap<Shapes2D::Segment2d, i
     }
 }
 
+
+
+/**
+ * debug functionality
+ */
 void
 SegmentIntersection2d::print_status(std::multimap<Shapes2D::Segment2d, int, status_comp> sweep)
 {
