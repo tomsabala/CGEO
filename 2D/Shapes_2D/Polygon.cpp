@@ -260,6 +260,21 @@ int Shapes2D::Polygon::getLeftMost_index() {
     return res;
 }
 
+bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
+    int res = 0;
+    std::vector<Segment2d> edges = this->getEdges();
+
+    for(Segment2d e : edges)
+    {
+        if (e.getUpper()->getY() > p->getY() && e.getLower()->getY() < p->getY())
+        {
+            if(e.getLower()->oriePred(e.getUpper(), p) > 0)
+                res = !res;
+        }
+    }
+
+    return res;
+}
 
 
 

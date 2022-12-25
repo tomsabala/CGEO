@@ -35,5 +35,7 @@ namespace Shapes2D{
         bool isY_Monotone();
         bool isInnerCusp(int i);
 
+        bool isInPoly(Point2d *p);
+
     };
 }
