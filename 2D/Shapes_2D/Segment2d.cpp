@@ -303,6 +303,7 @@ bool Segment2d::isIntersect(Segment2d *s) {
             return true;
         return false;
     }
+
     if(this->oriePred(s->getOrigin()) <= 0 && this->oriePred(s->getTarget()) >= 0) {
         if(s->oriePred(this->getOrigin()) >= 0 && s->oriePred(this->getTarget()) <= 0)
             return true;
@@ -314,6 +315,11 @@ bool Segment2d::isIntersect(Segment2d *s) {
 }
 
 Point2d *Segment2d::getIntersect(Segment2d *s) {
+    if (this->getUpper()->_eq_(s->getUpper()) || this->getLower()->_eq_(s->getUpper()))
+        return s->getUpper();
+    if (this->getUpper()->_eq_(s->getLower()) || this->getLower()->_eq_(s->getLower()))
+        return s->getLower();
+
     if(this->isIntersect(s)) {
         double a = (this->getTarget()->getY() - this->getOrigin()->getY()) / (this->getTarget()->getX() - this->getOrigin()->getX());
         double b = this->getOrigin()->getY() - (this->getOrigin()->getX() * a);
