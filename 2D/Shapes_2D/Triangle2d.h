@@ -1,14 +1,11 @@
-//
-// Created by tomsabala on 12/25/22.
-//
+#pragma once
 
-#ifndef CGEO_TRIANGLE2D_H
-#define CGEO_TRIANGLE2D_H
-
+#include "Point2d.h"
 
 class Triangle2d {
+public:
+    std::vector<Shapes2D::Point2d> vertex;
 
+    Triangle2d(Shapes2D::Point2d p, Shapes2D::Point2d q, Shapes2D::Point2d t);
+    std::vector<Shapes2D::Point2d> getVertices();
 };
-
-
-#endif //CGEO_TRIANGLE2D_H
