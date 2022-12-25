@@ -274,7 +274,7 @@ bool BST::remove(TreeNode* toDel)
     // Case 2: both children
     else if (toDel->getLeft() && toDel->getRight())
     {
-        TreeNode* maxNode = new TreeNode(this->maxx(toDel->getLeft()));
+        TreeNode* maxNode = this->maxx(toDel->getLeft());
         Shapes2D::Segment2d v = *maxNode->getSegment();
         this->remove(maxNode);
         toDel->setSegment(v);
@@ -324,7 +324,7 @@ TreeNode* BST::getRoot()
  * @param s segment to look for
  * @return TreeNode pointer
  */
-TreeNode* BST::search(Shapes2D::Segment2d s)
+TreeNode* BST::searchSegment(Shapes2D::Segment2d s)
 {
     if (this->root != NULL)
     {
@@ -357,21 +357,59 @@ TreeNode* BST::search(Shapes2D::Segment2d s)
 }
 
 /**
+ * search the closest tree node to the given point
+ * @param p is a point we are interset in
+ * @return TreeNode pointer
+ */
+TreeNode* BST::searchPoint(Shapes2D::Point2d *p)
+{
+    if (this->root != NULL)
+    {
+        TreeNode* last;
+        TreeNode* temp = this->root;
+        while (temp != NULL)
+        { /* search in the subtree temp */
+            last = temp;
+            if( temp->getSegment()->getSlope() == 0 )
+            {
+                if (p->getX() < temp->getSegment()->getUpper()->getX())
+                    temp = temp->getLeft();
+                else if (p->getX() > temp->getSegment()->getLower()->getX())
+                    temp = temp->getRight();
+                else
+                    return temp;
+                continue;
+            }
+            int pred;
+            pred = temp->getSegment()->getUpper()->oriePred(temp->getSegment()->getLower(), p);
+
+            if ( pred < 0 )
+                temp = temp->getRight();
+            else if ( pred > 0 )
+                temp = temp->getLeft();
+            else
+                return temp;
+        }
+        return last;
+    }
+    return NULL;
+}
+
+/**
  * return the maximum value segment in the tree
  * @param tmp root
  * @return Segment value
  */
-Shapes2D::Segment2d BST::maxx(TreeNode* tmp)
+TreeNode* BST::maxx(TreeNode* tmp)
 {
     while (tmp != NULL) /* walk on the right path */
     {
         if (tmp->getRight() == NULL)
         {
-            return *tmp->getSegment();
+            return tmp;
         }
         tmp = tmp->getRight();
     }
-    return Shapes2D::Segment2d();
 }
 
 /**
@@ -379,17 +417,16 @@ Shapes2D::Segment2d BST::maxx(TreeNode* tmp)
  * @param tmp root
  * @return Segment value
  */
-Shapes2D::Segment2d BST::minn(TreeNode* tmp)
+TreeNode* BST::minn(TreeNode* tmp)
 {
     while (tmp != NULL)
     { /* walk on the left path */
         if (tmp->getLeft() == NULL)
         {
-            return *tmp->getSegment();
+            return tmp;
         }
         tmp = tmp->getLeft();
     }
-    return Shapes2D::Segment2d();
 }
 
 /**
@@ -514,6 +551,89 @@ bool BST::_ge_(Shapes2D::Segment2d v, Shapes2D::Segment2d u)
     }
 }
 
-void BST::setHeight(Shapes2D::Point2d p) {
+void BST::setHeight(Shapes2D::Point2d p)
+{
     this->height = p;
+}
+
+TreeNode *BST::getPredecessor(TreeNode * node)
+{
+    /* base case */
+    if (root == nullptr)
+    {
+        return nullptr;
+    }
+    TreeNode* prec = nullptr;
+    while (1)
+    {
+        // if the given key is less than the root node, visit the left subtree
+        if (this->_le_(*node->getSegment(), *root->getSegment()))
+            root = root->getLeft();
+        // if the given key is more than the root node, visit the right subtree
+        else if (this->_ge_(*node->getSegment(), *root->getSegment()))
+        {
+            // update predecessor to the current node before visiting
+            // right subtree
+            prec = root;
+            root = root->getRight();
+        }
+        // if a node with the desired value is found, the predecessor is the maximum
+        // value node in its left subtree (if any)
+        else
+        {
+            if (root->getLeft() != NULL)
+            {
+                prec = this->maxx(root->getLeft());
+            }
+            break;
+        }
+        // if the key doesn't exist in the binary tree, return previous greater node
+        if (root == NULL)
+        {
+            return prec;
+        }
+    }
+    // return predecessor, if any
+    return prec;
+}
+
+TreeNode *BST::getSuccessor(TreeNode * node) {
+    // base case
+    if (root == nullptr)
+    {
+        return nullptr;
+    }
+    TreeNode* succ = nullptr;
+    while (1)
+    {
+        // if the given key is less than the root node, visit the left subtree
+        if (this->_le_(*node->getSegment(), *root->getSegment()))
+        {
+            // update successor to the current node before visiting left subtree
+            succ = root;
+            root = root->getLeft();
+        }
+        // if the given key is more than the root node, visit the right subtree
+        else if (this->_ge_(*node->getSegment(), *root->getSegment()))
+        {
+            root = root->getRight();
+        }
+        // if a node with the desired value is found, the successor is the minimum
+        // value node in its right subtree (if any)
+        else
+        {
+            if (root->getRight() != NULL)
+            {
+                succ = this->minn(root->getRight());
+            }
+            break;
+        }
+        // if the key doesn't exist in the binary tree, return next greater node
+        if (root == NULL)
+        {
+            return succ;
+        }
+    }
+    // return successor, if any
+    return succ;
 }

@@ -28,9 +28,12 @@ public:
     int getSize();
     TreeNode* getRoot();
     void insertSegment(Shapes2D::Segment2d* s);
-    TreeNode* search(Shapes2D::Segment2d);
-    Shapes2D::Segment2d maxx(TreeNode*);
-    Shapes2D::Segment2d minn(TreeNode*);
+    TreeNode* searchSegment(Shapes2D::Segment2d);
+    TreeNode* searchPoint(Shapes2D::Point2d *);
+    TreeNode* getPredecessor(TreeNode *);
+    TreeNode* getSuccessor(TreeNode *);
+    TreeNode* maxx(TreeNode*);
+    TreeNode* minn(TreeNode*);
     void walkInOrder(TreeNode*);
     void walkPreOrder(TreeNode*);
     void walkPostOrder(TreeNode*);
