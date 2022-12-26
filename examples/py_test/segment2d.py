@@ -38,3 +38,9 @@ print("s1 : {}".format(s1))
 print("s2 : {}\n".format(s2))
 print("orientation for s2->s1 is {} (positive)".format(s2.oriePred(s1)))
 print("orientation for s1->s2 is {} (negative)\n".format(s1.oriePred(s2)))
+
+
+
+seg1 = Geo.Segment(Geo.Point(1, 3), Geo.Point(1, 1))
+seg2 = Geo.Segment(Geo.Point(2, 4), Geo.Point(1, 1))
+
