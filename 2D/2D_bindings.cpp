@@ -101,7 +101,8 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("getSize", &Shapes2D::Polygon::getSize, "return number of vertices in polygon")
             .def("isConvex", &Shapes2D::Polygon::isConvex, "check whether polygon is convex")
             .def("isY_Monotone", &Shapes2D::Polygon::isY_Monotone, "check whether polygon is y-monotone")
-            .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp");
+            .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp")
+            .def("decomposeY_Monotone", &Shapes2D::Polygon::decomposeY_Monotone, "decompose the given polygon into y-monotone polygons");
 
     py::class_<ConvexHull>(h, "ConvexHullUtilities")
             .def(py::init<>())
