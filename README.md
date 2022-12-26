@@ -16,10 +16,10 @@ I suggest reading the relevant examples before trying to use the functionality b
 
 # Some Nice Examples
 You can have a look for an ouput example on convex hull algorithm using [Graham Convex Hull Algorithm](https://en.wikipedia.org/wiki/Graham_scan) :
-![Convex Hull 1](examples/PlotImages/convex_hull.png)
-![Convex Hull 2](examples/PlotImages/Convex_Hull002.png)
+![Convex Hull 1](examples/PlotImages/convex_hull.png =100x100)
+![Convex Hull 2](examples/PlotImages/Convex_Hull002.png =100x100)
 
 The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
 
 Also, a nice usefull y-monotonic decomposition of a polygon :
-![Decomposition](examples/PlotImages/y_decomposition.png)
+![Decomposition](examples/PlotImages/y_decomposition.png =100x100)
