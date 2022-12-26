@@ -22,4 +22,4 @@ You can have a look for an ouput example on convex hull algorithm using [Graham 
 The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
 
 Also, a nice usefull y-monotonic decomposition of a polygon :
-![Decomposition]([http://url/to/img.png](https://github.com/tomsabala/CGEO/examples/PlotImages/y_decomposition.png))
+![Decomposition](examples/PlotImages/y_decomposition.png)
