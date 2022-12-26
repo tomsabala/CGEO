@@ -20,5 +20,7 @@ You can have a look for an ouput example on convex hull algorithm using [Graham 
 
 The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
 
-Also, a nice usefull y-monotonic decomposition of a polygon : <br />
+Also, a nice usefull [y-monotonic](https://en.wikipedia.org/wiki/Monotone_polygon) decomposition of a polygon : <br />
 <img src=examples/PlotImages/y_decomposition.png width=250 height=250 />
+
+Here the initial polygon is the overall pink layer, and each sub-polygon is decomposed with an inner diagonal edge.
