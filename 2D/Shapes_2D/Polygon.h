@@ -8,6 +8,16 @@ namespace Shapes2D{
     struct Polygon {
     private:
         std::vector<Point2d> vertices;
+
+        static int next_downInnerCusp(Shapes2D::Polygon *poly, int t);
+        static int next_upperInnerCusp(Shapes2D::Polygon *poly, int t);
+        static int rightBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v);
+        static int leftBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v);
+        static int rightBoundDownInnerCusp(Shapes2D::Polygon *poly, int v);
+        static int leftBoundDownInnerCusp(Shapes2D::Polygon *poly, int v);
+        static int findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, int innerCusp);
+        static int findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, int innerCusp);
+
     public:
         /* constructors */
         Polygon();
@@ -34,8 +44,7 @@ namespace Shapes2D{
         bool isConvex();
         bool isY_Monotone();
         bool isInnerCusp(int i);
-
         bool isInPoly(Point2d *p);
-
+        static std::vector<Polygon *> decomposeY_Monotone(Polygon *poly);
     };
 }

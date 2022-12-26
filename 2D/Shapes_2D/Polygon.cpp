@@ -19,7 +19,16 @@ Shapes2D::Polygon::Polygon() {
  * @param v is a vector of type Point2d
  */
 Shapes2D::Polygon::Polygon(const std::vector<Point2d> &v) {
-    this->vertices.insert(this->vertices.begin(), v.begin(), v.end());
+    double edge_sum = 0;
+    for (int i=0; i<v.size(); i++)
+    {
+        Point2d next = i == v.size()-1 ? v[0] : v[i+1];
+        edge_sum += (next.getX() - v[i].getX()) * (next.getY() + v[i].getY());
+    }
+    if (edge_sum >= 0)
+        this->vertices.insert(this->vertices.begin(), v.begin(), v.end());
+    else
+        this->vertices.insert(this->vertices.end(), v.rbegin(), v.rend());
 }
 
 /**
@@ -190,7 +199,7 @@ bool Shapes2D::Polygon::isY_Monotone() {
 
 bool Shapes2D::Polygon::isInnerCusp(int i) {
     int n = this->getSize();
-    double prev_y = this->getByIndex((i-1)%n)->getY();
+    double prev_y = this->getByIndex(i == 0 ? n-1 : i-1)->getY();
     double next_y = this->getByIndex((i+1)%n)->getY();
     double curr_y = this->getByIndex(i)->getY();
 
@@ -260,6 +269,12 @@ int Shapes2D::Polygon::getLeftMost_index() {
     return res;
 }
 
+/**
+ * this function checks whether a given point is inside polygon
+ * assuming polygon is a simple polygon
+ * @param p 2d point
+ * @return true iff point is in inteior of polygon
+ */
 bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
     int res = 0;
     std::vector<Segment2d> edges = this->getEdges();
@@ -273,6 +288,265 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
         }
     }
 
+    return res;
+}
+
+/**
+ * the next following functions are the methods related to the decomposision of a polygon into
+ * y-monotone polygons.
+ * for each inner cusp we want to find a diagonal that is a legal diagonal, and then split the polygon accordingly
+ * and make a recursive call for the both polygons
+ *
+ * IDEA:
+ * a polygon is y-monotone iff it does not have any inner cusps
+ * inner cusp is a vertex which has two adjacent vertices with y-value bigger or lower than his
+ */
+int Shapes2D::Polygon::next_downInnerCusp(Shapes2D::Polygon *poly, int t)
+{
+    int n = poly->getSize();
+
+    for (int i=(t+1)%n; i!=t; i=(i+1)%n)
+    {
+        int pred = i == 0 ? n-1 : i-1;
+        int succ = i == n-1 ? 0 : i+1;
+
+        if (poly->getByIndex(pred)->getY() < poly->getByIndex(i)->getY() && poly->getByIndex(succ)->getY() < poly->getByIndex(i)->getY())
+        {
+            if (poly->getByIndex(pred)->oriePred(poly->getByIndex(i), poly->getByIndex(succ)) > 0)
+                return i;
+        }
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::next_upperInnerCusp(Shapes2D::Polygon *poly, int t)
+{
+    int n = poly->getSize();
+
+    for (int i=t; i<n; i++)
+    {
+        int pred = i == 0 ? n-1 : i-1;
+        int succ = i == n-1 ? 0 : i+1;
+
+        if (poly->getByIndex(pred)->getY() > poly->getByIndex(i)->getY() && poly->getByIndex(succ)->getY() > poly->getByIndex(i)->getY())
+        {
+            if (poly->getByIndex(pred)->oriePred(poly->getByIndex(i), poly->getByIndex(succ)) > 0)
+                return i;
+        }
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::leftBoundDownInnerCusp(Shapes2D::Polygon *poly, int v)
+{
+    int n = poly->getSize();
+    double v_y = poly->getByIndex(v)->getY();
+
+    for(int i=(v+1)%n; i!=v; i=(i+1)%n)
+    {
+        if (poly->getByIndex(i)->getY() >= v_y)
+            return i;
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::rightBoundDownInnerCusp(Shapes2D::Polygon *poly, int v)
+{
+    int n = poly->getSize();
+    double v_y = poly->getByIndex(v)->getY();
+
+    for(int i=(v-1)%n; i!=v; i=i == 0 ? n-1 : i-1)
+    {
+        if (poly->getByIndex(i)->getY() >= v_y)
+            return i;
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::leftBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v)
+{
+    int n = poly->getSize();
+    double v_y = poly->getByIndex(v)->getY();
+
+    for(int i=(v-1)%n; i!=v; i=i == 0 ? n-1 : i-1)
+    {
+        if (poly->getByIndex(i)->getY() <= v_y)
+            return i;
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::rightBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v)
+{
+    int n = poly->getSize();
+    double v_y = poly->getByIndex(v)->getY();
+
+    for(int i=(v+1)%n; i!=v; i=(i+1)%n)
+    {
+        if (poly->getByIndex(i)->getY() <= v_y)
+            return i;
+    }
+
+    return -1;
+}
+
+int Shapes2D::Polygon::findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, int innerCusp)
+{
+    int n = poly->getSize();
+    int leftBoundVertex = leftBoundUpperInnerCusp(poly, innerCusp);
+    int rightBoundVertex = rightBoundUpperInnerCusp(poly, innerCusp);
+
+    Shapes2D::Point2d *left_point = poly->getByIndex(leftBoundVertex);
+    Shapes2D::Point2d *right_point = poly->getByIndex(rightBoundVertex);
+
+    int u = -1;
+
+    for (int i=rightBoundVertex; i!=leftBoundVertex; i=(i+1)%n)
+    {
+        Shapes2D::Point2d *p = poly->getByIndex(i);
+        if(p->getX() > left_point->getX() && p->getX() < right_point->getX())
+        {
+            if (u == -1) /* first component found */
+            {
+                u = i;
+                continue;
+            }
+            if (poly->getByIndex(u)->getY() < p->getY()) /* compare between u's height and i's height */
+            {
+                u = i;
+                continue;
+            }
+        }
+    }
+
+    return u;
+}
+
+int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, int innerCusp)
+{
+    int n = poly->getSize();
+    int leftBoundVertex = leftBoundDownInnerCusp(poly, innerCusp);
+    std::cout << "found left bound is : " << leftBoundVertex << '\n';
+
+    int rightBoundVertex = rightBoundDownInnerCusp(poly, innerCusp);
+
+    std::cout << "found right bound is : " << rightBoundVertex << '\n';
+
+    Shapes2D::Point2d *left_point = poly->getByIndex(leftBoundVertex);
+    Shapes2D::Point2d *right_point = poly->getByIndex(rightBoundVertex);
+
+    int u = -1;
+
+    for (int i=leftBoundVertex; i!=rightBoundVertex; i=(i+1)%n)
+    {
+        Shapes2D::Point2d *p = poly->getByIndex(i);
+        if(p->getX() > left_point->getX() && p->getX() < right_point->getX())
+        {
+            if (u == -1) /* first component found */
+            {
+                u = i;
+                continue;
+            }
+            if (poly->getByIndex(u)->getY() > p->getY()) /* compare between u's height and i's height */
+            {
+                u = i;
+                continue;
+            }
+        }
+    }
+
+    return u;
+}
+
+std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D::Polygon *poly) {
+    std::vector<Shapes2D::Polygon *> res;
+
+    int n = poly->getSize();
+
+    std::cout<< "function is called with n : " << n << '\n';
+
+    int downInnerCusp = next_downInnerCusp(poly, 0);
+    if (downInnerCusp != -1)
+    {
+        std::cout << "polygon has down inner cusp, in vertex : " << downInnerCusp << '\n';
+        int u = findDiagonalFromDownInnerCusp(poly, downInnerCusp);
+        if (u == -1)
+            throw (Exception2D("un expected error occurred\n"));
+
+        std::cout << "diagonal is second vertex is : " << u << '\n';
+
+        Shapes2D::Polygon *poly1, *poly2;
+        std::vector<Shapes2D::Point2d> poly1_points, poly2_points;
+
+        for(int i=downInnerCusp; i!=u;  i = (i + 1) % n)
+        {
+            poly1_points.push_back(*poly->getByIndex(i));
+        }
+        poly1_points.push_back(*poly->getByIndex(u));
+
+        for(int i=u; i!=downInnerCusp;  i = (i + 1) % n)
+        {
+            poly2_points.push_back(*poly->getByIndex(i));
+        }
+        poly2_points.push_back(*poly->getByIndex(downInnerCusp));
+
+        poly1 = new Shapes2D::Polygon(poly1_points);
+        poly2 = new Shapes2D::Polygon(poly2_points);
+
+        std::vector<Polygon *> left_poly_dec = decomposeY_Monotone(poly1);
+        std::vector<Polygon *> right_poly_dec = decomposeY_Monotone(poly2);
+
+        res.insert(res.end(), left_poly_dec.begin(), left_poly_dec.end());
+        res.insert(res.end(), right_poly_dec.begin(), right_poly_dec.end());
+
+        return res;
+    }
+
+
+
+    int upperInnerCusp = next_upperInnerCusp(poly, 0);
+    if (upperInnerCusp != -1)
+    {
+        std::cout << "polygon has upper inner cusp, in vertex : " << downInnerCusp << '\n';
+        int u = findDiagonalFromUpperInnerCusp(poly, upperInnerCusp);
+        if (u == -1)
+            throw (Exception2D("un expected erro occurred\n"));
+
+        std::cout << "diagonal is second vertex is : " << u << '\n';
+
+        Shapes2D::Polygon *poly1, *poly2;
+        std::vector<Shapes2D::Point2d> poly1_points, poly2_points;
+
+        for(int i=upperInnerCusp; i!=u;  i = (i + 1) % n)
+        {
+            poly1_points.push_back(*poly->getByIndex(i));
+        }
+        poly1_points.push_back(*poly->getByIndex(u));
+
+        for(int i=u; i!=upperInnerCusp;  i = (i + 1) % n)
+        {
+            poly2_points.push_back(*poly->getByIndex(i));
+        }
+        poly2_points.push_back(*poly->getByIndex(upperInnerCusp));
+
+        poly1 = new Shapes2D::Polygon(poly1_points);
+        poly2 = new Shapes2D::Polygon(poly2_points);
+
+        std::vector<Polygon *> left_poly_dec = decomposeY_Monotone(poly1);
+        std::vector<Polygon *> right_poly_dec = decomposeY_Monotone(poly2);
+
+        res.insert(res.end(), left_poly_dec.begin(), left_poly_dec.end());
+        res.insert(res.end(), right_poly_dec.begin(), right_poly_dec.end());
+
+        return res;
+    }
+
+    res.push_back(poly);
     return res;
 }
 
