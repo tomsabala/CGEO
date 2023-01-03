@@ -35,7 +35,7 @@ and you can find multiple code-examples of python programs with the wrapped pack
 
 
 ## How To Run
-<p>For some running examples you can checkout the ![examples](CGEO/tree/main/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+<p>For some running examples you can checkout the ![examples](examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 </p>
@@ -44,9 +44,10 @@ I suggest reading the relevant examples before trying to use the functionality b
 ## Some Nice Examples
 <details>
       <summary>Convex-Hull</summary>
-      <p><img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 />
-         The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
-</p>     
+      <p><img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 /></p>
+   
+   The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+     
 </details>
 
 <details>
@@ -54,6 +55,7 @@ I suggest reading the relevant examples before trying to use the functionality b
       <p><img src=examples/PlotImages/y_decomposition.png width=250 height=250 /></p>  
          
    The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+   
    A [reference](https://en.wikipedia.org/wiki/Monotone_polygon) for y-monotone polygons definition.
    
 </details>
