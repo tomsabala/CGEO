@@ -1,19 +1,18 @@
 ![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)  ![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social) ![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green)  ![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 # CGEO
-<details>
-    <p>This project is a collection of several Computational Geometry Algorithms and Applications.
+
+<p>This project is a collection of several Computational Geometry Algorithms and Applications.
 
 The algorithms are implemented in C++ and are wrapped with PyBind11 to use in Python.
 
 The reason for the project is educational, I am challenging my self with implementing the algorithms so I can understand the theoretic material better.
 
 This is an on-going project and has new features every now and then.</p>
-</details>
 
-<details>
-    <summary>List Of Implementations</summary>
-           <p>you can find the followong algorithms available:
+
+## List Of Implementations
+<p>You can find the followong algorithms available:
 
 * ![Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
     * ![Gift-Wrapping](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm) Convex Hull by Jarvis march
@@ -28,31 +27,22 @@ This is an on-going project and has new features every now and then.</p>
         * ![Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
         * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon2d.cpp)
 * ![Balanced Binary Segment-Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
-</details>
 
-<details>
-           <summary>Some Nice Examples</summary>
-           <p> 
-           All the algorithms are implemented using c++. 
-           But a user can use this source code as a C++ extension for a Python program.
-           All algorithms and classes are wrapperd with ![pybind11](https://pybind11.readthedocs.io/en/stable/), 
-           and you can find multiple code-examples of python programs with the wrapped package via the following ![link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
-           </p>
-
-</details>
+All the algorithms are implemented using c++. 
+But a user can use this source code as a C++ extension for a Python program.
+All algorithms and classes are wrapperd with ![pybind11](https://pybind11.readthedocs.io/en/stable/), 
+and you can find multiple code-examples of python programs with the wrapped package via the following ![link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
 
 
-<details>
-    <summary>How To Run</summary>
-           <p>For some running examples you can checkout the [examples](https://github.com/tomsabala/CGEO/tree/main/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+## How To Run
+<p>For some running examples you can checkout the [examples](https://github.com/tomsabala/CGEO/tree/main/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 </p>
-</details>
 
-<details>
-           <summary>Some Nice Examples</summary>
-           <p>* Convex-Hull : <br />
+
+## Some Nice Examples
+* Convex-Hull : <br />
 <img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 />
 
 >> The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
@@ -65,5 +55,4 @@ I suggest reading the relevant examples before trying to use the functionality b
 * Basic polygon triangulation : <br />
 <img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 />
 
-</details>
 
