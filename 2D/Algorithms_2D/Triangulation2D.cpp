@@ -1,163 +1,231 @@
-//
-// Created by tomsabala on 12/25/22.
-//
 
 #include <iostream>
 #include "Triangulation2D.h"
 
+
 std::vector<Triangle2d *>
-        Triangulation2D::triangulate(Shapes2D::Polygon poly)
-        {
-    std::vector<Triangle2d*> res;
-    if (poly.getSize() <= 3)
+Triangulation2D::triangulate(Shapes2D::Polygon *poly)
+{
+    std::vector<Triangle2d *> res;
+
+    std::vector<Shapes2D::Polygon *> poly_decompose = Shapes2D::Polygon::decomposeY_Monotone(poly);
+
+    for (Shapes2D::Polygon *sub_poly : poly_decompose)
     {
-        Triangle2d *tri = new Triangle2d(*poly.getByIndex(0), *poly.getByIndex(1), *poly.getByIndex(2));
+        std::vector<Triangle2d *> sub_res = this->triangulate_YMonotone(sub_poly);
+        res.insert(res.end(), sub_res.begin(), sub_res.end());
+    }
+
+    return res;
+}
+
+/**
+ * this function triangulate the polygon poly,
+ * while assuming that poly is a y-monotone polygon
+ * @param poly a y-monotone polygon
+ * @return vector of Triangles in poly
+ */
+std::vector<Triangle2d *>
+Triangulation2D::triangulate_YMonotone(Shapes2D::Polygon *poly)
+{
+    std::vector<Triangle2d *> res;
+
+    if (poly->getSize() == 3)
+    {
+        Triangle2d *tri = new Triangle2d(*poly->getByIndex(0), *poly->getByIndex(1), *poly->getByIndex(2));
         res.push_back(tri);
         return res;
     }
-    int v;
-    int u;
-    for(int i=0; i<poly.getSize(); i++)
+
+    std::stack<std::pair<Shapes2D::Point2d *, int>> vertex_Stack;
+    std::vector<std::pair<Shapes2D::Point2d *, int>> sorted_vertex = this->sortByY(poly);
+
+    int i=2;
+    vertex_Stack.push(sorted_vertex[0]);
+    vertex_Stack.push(sorted_vertex[1]);
+
+    while(i < sorted_vertex.size())
     {
-        u = getDiagonal(poly, i);
-        if(u != -1){
-            v = i;
-            break;
+        std::pair<Shapes2D::Point2d *, int> p = sorted_vertex[i];
+        this->popFromStack(&res, &vertex_Stack, p);
+
+        i++;
+    }
+
+    return res;
+}
+
+/**
+ * this function is responsible for dynamically piping vertices from the stack,
+ * as long as they can create a new triangle with another vertex p
+ * @param res every valid triangle is been inserted into res
+ * @param vertex_Stack dynamic stack
+ * @param p the pivot vertex
+ */
+void
+Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::pair<Shapes2D::Point2d *, int>> *vertex_Stack, std::pair<Shapes2D::Point2d *, int> p)
+{
+    if (p.second == vertex_Stack->top().second)
+    {
+        /* p is on the same rail as every other vertex in the stack */
+        while(vertex_Stack->size() >= 2)
+        {
+            std::pair<Shapes2D::Point2d *, int> first_pair = vertex_Stack->top();
+            vertex_Stack->pop();
+            std::pair<Shapes2D::Point2d *, int> second_pair = vertex_Stack->top();
+            vertex_Stack->pop();
+
+            if (p.second)
+            {
+                if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
+                {
+                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    vertex_Stack->push(second_pair);
+                }
+                else
+                {
+                    vertex_Stack->push(second_pair);
+                    vertex_Stack->push(first_pair);
+                    break;
+                }
+            }
+
+            else
+            {
+                if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
+                {
+                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    vertex_Stack->push(second_pair);
+                }
+                else
+                {
+                    vertex_Stack->push(second_pair);
+                    vertex_Stack->push(first_pair);
+                    break;
+                }
+            }
+        }
+    }
+    else
+    { /* p is on the opposite rail from all other vertices in the stack */
+
+        std::pair<Shapes2D::Point2d *, int> last_p = vertex_Stack->top();
+        while(vertex_Stack->size() >= 2)
+        {
+            std::pair<Shapes2D::Point2d *, int> first_pair = vertex_Stack->top();
+            vertex_Stack->pop();
+            std::pair<Shapes2D::Point2d *, int> second_pair = vertex_Stack->top();
+            vertex_Stack->pop();
+
+            if (p.second)
+            {
+                if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
+                {
+                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    if(vertex_Stack->size() == 0)
+                        break;
+                    vertex_Stack->push(second_pair);
+                }
+                else
+                {
+                    vertex_Stack->push(second_pair);
+                    vertex_Stack->push(first_pair);
+                    break;
+                }
+            }
+            else
+            {
+                if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
+                {
+                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    if(vertex_Stack->size() == 0)
+                        break;
+                    vertex_Stack->push(second_pair);
+                }
+                else
+                {
+                    vertex_Stack->push(second_pair);
+                    vertex_Stack->push(first_pair);
+                    break;
+                }
+            }
+        }
+        vertex_Stack->push(last_p);
+    }
+
+    vertex_Stack->push(p);
+}
+
+/**
+ * get a sorted vector of all points in the polygon by their y coordinate
+ * @param poly assuming poly is y-monotone
+ * @return sorted points vector
+ */
+std::vector<std::pair<Shapes2D::Point2d *, int>>
+Triangulation2D::sortByY(Shapes2D::Polygon *poly)
+{
+    std::pair<std::vector<std::pair<Shapes2D::Point2d *, int>>, std::vector<std::pair<Shapes2D::Point2d *, int>>> rails = this->findLeftRightRails(poly);
+
+    std::vector<std::pair<Shapes2D::Point2d *, int>> res;
+
+    int leftIndex=0, rightIndex=0;
+    while (leftIndex<rails.first.size() && rightIndex<rails.second.size())
+    {
+        if (rails.first[leftIndex].first->getY() > rails.second[rightIndex].first->getY())
+            res.push_back(rails.first[leftIndex ++]);
+        else
+            res.push_back(rails.second[rightIndex ++]);
+    }
+
+    while (leftIndex<rails.first.size())
+        res.push_back(rails.first[leftIndex ++]);
+
+    while (rightIndex<rails.second.size())
+        res.push_back(rails.second[rightIndex ++]);
+
+    return res;
+}
+
+/**
+ * get a two rails from up to bottom points of poly
+ * @param poly assuming poly is a y-monotone polygon
+ * @return two sorted vectors
+ */
+std::pair<std::vector<std::pair<Shapes2D::Point2d *, int>>, std::vector<std::pair<Shapes2D::Point2d *, int>>>
+Triangulation2D::findLeftRightRails(Shapes2D::Polygon *poly)
+{
+    int n = poly->getSize();
+    /* get upper and lower polygons points */
+    Shapes2D::Point2d *upperPoint=poly->getByIndex(0), *lowerPoint=poly->getByIndex(0);
+    int upperIndex=0, lowerIndex=0;
+    for (int i=0; i<n; ++i)
+    {
+        Shapes2D::Point2d *curr_point = poly->getByIndex(i);
+        if (upperPoint->getY() < curr_point->getY())
+        {
+            upperPoint = curr_point;
+            upperIndex = i;
+        }
+        if (lowerPoint->getY() > curr_point->getY())
+        {
+            lowerPoint = curr_point;
+            lowerIndex = i;
         }
     }
 
-    std::pair<Shapes2D::Polygon, Shapes2D::Polygon> sub_polygons = constructPoly(poly, std::make_pair(v, u));
-    std::vector<Triangle2d *> tri_poly1 = triangulate(sub_polygons.first);
-    std::vector<Triangle2d *> tri_poly2 = triangulate(sub_polygons.second);
+    /* construct the left and right rails from top to bottom */
+    std::vector<std::pair<Shapes2D::Point2d *, int>>leftRail;
+    std::vector<std::pair<Shapes2D::Point2d *, int>>rightRail;
 
-    res.insert(res.end(), tri_poly1.begin(), tri_poly1.end());
-    res.insert(res.end(), tri_poly2.begin(), tri_poly2.end());
-
-//    std::cout<<"pol1 is decomposed to : \n";
-//    for (Triangle2d *tri : tri_poly1)
-//    {
-//        for (Shapes2D::Point2d p : tri->vertex)
-//        {
-//            std::cout<<p.toStr()<<'\n';
-//        }
-//    }
-//
-//    std::cout<<"pol2 is decomposed to : \n";
-//    for (Triangle2d *tri : tri_poly2)
-//    {
-//        for (Shapes2D::Point2d p : tri->vertex)
-//        {
-//            std::cout<<p.toStr()<<'\n';
-//        }
-//    }
-
-
-    return res;
-}
-
-/**
- * this function is responsible for finding a vertex in poly
- * which has two adjacent vertices with y-value lower then the vertex y-value
- * @param poly simple polygon
- * @return vector<int> (of length 0 if not found)
- */
-std::vector<int>
-Triangulation2D::downInnerCusp(Shapes2D::Polygon poly)
-{
-    int n = poly.getSize();
-    std::vector<int> res;
-
-    for (int i=0; i<n; i++)
+    for (int i=upperIndex; i!=lowerIndex; i=(i+1)%n)
     {
-        int pred = i == 0 ? n-1 : i-1;
-        int succ = i == n-1 ? 0 : i+1;
-
-        if (poly.getByIndex(pred)->getY() < poly.getByIndex(i)->getY() && poly.getByIndex(succ)->getY() < poly.getByIndex(i)->getY())
-            res.push_back(i);
+        rightRail.push_back(std::make_pair(poly->getByIndex(i), 1));
     }
-
-    return res;
-}
-
-/**
- * this function is responsible for finding a vertex in poly
- * which has two adjacent vertices with y-value bigger then the vertex y-value
- * @param poly simple polygon
- * @return vector<int> (of length 0 if not found)
- */
-std::vector<int>
-Triangulation2D::upperInnerCusp(Shapes2D::Polygon poly)
-{
-    int n = poly.getSize();
-    std::vector<int> res;
-
-    for (int i=0; i<n; i++)
+    for (int i=upperIndex==0?n-1:upperIndex-1; i!=lowerIndex; i=i==0?n-1:i-1)
     {
-        int pred = i == 0 ? n-1 : i-1;
-        int succ = i == n-1 ? 0 : i+1;
-
-        if (poly.getByIndex(pred)->getY() > poly.getByIndex(i)->getY() && poly.getByIndex(succ)->getY() > poly.getByIndex(i)->getY())
-            res.push_back(i);
+        leftRail.push_back(std::make_pair(poly->getByIndex(i), 0));
     }
+    leftRail.push_back(std::make_pair(poly->getByIndex(lowerIndex), 0));
 
-    return res;
-}
-
-std::pair<Shapes2D::Polygon, Shapes2D::Polygon>
-Triangulation2D::constructPoly(Shapes2D::Polygon poly, std::pair<int, int> vertex_ind) {
-    Shapes2D::Polygon *poly1, *poly2;
-    std::vector<Shapes2D::Point2d> poly1_points, poly2_points;
-
-    for(int i=vertex_ind.first; i!=vertex_ind.second;  i = (i + 1) % poly.getSize())
-    {
-        poly1_points.push_back(*poly.getByIndex(i));
-    }
-    poly1_points.push_back(*poly.getByIndex(vertex_ind.second));
-
-    for(int i=vertex_ind.second; i!=vertex_ind.first;  i = (i + 1) % poly.getSize())
-    {
-        poly2_points.push_back(*poly.getByIndex(i));
-    }
-    poly2_points.push_back(*poly.getByIndex(vertex_ind.first));
-
-    poly1 = new Shapes2D::Polygon(poly1_points);
-    poly2 = new Shapes2D::Polygon(poly2_points);
-
-    return std::make_pair(*poly1, *poly2);
-
-}
-
-int Triangulation2D::getDiagonal(Shapes2D::Polygon poly, int v) {
-
-    for (int i=0; i<poly.getSize(); i++)
-    {
-        int val = goodDiagonal(poly, v, i);
-        if (val)
-            return i;
-    }
-
-    return -1;
-}
-
-
-int Triangulation2D::goodDiagonal(Shapes2D::Polygon poly, int v, int u)
-{
-    if (u == v)
-        return 0;
-    if ((v + 1) % poly.getSize() == u || (u + 1) % poly.getSize() == v)
-        return 0;
-
-    std::vector<Shapes2D::Segment2d> edges = poly.getEdges();
-    Shapes2D::Segment2d *seg = new Shapes2D::Segment2d(poly.getByIndex(v), poly.getByIndex(u));
-    for (Shapes2D::Segment2d e : edges)
-    {
-        Shapes2D::Point2d *intersect = e.getIntersect(seg);
-        if (intersect == nullptr)
-            continue;
-        if(!intersect->_eq_(seg->getLower()) && !intersect->_eq_(seg->getLower()))
-            return 0;
-    }
-
-    Shapes2D::Point2d *midPoint = new Shapes2D::Point2d((seg->getTarget()->getX() + seg->getOrigin()->getX()) / 2, (seg->getTarget()->getY() + seg->getOrigin()->getY()) / 2);
-    return poly.isInPoly(midPoint);
+    return std::make_pair(leftRail, rightRail);
 }

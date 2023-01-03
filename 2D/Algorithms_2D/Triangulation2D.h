@@ -2,17 +2,25 @@
 
 #include "../Shapes_2D/Polygon.h"
 #include "../Shapes_2D/Triangle2d.h"
+#include <stack>
+
 
 class Triangulation2D {
 public:
     std::vector<Triangle2d *>
-            triangulate(Shapes2D::Polygon poly);
+    triangulate(Shapes2D::Polygon *poly);
 
-    std::pair<Shapes2D::Polygon, Shapes2D::Polygon>
-    constructPoly(Shapes2D::Polygon p,
-                  std::pair<int, int> vertex_ind);
+    std::vector<Triangle2d *>
+    triangulate_YMonotone(Shapes2D::Polygon *poly);
 
-    int getDiagonal(Shapes2D::Polygon p, int v);
+    std::vector<std::pair<Shapes2D::Point2d *, int>>
+    sortByY(Shapes2D::Polygon *poly);
 
-    int goodDiagonal(Shapes2D::Polygon poly, int v, int u);
+    std::pair<std::vector<std::pair<Shapes2D::Point2d *, int>>, std::vector<std::pair<Shapes2D::Point2d *, int>>>
+    findLeftRightRails(Shapes2D::Polygon *poly);
+
+    void
+    popFromStack(std::vector<Triangle2d *> * res,
+                 std::stack<std::pair<Shapes2D::Point2d *, int>> *vertex_Stack,
+                 std::pair<Shapes2D::Point2d *, int> p);
 };
