@@ -1,4 +1,5 @@
-![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social)![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=%3CCOLOR%3E)![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)
+![Computational Geometry](https://img.shields.io/badge/License-GNU%203.0-blue.svg)  ![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social) ![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=%3CCOLOR%3E)  ![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)
+
 # CGEO
 
 This project is a collection of several Computational Geometry Algorithms and Applications.
