@@ -1,4 +1,4 @@
-![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)  ![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social) ![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=dark-green)  ![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)
+![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)  ![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social) ![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green)  ![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)
 
 # CGEO
 
