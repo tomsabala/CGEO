@@ -45,17 +45,19 @@ I suggest reading the relevant examples before trying to use the functionality b
 <details>
       <summary>Convex-Hull :</summary>
       <p><img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 />
-         > The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+         >> The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
 </p>     
-
 </details>
 
-* [y-monotonic](https://en.wikipedia.org/wiki/Monotone_polygon) decomposition of a polygon : <br />
-<img src=examples/PlotImages/y_decomposition.png width=250 height=250 />
+<details>
+      <summary>Y Monotone Polygons Decomposition :</summary>
+      <p><img src=examples/PlotImages/y_decomposition.png width=250 height=250 />
+         >> The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+         >> A ![reference](https://en.wikipedia.org/wiki/Monotone_polygon) for y-monotone polygons definition.
+</p>     
+</details>
 
->> Here the initial polygon is the overall pink layer, and each sub-polygon is decomposed with an inner diagonal edge.</p>
-
-* Basic polygon triangulation : <br />
-<img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 />
-
-
+<details>
+      <summary>Basic polygon triangulation :</summary>
+      <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
+</details>
