@@ -12,7 +12,7 @@ class PlotPolygon:
     def __init__(self):
         pass
 
-    def plot(self, dots: np.array, **kwargs) -> None:
+    def plotConvexHull(self, dots: np.array, **kwargs) -> None:
 
         """
         imp from : https://stackoverflow.com/questions/43971259/how-to-draw-polygons-with-python
@@ -31,15 +31,51 @@ class PlotPolygon:
             plt.scatter(x, y, color='black')
         plt.show()
 
+    def plotPolygons(self, poly: np.array, sub_polygons: np.array) ->None:
+
+        p = Polygon(poly, facecolor='pink', edgecolor='black')
+        _, ax = plt.subplots()
+        ax.add_patch(p)
+        max_x, min_x, max_y, min_y = self.getBoundingBox(poly)
+
+        ax.set_xlim([min_x - 1, max_x + 1])
+        ax.set_ylim([min_y - 1, max_y + 1])
+
+        for sub_poly in sub_polygons:
+            for edge in sub_poly:
+                plt.plot([edge.origin.x, edge.target.x], [edge.origin.y, edge.target.y], color='black')
+        plt.show()
+
+    def plotTriangulation(self, Poly: np.array, Triangles: np.array) -> None:
+        p = Polygon(Poly, facecolor='pink', edgecolor='black')
+        _, ax = plt.subplots()
+        ax.add_patch(p)
+
+        max_x, min_x, max_y, min_y = self.getBoundingBox(Poly)
+
+        ax.set_xlim([min_x - 1, max_x + 1])
+        ax.set_ylim([min_y - 1, max_y + 1])
+
+        for [x, y] in Poly:
+            plt.scatter(x, y, color='black')
+        for [x, y] in Triangles:
+            plt.plot([x.x, y.x], [x.y, y.y], color='blue', marker='|')
+        plt.show()
+
+
+    def getBoundingBox(self, dots):
+        x = [x for (x, _) in dots]
+        y = [y for (_, y) in dots]
+
+        return max(x), min(x), max(y), min(y)
 
 def main(tests, titles=None):
     for test1, test2 in tests:
+        plt = PlotPolygon()
+        max_x, min_x, max_y, min_y = plt.getBoundingBox(test1)
 
-        x = [x for (x, _) in test1]
-        y = [y for (_, y) in test1]
-
-        kwargs = {'max_x': max(x), 'min_x': min(x), 'max_y': max(y), 'min_y': min(y), 'hull': test2, 'titles': titles}
-        PlotPolygon().plot(test1, **kwargs)
+        kwargs = {'max_x': max_x, 'min_x': min_x, 'max_y': max_y, 'min_y': min_y, 'hull': test2, 'titles': titles}
+        PlotPolygon().plotConvexHull(test1, **kwargs)
 
 
 def generateRandomPolygons(center: Tuple[float, float], avg_radius: float,
@@ -59,14 +95,20 @@ def generateRandomPolygons(center: Tuple[float, float], avg_radius: float,
     angle_steps = random_angle_steps(num_vertices, irregularity)
 
     # now generate the points
+    points_set = set()
     points = []
     angle = random.uniform(0, 2 * math.pi)
-    for i in range(num_vertices):
+    counter = 0
+    while counter < num_vertices:
         radius = clip(random.gauss(avg_radius, spikiness), 0, 2 * avg_radius)
         point = (center[0] + radius * math.cos(angle),
                  center[1] + radius * math.sin(angle))
+        if point in points_set:
+            continue
         points.append(point)
-        angle += angle_steps[i]
+        angle += angle_steps[counter]
+        points_set.add(point)
+        counter += 1
 
     return points
 
