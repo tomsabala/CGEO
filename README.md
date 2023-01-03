@@ -35,10 +35,10 @@ and you can find multiple code-examples of python programs with the wrapped pack
 
 
 ## How To Run
-<p>For some running examples you can checkout the [examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+For some running examples you can checkout the ![examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
-</p>
+
 
 
 ## Some Nice Examples
