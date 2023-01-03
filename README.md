@@ -26,7 +26,7 @@ This is an on-going project and has new features every now and then.</p>
         * ![Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
         * ![Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
         * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon2d.cpp)
-* ![Balanced Binary Segment-Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
+* ![Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
 
 All the algorithms are implemented using c++. 
 But a user can use this source code as a C++ extension for a Python program.
