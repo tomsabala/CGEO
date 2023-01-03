@@ -1,3 +1,4 @@
+![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=%3CCOLOR%3E)
 # CGEO
 
 This project is a collection of several Computational Geometry Algorithms and Applications.
