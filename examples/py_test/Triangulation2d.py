@@ -11,7 +11,6 @@ for i in range(10):
                                               irregularity=0.5,
                                               spikiness=0.5,
                                               num_vertices=10)
-    # dots = [(1, 3), (2, 4), (5, 3), (4, 1), (5, -3), (1, 1)]
 
     points_arr = [Geo.Point(x, y) for x, y in dots]
     poly = Geo.Polygon(points_arr)
@@ -19,6 +18,10 @@ for i in range(10):
     # decompose to triangles
     Triangles = _utility.triangulate(poly)
     edges = []
+
+
+    for p in poly.getVertices():
+        print(p)
 
     for i, tri in enumerate(Triangles):
         vertex = tri.getVertex()
