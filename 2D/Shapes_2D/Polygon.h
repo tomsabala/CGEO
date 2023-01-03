@@ -22,6 +22,7 @@ namespace Shapes2D{
         /* constructors */
         Polygon();
         explicit Polygon(const std::vector<Point2d>& v);
+        explicit Polygon(const std::vector<Point2d *>& v);
 
         /* getter and setter */
         void insert(const Point2d &p);
@@ -44,6 +45,8 @@ namespace Shapes2D{
         bool isConvex();
         bool isY_Monotone();
         bool isInnerCusp(int i);
+        bool isUpperInnerCusp(int v);
+        bool isDownInnerCusp(int v);
         bool isInPoly(Point2d *p);
         static std::vector<Polygon *> decomposeY_Monotone(Polygon *poly);
     };
