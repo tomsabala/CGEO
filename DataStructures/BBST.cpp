@@ -410,6 +410,8 @@ TreeNode* BST::maxx(TreeNode* tmp)
         }
         tmp = tmp->getRight();
     }
+
+    return NULL;
 }
 
 /**
@@ -427,6 +429,7 @@ TreeNode* BST::minn(TreeNode* tmp)
         }
         tmp = tmp->getLeft();
     }
+    return NULL;
 }
 
 /**
