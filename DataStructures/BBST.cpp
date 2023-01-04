@@ -217,7 +217,7 @@ int BST::getSize() {
  */
 Shapes2D::Segment2d BST::parentDisplay(Shapes2D::Segment2d val)
 {
-    TreeNode* tmp = search(val);
+    TreeNode* tmp = searchSegment(val);
     return *tmp->getParent()->getSegment();
 }
 
@@ -247,7 +247,7 @@ int BST::high(TreeNode* tmp)
  */
 bool BST::removeSegment(Shapes2D::Segment2d toFind)
 {
-    return remove(search(toFind));
+    return remove(searchSegment(toFind));
 }
 
 /**
