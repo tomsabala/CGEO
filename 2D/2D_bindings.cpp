@@ -108,14 +108,8 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def(py::init<>())
             .def("grahamConvexHull", &ConvexHull::grahamConvexHull, "graham convex hull algorithm")
             .def("giftWrapConvexHull", &ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
-    /*
-    py::class_<status_comp> cls(h, "Status_comp");
-    cls.attr("height") = py::cast(status_comp::sweep);
-            cls.def(py::init<>())
-            .def_property_readonly_static("height", [](py::object) { return status_comp::sweep;})
-            .def("setHeight", &status_comp::setSweep, "set height");
 
-     py::class_<SegmentIntersection2d>(h, "SegmentIntersect")
+    py::class_<SegmentIntersection2d>(h, "SegmentIntersect")
             .def(py::init<>())
             .def("intersection", &SegmentIntersection2d::solve, "solve segment intersection");
 
@@ -125,16 +119,15 @@ PYBIND11_MODULE(libGeo_2D, h) {
 
     py::class_<BST>(h, "SegmentTree")
             .def(py::init<>())
-            .def("getSize", &BST::getSize, "return the size of the tree")
-            .def("getRoot", &BST::getRoot, "return the root pointer of the tree")
             .def("insert", &BST::insertSegment, "insert a new segment to the tree")
-            .def("search", &BST::search, "search a segment inside the tree and return its pointer")
+            .def("searchSegment", &BST::searchSegment, "search a segment inside the tree and return its pointer")
+            .def("searchPoint", &BST::searchPoint, "search for a segment that contains a given point inside the tree")
             .def("maxx", &BST::maxx, "return the maximum segment in the tree")
             .def("minn", &BST::minn, "return the minimum segment in the tree")
             .def("InOrder", &BST::walkInOrder, "print the tree segment in an in-order walk")
             .def("remove", &BST::removeSegment, "remove a segment from the tree")
             .def("setHeight", &BST::setHeight, "set the height of the tree");
-    */
+
     py::class_<Triangle2d>(h, "Triangle")
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
             .def("getVertex", &Triangle2d::getVertices, "get vertex list");
