@@ -15,8 +15,8 @@ This is an on-going project and has new features every now and then.</p>
 <p>You can find the followong algorithms available:
 
 * ![Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
-    * ![Gift-Wrapping](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm) Convex Hull by Jarvis march
-    * ![Grahm-Scan](https://en.wikipedia.org/wiki/Graham_scan) Convex Hull by Ronald Graham
+    * [Gift-Wrapping](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm) Convex Hull by Jarvis march
+    * [Grahm-Scan](https://en.wikipedia.org/wiki/Graham_scan) Convex Hull by Ronald Graham
     * Devide-and-Conquer Convex Hull
 * ![Segmentation Intersection](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SegmentIntersection2D.cpp)
 * ![Polygon Triangulation](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/Triangulation2D.cpp)
