@@ -25,7 +25,7 @@ This is an on-going project and has new features every now and then.</p>
         * ![Point](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Point2d.cpp)
         * ![Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
         * ![Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
-        * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon2d.cpp)
+        * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon.cpp)
 * ![Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
 
 All the algorithms are implemented using c++. 
