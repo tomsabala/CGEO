@@ -39,6 +39,12 @@ For some running examples you can checkout the ![examples](CGEO/examples) direct
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 
+You can use this repo as a submodule within your repository with the following steps:
+1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`
+2) Now, inside the `CGEO` directory, update the pybind11 extension with `git submodule update --init`
+3) Build the package with `./run.sh`
+
+After scanning dependencies and build are finish, you can use it as an extension in your own python environment.
 
 
 ## Some Nice Examples
