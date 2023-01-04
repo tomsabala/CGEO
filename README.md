@@ -26,7 +26,7 @@ This is an on-going project and has new features every now and then.</p>
         * ![Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
         * ![Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
         * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon2d.cpp)
-* ![Balanced Binary Segment-Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
+* ![Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
 
 All the algorithms are implemented using c++. 
 But a user can use this source code as a C++ extension for a Python program.
@@ -35,24 +35,31 @@ and you can find multiple code-examples of python programs with the wrapped pack
 
 
 ## How To Run
-<p>For some running examples you can checkout the [examples](https://github.com/tomsabala/CGEO/tree/main/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+For some running examples you can checkout the ![examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
-</p>
+
 
 
 ## Some Nice Examples
-* Convex-Hull : <br />
-<img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 />
+<details>
+      <summary>Convex-Hull</summary>
+      <p><img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 /></p>
+   
+   * The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+     
+</details>
 
->> The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+<details>
+      <summary>Y-Monotone Polygons Decomposition</summary>
+      <p><img src=examples/PlotImages/y_decomposition.png width=250 height=250 /></p>  
+         
+   * The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
+   * A [reference](https://en.wikipedia.org/wiki/Monotone_polygon) for y-monotone polygons definition.
+   
+</details>
 
-* [y-monotonic](https://en.wikipedia.org/wiki/Monotone_polygon) decomposition of a polygon : <br />
-<img src=examples/PlotImages/y_decomposition.png width=250 height=250 />
-
->> Here the initial polygon is the overall pink layer, and each sub-polygon is decomposed with an inner diagonal edge.</p>
-
-* Basic polygon triangulation : <br />
-<img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 />
-
-
+<details>
+      <summary>Basic polygon triangulation</summary>
+      <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
+</details>
