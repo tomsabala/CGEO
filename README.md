@@ -42,8 +42,8 @@ I suggest reading the relevant examples before trying to use the functionality b
 You can use this repo as a submodule within your repository with the following steps:
 1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`
 2) Enter the `CGEO` directory.
-      2.1) Update the pybind11 extension with `git submodule update --init`
-      2.2) Build the package with `./run.sh`
+   2.1) Update the pybind11 extension with `git submodule update --init`
+   2.2) Build the package with `./run.sh`
 
 After scanning dependencies and build are finish, you can use it as an extension in your own python environment.
 
