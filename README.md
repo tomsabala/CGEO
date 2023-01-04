@@ -57,6 +57,14 @@ After scanning dependencies and build are finish, you can use it as an extension
 </details>
 
 <details>
+      <summary>Segement Intersection</summary>
+      <p><img src=examples/PlotImages/SegmentIntersection.png width=250 height=250/></p>
+   
+   * The input is given as a list of segments, and the algorithms is coloring all segments intersections with blue.
+     
+</details>
+
+<details>
       <summary>Y-Monotone Polygons Decomposition</summary>
       <p><img src=examples/PlotImages/y_decomposition.png width=250 height=250 /></p>  
          
@@ -69,3 +77,6 @@ After scanning dependencies and build are finish, you can use it as an extension
       <summary>Basic polygon triangulation</summary>
       <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
 </details>
+
+## Issues
+* Segment intersection is currently on and off, a problem with the balanced segement tree is causing the segment to be un-predictable.
