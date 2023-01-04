@@ -45,7 +45,7 @@ You can use this repo as a submodule within your repository with the following s
 <t/>2.1) Update the pybind11 extension with `git submodule update --init` <br/>
 <t/>2.2) Build the package with `./run.sh`
 
-::notice that the `run.sh` shell script includes some linux os commands. If you are undes windows OS, build the library using the suitable commands.
+::notice that the `run.sh` shell script includes some linux os commands. If you are under windows OS, build the library using the suitable commands.
 
 After scanning dependencies and build are finish, you can use it as an extension in your own python environment.
 
