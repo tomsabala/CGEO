@@ -12,7 +12,7 @@ BST::BST()
  * */
 void BST::insertSegment(Shapes2D::Segment2d* s)
 {
-    this->root = insert(s, this->root);
+    this->setRoot(insert(s, this->root));
 }
 
 /**
@@ -154,71 +154,7 @@ TreeNode* BST::lr_doubleRightRotation(TreeNode* node)
  * return the size of the tree
  */
 int BST::getSize() {
-    return size;
-}
-
-//inline void BST::successor(Shapes2D::Segment2d val) {
-//    levelOrder(search(val));
-//}
-
-//void BST::mirror(TreeNode* tmp1, BST* tmp2) {
-//    if (!tmp1) return;
-//
-//    TreeNode* node = new TreeNode(tmp1->getSegment());
-//    if (tmp2->getRoot() == NULL) {
-//        tmp2->setRoot(node);
-//    }
-//    else {
-//        TreeNode* temp = tmp2->getRoot();
-//        while (temp != NULL) {
-//            if (_ge_(temp->getSegment(), tmp1->getSegment())) {
-//                if (temp->getRight() == NULL)
-//                {
-//                    temp->setRight(node);
-//                    node->setParent(temp);
-//                    break;
-//                }
-//                temp = temp->getRight();
-//            }
-//            else if (_le_(temp->getSegment(), tmp1->getSegment())) {
-//                if (temp->getLeft() == NULL)
-//                {
-//                    temp->setLeft(node);
-//                    node->setParent(temp);
-//                    break;
-//                }
-//                temp = temp->getLeft();
-//            }
-//            else
-//            {
-//                break;
-//            }
-//        }
-//    }
-//
-//    mirror(tmp1->getLeft(), tmp2);
-//    mirror(tmp1->getRight(), tmp2);
-//}
-
-//
-//inline void BST::predecessor(Shapes2D::Segment2d val) {
-//    TreeNode* tmp = search(val);
-//    do {
-//        std::cout << tmp->getParent()->getSegment() << " ";
-//        tmp = tmp->getParent();
-//    } while (tmp->getParent() != NULL);
-//}
-
-/**
- * return the parent segment if the segment given.
- * assume that val is indeed in the tree
- * @param val
- * @return
- */
-Shapes2D::Segment2d BST::parentDisplay(Shapes2D::Segment2d val)
-{
-    TreeNode* tmp = searchSegment(val);
-    return *tmp->getParent()->getSegment();
+    return this->size;
 }
 
 /**
@@ -247,7 +183,19 @@ int BST::high(TreeNode* tmp)
  */
 bool BST::removeSegment(Shapes2D::Segment2d toFind)
 {
-    return remove(searchSegment(toFind));
+    TreeNode *seg_node = searchSegment(toFind);
+    if (seg_node->getSegment()->_eq_(&toFind)) {
+        return remove(seg_node);
+    }
+    std::vector<TreeNode *> in_order;
+
+    for (TreeNode * node : in_order)
+    {
+        if (node->getSegment()->_eq_(&toFind))
+            return remove(node);
+    }
+
+    return false;
 }
 
 /**
@@ -257,18 +205,21 @@ bool BST::removeSegment(Shapes2D::Segment2d toFind)
  */
 bool BST::remove(TreeNode* toDel)
 {
-    if (!toDel)
-        return false;
-
     // Case 1: leaf node.
     if (!toDel->getLeft() && !toDel->getRight())
     {
-        if (this->root == toDel)
-            this->root = NULL;
-        else if (toDel->getParent()->getLeft() == toDel)
-            toDel->getParent()->setLeft(NULL);
+        if (this->getRoot()->getSegment()->_eq_(toDel->getSegment()))
+        {
+            this->setRoot(nullptr);
+        }
+        else if (toDel->getParent()->getLeft()->getSegment()->_eq_(toDel->getSegment()))
+        {
+            toDel->getParent()->setLeft(nullptr);
+        }
         else
-            toDel->getParent()->setRight(NULL);
+        {
+            toDel->getParent()->setRight(nullptr);
+        }
     }
 
     // Case 2: both children
@@ -286,8 +237,8 @@ bool BST::remove(TreeNode* toDel)
     {
         TreeNode* toShift = toDel->getLeft() ? toDel->getLeft() : toDel->getRight();
 
-        if (this->root == toDel)
-            this->root = toShift;
+        if (this->getRoot() == toDel)
+            this->setRoot(toShift);
 
         TreeNode* futureParent = toDel->getParent();
 
@@ -326,11 +277,13 @@ TreeNode* BST::getRoot()
  */
 TreeNode* BST::searchSegment(Shapes2D::Segment2d s)
 {
-    if (this->root != NULL)
+    if (this->getRoot() != NULL)
     {
-        TreeNode* temp = this->root;
+        TreeNode* temp = this->getRoot();
         while (temp != NULL)
         { /* search in the subtree temp */
+            if (temp->getSegment()->_eq_(&s))
+                return temp;
             if (this->_le_(*temp->getSegment(), s))
             {
                 if (temp->getRight() == NULL)
@@ -358,17 +311,21 @@ TreeNode* BST::searchSegment(Shapes2D::Segment2d s)
 
 /**
  * search the closest tree node to the given point
- * @param p is a point we are interset in
+ * @param p is a point we are interest in
  * @return TreeNode pointer
  */
 TreeNode* BST::searchPoint(Shapes2D::Point2d *p)
 {
-    if (this->root != NULL)
+    std::cout << "<><><><> inside search point <><><><>\n";
+    if (root != NULL)
     {
         TreeNode* last;
-        TreeNode* temp = this->root;
+        TreeNode* temp = this->getRoot();
         while (temp != NULL)
         { /* search in the subtree temp */
+            std::cout << "current temp: " <<temp->getSegment()->toStr();
+            if (temp->getSegment()->containPoint(*p))
+                return temp;
             last = temp;
             if( temp->getSegment()->getSlope() == 0 )
             {
@@ -380,13 +337,13 @@ TreeNode* BST::searchPoint(Shapes2D::Point2d *p)
                     return temp;
                 continue;
             }
-            int pred;
+            double pred;
             pred = temp->getSegment()->getUpper()->oriePred(temp->getSegment()->getLower(), p);
-
+            std::cout<<"check pred : " << pred <<'\n';
             if ( pred < 0 )
-                temp = temp->getRight();
-            else if ( pred > 0 )
                 temp = temp->getLeft();
+            else if ( pred > 0 )
+                temp = temp->getRight();
             else
                 return temp;
         }
@@ -446,6 +403,18 @@ void BST::walkInOrder(TreeNode* tmp)
     this->walkInOrder(tmp->getLeft());
     std::cout << tmp->getSegment()->toStr();
     this->walkInOrder(tmp->getRight());
+}
+
+void BST::walkInOrder_vec(std::vector<TreeNode *> res, TreeNode *tmp)
+{
+    if (tmp == NULL)
+    {
+        return;
+    }
+
+    this->walkInOrder_vec(res, tmp->getLeft());
+    res.push_back(tmp);
+    this->walkInOrder_vec(res, tmp->getRight());
 }
 
 /**
@@ -561,43 +530,32 @@ void BST::setHeight(Shapes2D::Point2d p)
 
 TreeNode *BST::getPredecessor(TreeNode * node)
 {
+    std::cout << "<><><><> inside get predecessor <><><><>\n";
     /* base case */
-    if (root == nullptr)
+    if (root == NULL)
+        return NULL;
+
+    if (node->getLeft() != NULL)
+        return maxx(node->getLeft());
+    TreeNode *prev = node;
+    TreeNode *parent_node = node->getParent();
+    int counter = 0;
+    while(parent_node != NULL)
     {
-        return nullptr;
-    }
-    TreeNode* prec = nullptr;
-    while (1)
-    {
-        // if the given key is less than the root node, visit the left subtree
-        if (this->_le_(*node->getSegment(), *root->getSegment()))
-            root = root->getLeft();
-        // if the given key is more than the root node, visit the right subtree
-        else if (this->_ge_(*node->getSegment(), *root->getSegment()))
+        std::cout <<"iter number : " << counter << " " << parent_node->getSegment()->toStr();
+        if (parent_node->getRight() == prev)
         {
-            // update predecessor to the current node before visiting
-            // right subtree
-            prec = root;
-            root = root->getRight();
+            return parent_node;
         }
-        // if a node with the desired value is found, the predecessor is the maximum
-        // value node in its left subtree (if any)
-        else
-        {
-            if (root->getLeft() != NULL)
-            {
-                prec = this->maxx(root->getLeft());
-            }
+        prev = parent_node;
+        parent_node = parent_node->getParent();
+        counter ++;
+        if (counter  > 2)
             break;
-        }
-        // if the key doesn't exist in the binary tree, return previous greater node
-        if (root == NULL)
-        {
-            return prec;
-        }
     }
-    // return predecessor, if any
-    return prec;
+
+    return NULL;
+
 }
 
 TreeNode *BST::getSuccessor(TreeNode * node) {
@@ -606,37 +564,20 @@ TreeNode *BST::getSuccessor(TreeNode * node) {
     {
         return nullptr;
     }
-    TreeNode* succ = nullptr;
-    while (1)
+
+    if (node->getRight() != NULL)
+        return minn(node->getRight());
+
+    TreeNode *prev = node;
+    TreeNode *parent_node = node->getParent();
+
+    while(parent_node != NULL)
     {
-        // if the given key is less than the root node, visit the left subtree
-        if (this->_le_(*node->getSegment(), *root->getSegment()))
-        {
-            // update successor to the current node before visiting left subtree
-            succ = root;
-            root = root->getLeft();
-        }
-        // if the given key is more than the root node, visit the right subtree
-        else if (this->_ge_(*node->getSegment(), *root->getSegment()))
-        {
-            root = root->getRight();
-        }
-        // if a node with the desired value is found, the successor is the minimum
-        // value node in its right subtree (if any)
-        else
-        {
-            if (root->getRight() != NULL)
-            {
-                succ = this->minn(root->getRight());
-            }
-            break;
-        }
-        // if the key doesn't exist in the binary tree, return next greater node
-        if (root == NULL)
-        {
-            return succ;
-        }
+        if (parent_node->getLeft() == prev)
+            return parent_node;
+
+        prev = parent_node;
+        parent_node = parent_node->getParent();
     }
-    // return successor, if any
-    return succ;
+    return NULL;
 }

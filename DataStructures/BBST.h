@@ -6,10 +6,11 @@
 
 
 class BST {
+public:
     TreeNode* root;
     Shapes2D::Point2d height;
     int size;
-
+private:
     bool remove(TreeNode*);
     TreeNode* insert(Shapes2D::Segment2d* s, TreeNode* node);
     void setRoot(TreeNode* node);
@@ -35,11 +36,11 @@ public:
     TreeNode* maxx(TreeNode*);
     TreeNode* minn(TreeNode*);
     void walkInOrder(TreeNode*);
+    void walkInOrder_vec(std::vector<TreeNode *>, TreeNode*);
     void walkPreOrder(TreeNode*);
     void walkPostOrder(TreeNode*);
     int high(TreeNode*);
     bool removeSegment(Shapes2D::Segment2d);
-    Shapes2D::Segment2d parentDisplay(Shapes2D::Segment2d);
     void setHeight(Shapes2D::Point2d p);
     ~BST();
 };
