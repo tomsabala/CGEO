@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Triangulation2D.h"
 
+using namespace Algorithms2d;
 
 std::vector<Triangle2d *>
 Triangulation2D::triangulate(Shapes2D::Polygon *poly)

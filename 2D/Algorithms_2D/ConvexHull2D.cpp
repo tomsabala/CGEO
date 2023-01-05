@@ -3,6 +3,8 @@
 #include <iostream>
 #include "ConvexHull2D.h"
 
+using namespace Algorithms2d;
+
 /**
  * the graham algorithm is an O(nlog(n)) algo. for finding the convex hull of a polygon.
  * the algorithms sorts the points by their x-axis and then eliminate points one by one from being part of the convex.

@@ -10,65 +10,68 @@
 #include "../Shapes_2D/Line2d.h"
 #include "../../DataStructures/BBST.h"
 
-struct pair_hashFunction
-{
-    size_t operator()(const std::pair<double, double> &x) const
+
+namespace Algorithms2d{
+    struct pair_hashFunction
     {
-        std::hash<double> int_hasher;
-        return int_hasher(x.first) ^ int_hasher(x.second);
-    }
-};
+        size_t operator()(const std::pair<double, double> &x) const
+        {
+            std::hash<double> int_hasher;
+            return int_hasher(x.first) ^ int_hasher(x.second);
+        }
+    };
 
-class event_comp
-{
-public:
-    bool operator()(Shapes2D::Point2d * a, Shapes2D::Point2d * b) const
+    class event_comp
     {
-        double a_y = a->getY(), a_x = a->getX();
-        double b_y = b->getY(), b_x = b->getX();
+    public:
+        bool operator()(Shapes2D::Point2d * a, Shapes2D::Point2d * b) const
+        {
+            double a_y = a->getY(), a_x = a->getX();
+            double b_y = b->getY(), b_x = b->getX();
 
-        if (a_y > b_y + eps || abs(a_y - b_y) <= eps && a_x < b_x) return true;
-        return false;
-    }
-};
+            if (a_y > b_y + eps || abs(a_y - b_y) <= eps && a_x < b_x) return true;
+            return false;
+        }
+    };
 
-class SegmentIntersection2d {
-public:
-    SegmentIntersection2d() = default;
+    class SegmentIntersection2d {
+    public:
+        SegmentIntersection2d() = default;
 
-    std::pair<bool, Shapes2D::Point2d *>*
-    intersect(const Shapes2D::Segment2d *a,
-              const Shapes2D::Segment2d *b,
-              bool test);
+        std::pair<bool, Shapes2D::Point2d *>*
+        intersect(const Shapes2D::Segment2d *a,
+                  const Shapes2D::Segment2d *b,
+                  bool test);
 
-    void
-    intersect(std::vector<Shapes2D::Segment2d> *segments,
-              std::vector<Shapes2D::Point2d *> *intersections);
+        void
+        intersect(std::vector<Shapes2D::Segment2d> *segments,
+                  std::vector<Shapes2D::Point2d *> *intersections);
 
-    void
-    handleEventPoint(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
-                     std::multimap<Shapes2D::Point2d *, int, event_comp> *events,
-                     BST *status,
-                     std::vector<Shapes2D::Point2d *> *intersections);
+        void
+        handleEventPoint(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
+                         std::multimap<Shapes2D::Point2d *, int, event_comp> *events,
+                         BST *status,
+                         std::vector<Shapes2D::Point2d *> *intersections);
 
-    std::vector<Shapes2D::Segment2d>
-    findInteriorMap(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
-                    BST *status);
+        std::vector<Shapes2D::Segment2d>
+        findInteriorMap(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
+                        BST *status);
 
-    bool isInterior(Shapes2D::Segment2d s, Shapes2D::Point2d p);
+        bool isInterior(Shapes2D::Segment2d s, Shapes2D::Point2d p);
 
-    void print_status(BST *status);
+        void print_status(BST *status);
 
-    void print_events(std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
+        void print_events(std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
 
-    std::vector<Shapes2D::Point2d *>
-    solve(std::vector<Shapes2D::Segment2d> *segments);
+        std::vector<Shapes2D::Point2d *>
+        solve(std::vector<Shapes2D::Segment2d> *segments);
 
-    void
-    handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
-                    Shapes2D::Point2d p,
-                    std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
-};
+        void
+        handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
+                        Shapes2D::Point2d p,
+                        std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
+    };
+}
 
 
 

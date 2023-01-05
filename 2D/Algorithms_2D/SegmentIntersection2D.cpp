@@ -1,6 +1,8 @@
 
 #include "SegmentIntersection2D.h"
 
+using namespace Algorithms2d;
+
 std::unordered_set<int> included_segments;
 std::unordered_set<std::pair<double, double>, pair_hashFunction> checked_points;
 std::map<std::pair<double, double>, std::vector<std::pair<Shapes2D::Segment2d, int>>> Upper_end_point;
