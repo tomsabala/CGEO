@@ -28,6 +28,36 @@ Circle2d::Circle2d(double radius, Point2d * center)
 
 
 /**
+ * construct a circle around the triangle the these three points represents
+ * @param p, q, t : three points in the plane.
+ * assuming that p, q, and t don't lie on one line.
+ */
+Circle2d::Circle2d(Point2d *p, Point2d *q, Point2d *t) {
+    /* we need to build the orthogonal lines passing through the middle of two edges of the triangle */
+    Line2d *l1, *l2;
+    /* line 1: between p and q construction */
+
+    Point2d *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
+    if (p->getY() == q->getY())
+        l1 = new Line2d(0, *mid_point1, true);
+    else
+        l1 = new Line2d(-1/( (p->getY() - q->getY()) / (p->getX() - q->getX())), *mid_point1, false);
+
+    Point2d *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
+    if (p->getY() == t->getY())
+        l2 = new Line2d(0, *mid_point2, true);
+    else
+        l2 = new Line2d(-1/( (p->getY() - t->getY()) / (p->getX() - t->getX())), *mid_point2, false);
+
+
+    Point2d *center = Line2d::line_intersection(l1, l2);
+    double radius = center->dist(p);
+
+    this->c = center;
+    this->r = radius;
+}
+
+/**
  * return the circle's radius
  * @return r, value type
  */
@@ -177,8 +207,3 @@ int Circle2d::polyContains(Polygon *poly) {
     }
     return flag ? 1 : -1;
 }
-
-
-
-
-

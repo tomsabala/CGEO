@@ -17,6 +17,7 @@ namespace Shapes2D
         Circle2d();
         Circle2d(double );
         Circle2d(double, Point2d *);
+        Circle2d(Point2d *, Point2d *, Point2d *);
 
         /* getter and setter */
         double getRadius();
