@@ -104,14 +104,14 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp")
             .def("decomposeY_Monotone", &Shapes2D::Polygon::decomposeY_Monotone, "decompose the given polygon into y-monotone polygons");
 
-    py::class_<ConvexHull>(h, "ConvexHullUtilities")
+    py::class_<Algorithms2d::ConvexHull>(h, "ConvexHullUtilities")
             .def(py::init<>())
-            .def("grahamConvexHull", &ConvexHull::grahamConvexHull, "graham convex hull algorithm")
-            .def("giftWrapConvexHull", &ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
+            .def("grahamConvexHull", &Algorithms2d::ConvexHull::grahamConvexHull, "graham convex hull algorithm")
+            .def("giftWrapConvexHull", &Algorithms2d::ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
 
-    py::class_<SegmentIntersection2d>(h, "SegmentIntersect")
+    py::class_<Algorithms2d::SegmentIntersection2d>(h, "SegmentIntersect")
             .def(py::init<>())
-            .def("intersection", &SegmentIntersection2d::solve, "solve segment intersection");
+            .def("intersection", &Algorithms2d::SegmentIntersection2d::solve, "solve segment intersection");
 
     py::class_<TreeNode>(h, "TreeNode")
             .def(py::init<Shapes2D::Segment2d>())
@@ -132,7 +132,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
             .def("getVertex", &Triangle2d::getVertices, "get vertex list");
 
-    py::class_<Triangulation2D>(h, "TriangulationUtilities")
+    py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtilities")
             .def(py::init<>())
-            .def("triangulate", &Triangulation2D::triangulate, "triangulate polygon");
+            .def("triangulate", &Algorithms2d::Triangulation2D::triangulate, "triangulate polygon");
 }
