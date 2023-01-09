@@ -26,6 +26,15 @@ Circle2d::Circle2d(double radius)
 Circle2d::Circle2d(double radius, Point2d * center)
 : r(radius), c(center) {}
 
+/**
+ * construct a circle with r=dist(p, q)/2 and center in the middle of pq segment
+ * @param p, q : two points in the plane
+ */
+Circle2d::Circle2d(Point2d *p, Point2d *q)
+{
+    this->c = new Point2d((p->getX() + q->getX())/2, (p->getY() + q->getY())/2);
+    this->r = p->dist(q) / 2;
+}
 
 /**
  * construct a circle around the triangle the these three points represents
