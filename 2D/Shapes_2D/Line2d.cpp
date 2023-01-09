@@ -105,7 +105,6 @@ Shapes2D::Point2d *Line2d::line_intersection(Line2d *u, Line2d *v) {
         double u_a = -*m_u, u_c = -(*m_u * u->p.getX()) + u->p.getY();
         double v_a = -*m_v, v_c = -(*m_v * v->p.getX()) + v->p.getY();
 
-        std::cout<<*m_v << " " <<*m_u<<'\n';
         double det2lines = -*m_u + (*m_v);
         x_val = (u_c - v_c) / det2lines;
         y_val = (u_a * v_c - v_a * u_c) / det2lines;
@@ -132,4 +131,13 @@ std::pair<bool, double> Line2d::getX_fromY(double y) {
     else{
         return std::make_pair(true, (y - this->p.getY() + this->slope * this->p.getX()) / (this->slope));
     }
+}
+
+/**
+ * compute the distance of a point from the line
+ * @param point : a point in the plane
+ * @return double value of the distance
+ */
+double Line2d::dist(Shapes2D::Point2d *point) {
+    return 0;
 }

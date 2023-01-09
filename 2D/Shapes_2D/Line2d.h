@@ -19,6 +19,7 @@ public:
     double* getX_intersect();
     std::pair<bool, double> getY_fromX(double x);
     std::pair<bool, double> getX_fromY(double y);
+    double dist(Shapes2D::Point2d *);
 
     static Shapes2D::Point2d* line_intersection(Line2d* u, Line2d* v);
 };
