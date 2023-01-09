@@ -2,7 +2,7 @@ from build import libGeo_2D as Geo
 from examples.Plots2D import PolygonPlot
 
 
-_utility = Geo.TriangulationUtilities()
+_utility = Geo.TriangulationUtils()
 
 plt = PolygonPlot.PlotPolygon()
 for i in range(10):
