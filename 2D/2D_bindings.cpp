@@ -104,7 +104,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp")
             .def("decomposeY_Monotone", &Shapes2D::Polygon::decomposeY_Monotone, "decompose the given polygon into y-monotone polygons");
 
-    py::class_<Algorithms2d::ConvexHull>(h, "ConvexHullUtilities")
+    py::class_<Algorithms2d::ConvexHull>(h, "ConvexHullUtils")
             .def(py::init<>())
             .def("grahamConvexHull", &Algorithms2d::ConvexHull::grahamConvexHull, "graham convex hull algorithm")
             .def("giftWrapConvexHull", &Algorithms2d::ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
@@ -132,7 +132,27 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
             .def("getVertex", &Triangle2d::getVertices, "get vertex list");
 
-    py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtilities")
+    py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtils")
             .def(py::init<>())
             .def("triangulate", &Algorithms2d::Triangulation2D::triangulate, "triangulate polygon");
+
+    py::class_<Shapes2D::Circle2d>(h, "Circle")
+            .def(py::init<>())
+            .def(py::init<double>())
+            .def(py::init<double, Shapes2D::Point2d *>())
+            .def(py::init<Shapes2D::Point2d *, Shapes2D::Point2d *, Shapes2D::Point2d *>())
+            .def_property("r", &Shapes2D::Circle2d::getRadius, &Shapes2D::Circle2d::setRadius)
+            .def_property("center", &Shapes2D::Circle2d::getCenter, &Shapes2D::Circle2d::setCenter)
+            .def("circleIntersect", &Shapes2D::Circle2d::circleIntersect, "check if the circle intersect with a given circle")
+            .def("lineIntersect", &Shapes2D::Circle2d::lineIntersect, "check if the circle intersect with a given line")
+            .def("segIntersect", &Shapes2D::Circle2d::segIntersect, "check if the circle intersect with a given segment")
+            .def("polyIntersect", &Shapes2D::Circle2d::polyIntersect, "check if the circle intersect with a given polygon")
+            .def("pointContains", &Shapes2D::Circle2d::pointContains, "check if a point is contained in the circle")
+            .def("segContains", &Shapes2D::Circle2d::segmentContains, "check if a segment is contained in the circle")
+            .def("circleContains", &Shapes2D::Circle2d::circleContains, "check if a circle is contained in the circle")
+            .def("polyContains", &Shapes2D::Circle2d::polyContains, "check if a polygon is contained in the circle");
+
+    py::class_<Algorithms2d::SmallestEnclosingDisk>(h, "EnclosingDistUtils")
+            .def(py::init<>())
+            .def("findDisc", &Algorithms2d::SmallestEnclosingDisk::findDisc, "find enclosing disc");
 }
