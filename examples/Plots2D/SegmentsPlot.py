@@ -1,9 +1,5 @@
-import math
-from typing import List, Tuple
-
 import matplotlib.pyplot as plt
 import numpy as np
-from build import libGeo_2D as Geo
 
 class PlotSegments:
     def __init__(self):
