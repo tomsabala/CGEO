@@ -40,11 +40,25 @@ For some running examples you can checkout the [examples](CGEO/examples) directo
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 
-You can use this repo as a submodule within your repository with the following steps:
-1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`
+You can use this project in one of the following options: 
+###-----
+As a submodule within your repository with the following steps:
+1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`.
 2) Enter the `CGEO` directory.<br />
-<t/>2.1) Update the pybind11 extension with `git submodule update --init` <br/>
-<t/>2.2) Build the package with `./run.sh`
+<t/>2.1) Update the pybind11 extension with `git submodule update --init`. <br/>
+<t/>2.2) Build the package with `./run.sh`.
+###-----
+Clone this repo, to your local machine:
+1) Clone repo: `git clone git@github.com:tomsabala/CGEO.git`.
+2) Enter the `CGEO` directory.<br />
+<t/>2.1) Update the pybind11 extension with `git submodule update --init`. <br />
+<t/>2.2) Build the package with `./run.sh`.
+
+
+You can import the library in any `*.py` file with `from CGEO.build import libGeo_2D`.
+In order to run your `file.py` program: 
+1) Set the path for user defined modules with `export PYTHONPATH=.`.
+2) Execute program `python file.py`.
 
 ::notice that the `run.sh` shell script includes some linux os commands. If you are under windows OS, build the library using the suitable commands.
 
