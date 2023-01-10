@@ -130,6 +130,10 @@ PYBIND11_MODULE(libGeo_2D, h) {
 
     py::class_<Triangle2d>(h, "Triangle")
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
+            .def_property("a", &Triangle2d::getA, &Triangle2d::setA)
+            .def_property("b", &Triangle2d::getB, &Triangle2d::setB)
+            .def_property("c", &Triangle2d::getC, &Triangle2d::setC)
+            .def("area", &Triangle2d::area, "get area of triangle")
             .def("getVertex", &Triangle2d::getVertices, "get vertex list");
 
     py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtils")
