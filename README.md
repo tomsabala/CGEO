@@ -14,28 +14,29 @@ This is an on-going project and has new features every now and then.</p>
 ## List Of Implementations
 <p>You can find the followong algorithms available:
 
-* ![Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
+* [Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
     * [Gift-Wrapping](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm) Convex Hull by Jarvis march
     * [Grahm-Scan](https://en.wikipedia.org/wiki/Graham_scan) Convex Hull by Ronald Graham
-    * Devide-and-Conquer Convex Hull
-* ![Segmentation Intersection](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SegmentIntersection2D.cpp)
-* ![Polygon Triangulation](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/Triangulation2D.cpp)
+    * Devide & Conquer Convex Hull
+* [Segmentation Intersection](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SegmentIntersection2D.cpp)
+* [Polygon Triangulation](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/Triangulation2D.cpp)
 * Shapes
     * 2D Basic Shapes
-        * ![Point](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Point2d.cpp)
-        * ![Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
-        * ![Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
-        * ![Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon.cpp)
-* ![Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)</p>
+        * [Point](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Point2d.cpp)
+        * [Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
+        * [Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
+        * [Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon.cpp)
+* [Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)
+* [Smallest Enclosing Disc](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SmallestEnclosingDisk.cpp)<p/>
 
 All the algorithms are implemented using c++. 
 But a user can use this source code as a C++ extension for a Python program.
-All algorithms and classes are wrapperd with ![pybind11](https://pybind11.readthedocs.io/en/stable/), 
-and you can find multiple code-examples of python programs with the wrapped package via the following ![link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
+All algorithms and classes are wrapperd with [pybind11](https://pybind11.readthedocs.io/en/stable/), 
+and you can find multiple code-examples of python programs with the wrapped package via the following [link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
 
 
 ## How To Run
-For some running examples you can checkout the ![examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+For some running examples you can checkout the [examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 
@@ -77,8 +78,13 @@ After scanning dependencies and build are finish, you can use it as an extension
 </details>
 
 <details>
-      <summary>Basic polygon triangulation</summary>
+      <summary>Basic Polygon Triangulation</summary>
       <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
+</details>
+
+<details>
+      <summary>Smallest Enclosing Disc</summary>
+      <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/EnclosingDisc.png width=250 height=250 /></p>     
 </details>
 
 ## Issues
