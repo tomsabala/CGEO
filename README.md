@@ -40,14 +40,17 @@ For some running examples you can checkout the [examples](CGEO/examples) directo
 
 I suggest reading the relevant examples before trying to use the functionality by yourself.
 
-You can use this project in one of the following options: 
-###-----
+You can use this project in one of the following options: <br />
+### ----- 
+
 As a submodule within your repository with the following steps:
 1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`.
 2) Enter the `CGEO` directory.<br />
 <t/>2.1) Update the pybind11 extension with `git submodule update --init`. <br/>
-<t/>2.2) Build the package with `./run.sh`.
-###-----
+<t/>2.2) Build the package with `./run.sh`. <br />
+
+### -----
+
 Clone this repo, to your local machine:
 1) Clone repo: `git clone git@github.com:tomsabala/CGEO.git`.
 2) Enter the `CGEO` directory.<br />
