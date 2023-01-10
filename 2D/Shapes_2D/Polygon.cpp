@@ -465,8 +465,7 @@ int Shapes2D::Polygon::findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, i
             }
         }
     }
-
-    return u;
+    return u==-1 ? leftBoundVertex : u;
 }
 
 int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, int innerCusp)
@@ -495,7 +494,7 @@ int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, in
         }
     }
 
-    return u;
+    return u==-1 ? rightBoundVertex : u;
 }
 
 std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D::Polygon *poly) {
@@ -509,7 +508,6 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
         int u = findDiagonalFromDownInnerCusp(poly, downInnerCusp);
         if (u == -1)
             throw (Exception2D("un expected error occurred\n"));
-
         Shapes2D::Polygon *poly1, *poly2;
         std::vector<Shapes2D::Point2d *> poly1_points, poly2_points;
 
@@ -536,8 +534,6 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
 
         return res;
     }
-
-
 
     int upperInnerCusp = next_upperInnerCusp(poly, 0);
     if (upperInnerCusp != -1)

@@ -2,6 +2,9 @@
 #pragma once
 
 #include "Point2d.h"
+#include "Line2d.h"
+#include <cfloat>
+#include <valarray>
 #include <vector>
 
 namespace Shapes2D {

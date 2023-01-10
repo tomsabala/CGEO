@@ -1,8 +1,5 @@
 
-#include <cfloat>
-#include <valarray>
 #include "Segment2d.h"
-#include "Point2d.h"
 
 using namespace Shapes2D;
 
@@ -283,9 +280,10 @@ double Segment2d::dist(Segment2d *s) noexcept(false) {
 double Segment2d::dist(Point2d *p) noexcept(false) {
     if (p == nullptr)
         throw (Exception2D("null pointer"));
-    double m = this->getSlope();
-    double c = -m*this->getOrigin()->getX() + this->getOrigin()->getY();
-    return std::abs(m*p->getX() -p->getY() + c) / sqrt(pow(m, 2) + 1);
+
+    Line2d *l = new Line2d(this->getOrigin(), this->getTarget());
+
+    return l->dist(p);
 }
 
 /**
