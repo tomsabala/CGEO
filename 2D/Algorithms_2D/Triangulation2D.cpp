@@ -4,16 +4,19 @@
 
 using namespace Algorithms2d;
 
-std::vector<Triangle2d *>
+std::vector<Shapes2D::Triangle2d *>
 Triangulation2D::triangulate(Shapes2D::Polygon *poly)
 {
-    std::vector<Triangle2d *> res;
+    /* vector output */
+    std::vector<Shapes2D::Triangle2d *> res;
 
+    /* create decomposition of poly into y-monotone polygons */
     std::vector<Shapes2D::Polygon *> poly_decompose = Shapes2D::Polygon::decomposeY_Monotone(poly);
 
+    /* for each sub-poly, compute the responsive triangulation */
     for (Shapes2D::Polygon *sub_poly : poly_decompose)
     {
-        std::vector<Triangle2d *> sub_res = this->triangulate_YMonotone(sub_poly);
+        std::vector<Shapes2D::Triangle2d *> sub_res = this->triangulate_YMonotone(sub_poly);
         res.insert(res.end(), sub_res.begin(), sub_res.end());
     }
 
@@ -26,29 +29,34 @@ Triangulation2D::triangulate(Shapes2D::Polygon *poly)
  * @param poly a y-monotone polygon
  * @return vector of Triangles in poly
  */
-std::vector<Triangle2d *>
+std::vector<Shapes2D::Triangle2d *>
 Triangulation2D::triangulate_YMonotone(Shapes2D::Polygon *poly)
 {
-    std::vector<Triangle2d *> res;
+    /* vector output */
+    std::vector<Shapes2D::Triangle2d *> res;
 
+    /* poly is basically a triangle */
     if (poly->getSize() == 3)
     {
-        Triangle2d *tri = new Triangle2d(*poly->getByIndex(0), *poly->getByIndex(1), *poly->getByIndex(2));
+        Shapes2D::Triangle2d *tri = new Shapes2D::Triangle2d(*poly->getByIndex(0), *poly->getByIndex(1), *poly->getByIndex(2));
         res.push_back(tri);
         return res;
     }
 
+    /* sorted stack of vertex, from y=inf to y=-inf */
     std::stack<std::pair<Shapes2D::Point2d *, int>> vertex_Stack;
     std::vector<std::pair<Shapes2D::Point2d *, int>> sorted_vertex = this->sortByY(poly);
 
+    /* init stack */
     int i=2;
     vertex_Stack.push(sorted_vertex[0]);
     vertex_Stack.push(sorted_vertex[1]);
 
+    /* append vertices and compute the triangles respectively */
     while(i < sorted_vertex.size())
     {
         std::pair<Shapes2D::Point2d *, int> p = sorted_vertex[i];
-        this->popFromStack(&res, &vertex_Stack, p);
+        this->popFromStack(&res, &vertex_Stack, p); /* compute the triangle and dynamically pop vertices from stack */
 
         i++;
     }
@@ -64,7 +72,7 @@ Triangulation2D::triangulate_YMonotone(Shapes2D::Polygon *poly)
  * @param p the pivot vertex
  */
 void
-Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::pair<Shapes2D::Point2d *, int>> *vertex_Stack, std::pair<Shapes2D::Point2d *, int> p)
+Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::stack<std::pair<Shapes2D::Point2d *, int>> *vertex_Stack, std::pair<Shapes2D::Point2d *, int> p)
 {
     if (p.second == vertex_Stack->top().second)
     {
@@ -80,7 +88,7 @@ Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::p
             {
                 if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
                 {
-                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     vertex_Stack->push(second_pair);
                 }
                 else
@@ -95,7 +103,7 @@ Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::p
             {
                 if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
                 {
-                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     vertex_Stack->push(second_pair);
                 }
                 else
@@ -122,7 +130,7 @@ Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::p
             {
                 if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
                 {
-                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     if(vertex_Stack->size() == 0)
                         break;
                     vertex_Stack->push(second_pair);
@@ -138,7 +146,7 @@ Triangulation2D::popFromStack(std::vector<Triangle2d *> * res, std::stack<std::p
             {
                 if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
                 {
-                    res->push_back(new Triangle2d(*p.first, *first_pair.first, *second_pair.first));
+                    res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     if(vertex_Stack->size() == 0)
                         break;
                     vertex_Stack->push(second_pair);
