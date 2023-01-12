@@ -119,22 +119,22 @@ PYBIND11_MODULE(libGeo_2D, h) {
 
     py::class_<BST>(h, "SegmentTree")
             .def(py::init<>())
-            .def("insert", &BST::insertSegment, "insert a new segment to the tree")
+            .def("insert", &BST::insert, "insert a new segment to the tree")
             .def("searchSegment", &BST::searchSegment, "search a segment inside the tree and return its pointer")
             .def("searchPoint", &BST::searchPoint, "search for a segment that contains a given point inside the tree")
             .def("maxx", &BST::maxx, "return the maximum segment in the tree")
             .def("minn", &BST::minn, "return the minimum segment in the tree")
             .def("InOrder", &BST::walkInOrder, "print the tree segment in an in-order walk")
-            .def("remove", &BST::removeSegment, "remove a segment from the tree")
+            .def("remove", &BST::remove, "remove a segment from the tree")
             .def("setHeight", &BST::setHeight, "set the height of the tree");
 
-    py::class_<Triangle2d>(h, "Triangle")
+    py::class_<Shapes2D::Triangle2d>(h, "Triangle")
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
-            .def_property("a", &Triangle2d::getA, &Triangle2d::setA)
-            .def_property("b", &Triangle2d::getB, &Triangle2d::setB)
-            .def_property("c", &Triangle2d::getC, &Triangle2d::setC)
-            .def("area", &Triangle2d::area, "get area of triangle")
-            .def("getVertex", &Triangle2d::getVertices, "get vertex list");
+            .def_property("a", &Shapes2D::Triangle2d::getA, &Shapes2D::Triangle2d::setA)
+            .def_property("b", &Shapes2D::Triangle2d::getB, &Shapes2D::Triangle2d::setB)
+            .def_property("c", &Shapes2D::Triangle2d::getC, &Shapes2D::Triangle2d::setC)
+            .def("area", &Shapes2D::Triangle2d::area, "get area of triangle")
+            .def("getVertex", &Shapes2D::Triangle2d::getVertices, "get vertex list");
 
     py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtils")
             .def(py::init<>())
