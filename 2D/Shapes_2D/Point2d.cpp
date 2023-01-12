@@ -192,10 +192,10 @@ double Point2d::oriePred(Point2d *q, Point2d *r) noexcept(false) {
 }
 
 bool Point2d::_lt_(Point2d &p) const {
-    return this->getY()<p.getY()-eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() > p.getX());
+    return this->getY()<p.getY()-eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() < p.getX());
 }
 
 bool Point2d::_gt_(Point2d &p) const {
-    return this->getY()>p.getY()+eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() < p.getX());
+    return this->getY()>p.getY()+eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() > p.getX());
 }
 

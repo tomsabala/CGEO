@@ -141,3 +141,13 @@ std::pair<bool, double> Line2d::getX_fromY(double y) {
 double Line2d::dist(Shapes2D::Point2d *point) {
     return 0;
 }
+
+Shapes2D::Point2d *Line2d::getProjection(Shapes2D::Point2d *point) {
+    Line2d * orthogonal_l;
+    if (this->getSlope() == 0)
+        orthogonal_l = new Line2d(0, *point, true);
+    else
+        orthogonal_l = new Line2d(-1/(*this->getSlope()), *point, false);
+
+    return Line2d::line_intersection(this, orthogonal_l);
+}

@@ -11,6 +11,7 @@ namespace Shapes2D
     private:
         double r;
         Point2d *c;
+        static std::pair<double, Point2d*> circleFrom3Points(Point2d *, Point2d *, Point2d *);
 
     public:
         /* constructors */
@@ -25,6 +26,8 @@ namespace Shapes2D
         void setRadius(double radius);
         Point2d* getCenter();
         void setCenter(Point2d *p);
+        void setCircle(Point2d *, Point2d *, Point2d *);
+
 
         /* intersecting checking methods */
         bool circleIntersect(Circle2d *circ);

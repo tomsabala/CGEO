@@ -22,5 +22,6 @@ public:
     double dist(Shapes2D::Point2d *);
 
     static Shapes2D::Point2d* line_intersection(Line2d* u, Line2d* v);
+    Shapes2D::Point2d * getProjection(Shapes2D::Point2d *);
 };
 

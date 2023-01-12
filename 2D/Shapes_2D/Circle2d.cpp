@@ -42,28 +42,10 @@ Circle2d::Circle2d(Point2d *p, Point2d *q)
  * assuming that p, q, and t don't lie on one line.
  */
 Circle2d::Circle2d(Point2d *p, Point2d *q, Point2d *t) {
-    /* we need to build the orthogonal lines passing through the middle of two edges of the triangle */
-    Line2d *l1, *l2;
-    /* line 1: between p and q construction */
+    std::pair<double, Point2d *> vals = Circle2d::circleFrom3Points(p, q, t);
 
-    Point2d *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
-    if (p->getY() == q->getY())
-        l1 = new Line2d(0, *mid_point1, true);
-    else
-        l1 = new Line2d(-1/( (p->getY() - q->getY()) / (p->getX() - q->getX())), *mid_point1, false);
-
-    Point2d *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
-    if (p->getY() == t->getY())
-        l2 = new Line2d(0, *mid_point2, true);
-    else
-        l2 = new Line2d(-1/( (p->getY() - t->getY()) / (p->getX() - t->getX())), *mid_point2, false);
-
-
-    Point2d *center = Line2d::line_intersection(l1, l2);
-    double radius = center->dist(p);
-
-    this->c = center;
-    this->r = radius;
+    this->c = vals.second;
+    this->r = vals.first;
 }
 
 /**
@@ -216,3 +198,45 @@ int Circle2d::polyContains(Polygon *poly) {
     }
     return flag ? 1 : -1;
 }
+
+/**
+ * this function works with the same flow as the 3-points constructor,
+ * only the function don't create a new circle object, but overwrite an existing circle properties.
+ * @param p, q, t : 3 points in the plane
+ */
+void Circle2d::setCircle(Point2d *p, Point2d *q, Point2d *t) {
+    std::pair<double, Point2d *> val = Circle2d::circleFrom3Points(p, q, t);
+
+    this->c = val.second;
+    this->r = val.first;
+}
+
+/**
+ * this function finds the properties of a circle that goes through a 3 points in the plane.
+ * @param p, q, t : 3 points in the plane
+ */
+std::pair<double, Point2d *> Circle2d::circleFrom3Points(Point2d *p, Point2d *q, Point2d *t) {
+    /* we need to build the orthogonal lines passing through the middle of two edges of the triangle */
+    Line2d *l1, *l2;
+    /* line 1: between p and q construction */
+
+    Point2d *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
+    if (p->getY() == q->getY())
+        l1 = new Line2d(0, *mid_point1, true);
+    else
+        l1 = new Line2d(-1/( (p->getY() - q->getY()) / (p->getX() - q->getX())), *mid_point1, false);
+
+    Point2d *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
+    if (p->getY() == t->getY())
+        l2 = new Line2d(0, *mid_point2, true);
+    else
+        l2 = new Line2d(-1/( (p->getY() - t->getY()) / (p->getX() - t->getX())), *mid_point2, false);
+
+
+    Point2d *center = Line2d::line_intersection(l1, l2);
+    double radius = center->dist(p);
+
+    return std::make_pair(radius, center);
+}
+
+
