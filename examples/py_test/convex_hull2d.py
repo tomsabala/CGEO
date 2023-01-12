@@ -1,7 +1,7 @@
 from build import libGeo_2D as Geo
 from examples.Plots2D import PolygonPlot
 
-_utility = Geo.ConvexHullUtilities()
+_utility = Geo.ConvexHullUtils()
 polygons = []
 
 for i in range(10):

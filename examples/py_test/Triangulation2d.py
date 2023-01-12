@@ -19,10 +19,6 @@ for i in range(10):
     Triangles = _utility.triangulate(poly)
     edges = []
 
-
-    for p in poly.getVertices():
-        print(p)
-
     for i, tri in enumerate(Triangles):
         vertex = tri.getVertex()
         edges.append((vertex[0], vertex[1]))

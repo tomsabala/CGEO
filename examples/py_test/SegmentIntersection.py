@@ -1,20 +1,20 @@
 from build import libGeo_2D as Geo
 from examples.Plots2D import SegmentsPlot
 
-segments_coord = SegmentsPlot.generate_random_segments(5)
-segments_test = [0 for i in range(5)]
-for i, seg in enumerate(segments_coord):
-    p = Geo.Point(seg[0][0], seg[0][1])
-    q = Geo.Point(seg[1][0], seg[1][1])
-    seg = Geo.Segment(p, q)
-    segments_test[i] = seg
+# segments_coord = SegmentsPlot.generate_random_segments(5)
+# segments_test = [0 for i in range(5)]
+# for i, seg in enumerate(segments_coord):
+#     p = Geo.Point(seg[0][0], seg[0][1])
+#     q = Geo.Point(seg[1][0], seg[1][1])
+#     seg = Geo.Segment(p, q)
+#     segments_test[i] = seg
 
-# segments_test = [i for i in range(5)]
-# segments_test[0] = Geo.Segment(Geo.Point(5.00, 2.00), Geo.Point(6.00, 5.00))
-# segments_test[1] = Geo.Segment(Geo.Point(5.00, 5.00), Geo.Point(2.00, 4.00))
-# segments_test[2] = Geo.Segment(Geo.Point(3.00, 9.00), Geo.Point(8.00, 3.00))
-# segments_test[3] = Geo.Segment(Geo.Point(9.00, 6.00), Geo.Point(5.00, 1.00))
-# segments_test[4] = Geo.Segment(Geo.Point(3.00, 9.00), Geo.Point(3.00, 4.00))
+segments_test = [i for i in range(5)]
+segments_test[0] = Geo.Segment(Geo.Point(5.00, 2.00), Geo.Point(6.00, 5.00))
+segments_test[1] = Geo.Segment(Geo.Point(5.00, 5.00), Geo.Point(2.00, 4.00))
+segments_test[2] = Geo.Segment(Geo.Point(3.00, 9.00), Geo.Point(8.00, 3.00))
+segments_test[3] = Geo.Segment(Geo.Point(9.00, 6.00), Geo.Point(5.00, 1.00))
+segments_test[4] = Geo.Segment(Geo.Point(3.00, 9.00), Geo.Point(3.00, 4.00))
 
 print("segments test: ")
 for i in range(len(segments_test)):
