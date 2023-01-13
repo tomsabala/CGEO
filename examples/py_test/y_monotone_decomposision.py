@@ -12,9 +12,6 @@ dots = PolygonPlot.generateRandomPolygons(center=(0, 0),
 points_arr = [Geo.Point(x, y) for x, y in dots]
 poly = Geo.Polygon(points_arr)
 
-for p in poly.getVertices():
-    print(p)
-
 sub_polygons = Geo.Polygon.decomposeY_Monotone(poly)
 
 sub_polygons_points = []
