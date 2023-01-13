@@ -49,5 +49,7 @@ namespace Shapes2D{
         bool isDownInnerCusp(int v);
         bool isInPoly(Point2d *p);
         static std::vector<Polygon *> decomposeY_Monotone(Polygon *poly);
+
+        ~Polygon();
     };
 }

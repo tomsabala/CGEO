@@ -199,3 +199,5 @@ bool Point2d::_gt_(Point2d &p) const {
     return this->getY()>p.getY()+eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() > p.getX());
 }
 
+Point2d::~Point2d() {}
+

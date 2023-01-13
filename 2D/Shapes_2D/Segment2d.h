@@ -54,5 +54,7 @@ namespace Shapes2D {
         bool isIntersect(Segment2d *s);
         Point2d* getIntersect(Segment2d *s);
         bool containPoint(Point2d p) const;
+
+        ~Segment2d();
     };
 }

@@ -63,6 +63,8 @@ namespace Shapes2D {
         {
             return std::abs(y - b.y) > eps || std::abs(x - b.x) > eps;
         }
+
+        ~Point2d();
     };
 }
 

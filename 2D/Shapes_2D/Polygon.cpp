@@ -572,3 +572,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     res.push_back(poly);
     return res;
 }
+
+Shapes2D::Polygon::~Polygon() {
+
+}

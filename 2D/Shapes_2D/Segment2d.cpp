@@ -348,7 +348,10 @@ std::string Segment2d::toStr() const{
     return res;
 }
 
-
+Segment2d::~Segment2d() {
+    delete this->origin;
+    delete this->target;
+}
 
 
 

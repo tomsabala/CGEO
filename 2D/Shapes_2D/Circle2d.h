@@ -40,5 +40,7 @@ namespace Shapes2D
         int segmentContains(Segment2d *s);
         int circleContains(Circle2d *c);
         int polyContains(Polygon *poly);
+
+        ~Circle2d();
     };
 }

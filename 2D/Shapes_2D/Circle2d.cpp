@@ -207,6 +207,8 @@ int Circle2d::polyContains(Polygon *poly) {
 void Circle2d::setCircle(Point2d *p, Point2d *q, Point2d *t) {
     std::pair<double, Point2d *> val = Circle2d::circleFrom3Points(p, q, t);
 
+    delete this->c;
+
     this->c = val.second;
     this->r = val.first;
 }
@@ -236,7 +238,16 @@ std::pair<double, Point2d *> Circle2d::circleFrom3Points(Point2d *p, Point2d *q,
     Point2d *center = Line2d::line_intersection(l1, l2);
     double radius = center->dist(p);
 
+    delete mid_point1;
+    delete mid_point2;
+    delete l1;
+    delete l2;
+
     return std::make_pair(radius, center);
 }
 
+Circle2d::~Circle2d()
+{
+    delete this->c;
+}
 
