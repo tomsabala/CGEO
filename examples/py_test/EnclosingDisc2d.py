@@ -20,6 +20,7 @@ for p in points_vector:
     points.append(Geo.Point(p[0], p[1]))
 
 discUtils = Geo.EnclosingDistUtils()
+
 disc = discUtils.findDisc(points)
 
 CirclePlot.PlotCircles().plotEnclosingDisc(points, disc)

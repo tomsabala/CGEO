@@ -13,7 +13,10 @@ SmallestEnclosingDisk::SmallestEnclosingDisk() {}
  * @param points : set of points in the plane
  * @return a Circle in the plane.
  */
-Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2d *> points) {
+Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2d *> points)
+{
+
+    srand((unsigned) time(NULL));
     std::vector<int> permutation = shuffle(points.size());
 
     /* init circle */
@@ -23,7 +26,10 @@ Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2
 
     for (int i=2; i<permutation.size(); ++i)
         if (circle->pointContains(points[permutation[i]]) == -1)
+        {
+            delete circle;
             circle = findDisc_withOnePoint(points, permutation, i);
+        }
 
     return circle;
 }
@@ -37,16 +43,19 @@ Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2
  * @return a circle that includes all points with indices in permutation
  */
 Shapes2D::Circle2d *
-SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d *> points, std::vector<int> permutation, int I) {
-    std::vector<int> new_perm = shuffle(permutation, I);
+SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d *> points, std::vector<int> permutation, int I)
+{
 
     /* init circle */
-    Shapes2D::Circle2d *circle = new Shapes2D::Circle2d(points[new_perm[0]],
+    Shapes2D::Circle2d *circle = new Shapes2D::Circle2d(points[permutation[0]],
                                                         points[permutation[I]]);
 
-    for (int i=1; i<new_perm.size(); ++i)
-        if (circle->pointContains(points[new_perm[i]]) == -1)
-            circle = findDisc_withTwoPoints(points, new_perm, i, permutation[I]);
+    for (int i=1; i<I; ++i)
+        if (circle->pointContains(points[permutation[i]]) == -1)
+        {
+            delete circle;
+            circle = findDisc_withTwoPoints(points, permutation, i, permutation[I]);
+        }
 
     return circle;
 
@@ -80,7 +89,6 @@ std::vector<int> SmallestEnclosingDisk::shuffle(int N) {
     for (int i=0; i<N; i++)
         res[i] = i;
 
-    srand((unsigned)time(NULL));
     for (int i=0; i<N; i++)
     {
         r = (rand()%(N-i)) + i;
@@ -92,21 +100,4 @@ std::vector<int> SmallestEnclosingDisk::shuffle(int N) {
     return res;
 }
 
-std::vector<int> SmallestEnclosingDisk::shuffle(std::vector<int> permutation, int I) {
-    int r, tmp;
-    std::vector<int> res(I, 0);
-
-    for (int i = 0; i <= I; ++i)
-        res[i] = permutation[i];
-
-    srand((unsigned) time(NULL));
-    for (int j=0; j<I; j++) {
-        r = (rand()%(I-j)) + j;
-        tmp = res[j];
-        res[j] = res[r];
-        res[r] = tmp;
-    }
-
-    return res;
-}
 
