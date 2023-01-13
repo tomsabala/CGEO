@@ -225,6 +225,18 @@ bool Shapes2D::Polygon::isInnerCusp(int i) {
     return (prev_y > curr_y && next_y > curr_y) || (prev_y < curr_y && next_y < curr_y);
 }
 
+
+bool Shapes2D::Polygon::anyInnerCusp(int i, bool (*func)(Point2d *, Point2d *, Point2d *))
+{
+    int n = this->getSize();
+
+    int pred = i == 0 ? n-1 : i-1;
+    int succ = i == n-1 ? 0 : i+1;
+
+    return func(this->getByIndex(pred), this->getByIndex(i), this->getByIndex(succ));
+}
+
+
 /**
  * @return vector of all vertices
  */
@@ -292,7 +304,7 @@ int Shapes2D::Polygon::getLeftMost_index() {
  * this function checks whether a given point is inside polygon
  * assuming polygon is a simple polygon
  * @param p 2d point
- * @return true iff point is in inteior of polygon
+ * @return true iff point is in interior of polygon
  */
 bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
     int res = 0;
@@ -311,7 +323,7 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
 }
 
 /**
- * the next following functions are the methods related to the decomposision of a polygon into
+ * the next following functions are the methods related to the decomposition of a polygon into
  * y-monotone polygons.
  * for each inner cusp we want to find a diagonal that is a legal diagonal, and then split the polygon accordingly
  * and make a recursive call for the both polygons
@@ -320,65 +332,36 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
  * a polygon is y-monotone iff it does not have any inner cusps
  * inner cusp is a vertex which has two adjacent vertices with y-value bigger or lower than his
  */
-int Shapes2D::Polygon::next_downInnerCusp(Shapes2D::Polygon *poly, int t)
+int Shapes2D::Polygon::next_InnerCusp(Shapes2D::Polygon *poly, bool upper)
 {
-    int n = poly->getSize(), pred, succ;
-    int counter = n, i=0;
+    int n = poly->getSize();
 
-    while (counter)
+    for (int i=0; i<n; i++)
     {
-        if (poly->isDownInnerCusp(i))
-            return i;
-
-        i ++;
-        counter --;
-    }
-
-    return -1;
-}
-
-bool Shapes2D::Polygon::isDownInnerCusp(int v)
-{
-    int n = this->getSize();
-    int pred = v == 0 ? n-1 : v-1;
-    int succ = v == n-1 ? 0 : v+1;
-
-    if (this->getByIndex(pred)->getY() < this->getByIndex(v)->getY() && this->getByIndex(succ)->getY() < this->getByIndex(v)->getY())
-    {
-        if (this->getByIndex(pred)->oriePred(this->getByIndex(v), this->getByIndex(succ)) > 0)
-            return true;
-    }
-
-    return false;
-}
-
-bool Shapes2D::Polygon::isUpperInnerCusp(int v)
-{
-    int n = this->getSize();
-    int pred = v == 0 ? n-1 : v-1;
-    int succ = v == n-1 ? 0 : v+1;
-
-    if (this->getByIndex(pred)->getY() > this->getByIndex(v)->getY() && this->getByIndex(succ)->getY() > this->getByIndex(v)->getY())
-    {
-        if (this->getByIndex(pred)->oriePred(this->getByIndex(v), this->getByIndex(succ)) > 0)
-            return true;
-    }
-
-    return false;
-}
-
-int Shapes2D::Polygon::next_upperInnerCusp(Shapes2D::Polygon *poly, int t)
-{
-    int n = poly->getSize(), pred, succ;
-    int counter = n, i=t;
-
-    while ( counter )
-    {
-        if (poly->isUpperInnerCusp(i))
-            return i;
-
-        i ++;
-        counter --;
+        if (upper)
+        {
+            if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
+                if (a->getY() > b->getY() && c->getY() > b->getY())
+                {
+                    if (a->oriePred(b, c) > 0)
+                        return true;
+                }
+                return false;
+            }))
+                return i;
+        }
+        else
+        {
+            if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
+                if (a->getY() < b->getY() && c->getY() < b->getY())
+                {
+                    if (a->oriePred(b, c) > 0)
+                        return true;
+                }
+                return false;
+            }))
+                return i;
+        }
     }
 
     return -1;
@@ -456,7 +439,14 @@ int Shapes2D::Polygon::findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, i
         Shapes2D::Point2d *p = poly->getByIndex(i);
         if(p->getX() >= left_point->getX() && p->getX() <= right_point->getX())
         {
-            if (poly->isDownInnerCusp(i))
+            if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
+                if (a->getY() < b->getY() && c->getY() < b->getY())
+                {
+                    if (a->oriePred(b, c) > 0)
+                        return true;
+                }
+                return false;
+            }))
                 return i;
             if (u == -1 || poly->getByIndex(u)->getY() < p->getY())
             {
@@ -484,7 +474,14 @@ int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, in
         Shapes2D::Point2d *p = poly->getByIndex(i);
         if(p->getX() >= left_point->getX() && p->getX() <= right_point->getX())
         {
-            if (poly->isUpperInnerCusp(i))
+            if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
+                if (a->getY() > b->getY() && c->getY() > b->getY())
+                {
+                    if (a->oriePred(b, c) > 0)
+                        return true;
+                }
+                return false;
+            }))
                 return i;
             if (u == -1 || poly->getByIndex(u)->getY() > p->getY())
             {
@@ -502,7 +499,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
 
     int n = poly->getSize();
 
-    int downInnerCusp = next_downInnerCusp(poly, 0);
+    int downInnerCusp = next_InnerCusp(poly, false);
     if (downInnerCusp != -1)
     {
         int u = findDiagonalFromDownInnerCusp(poly, downInnerCusp);
@@ -535,7 +532,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
         return res;
     }
 
-    int upperInnerCusp = next_upperInnerCusp(poly, 0);
+    int upperInnerCusp = next_InnerCusp(poly, true);
     if (upperInnerCusp != -1)
     {
         int u = findDiagonalFromUpperInnerCusp(poly, upperInnerCusp);

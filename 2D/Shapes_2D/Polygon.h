@@ -9,8 +9,7 @@ namespace Shapes2D{
     private:
         std::vector<Point2d> vertices;
 
-        static int next_downInnerCusp(Shapes2D::Polygon *poly, int t);
-        static int next_upperInnerCusp(Shapes2D::Polygon *poly, int t);
+        static int next_InnerCusp(Shapes2D::Polygon *, bool);
         static int rightBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v);
         static int leftBoundUpperInnerCusp(Shapes2D::Polygon *poly, int v);
         static int rightBoundDownInnerCusp(Shapes2D::Polygon *poly, int v);
@@ -45,8 +44,7 @@ namespace Shapes2D{
         bool isConvex();
         bool isY_Monotone();
         bool isInnerCusp(int i);
-        bool isUpperInnerCusp(int v);
-        bool isDownInnerCusp(int v);
+        bool anyInnerCusp(int i, bool (*func)(Point2d *, Point2d *, Point2d *));
         bool isInPoly(Point2d *p);
         static std::vector<Polygon *> decomposeY_Monotone(Polygon *poly);
 

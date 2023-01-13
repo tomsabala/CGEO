@@ -88,16 +88,7 @@ bool Circle2d::circleIntersect(Circle2d *circ) {
  * @return true iff circles intersect
  */
 bool Circle2d::lineIntersect(Line2d *l) {
-    if (l->isVertical())
-        return std::abs(l->p.getX()-this->c->getX()) <= this->r;
-
-    /* find the projection point if the circle center onto l */
-    Point2d *proj_point = new Point2d();
-    proj_point->setX((this->c->getX() + *l->getSlope()*this->c->getY() - *l->getSlope()*l->getY_fromX(0).second) / (1 + *l->getSlope()));
-    proj_point->setY((*l->getSlope()*this->c->getX() + pow(*l->getSlope(), 2)*this->c->getY() + l->getY_fromX(0).second) / (1 + *l->getSlope()));
-
-    /* circle and line intersect iff the distance between them is less than r */
-    return proj_point->dist(this->c) <= this->r;
+    return l->dist(this->getCenter()) <= this->r;
 }
 
 /**
