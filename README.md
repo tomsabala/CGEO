@@ -2,16 +2,14 @@
 
 # CGEO
 
-<p>This project is a collection of several Computational Geometry Algorithms and Applications.
+<p>This project is a collection of several algorithms and applications of computational geometry.
 
-The algorithms are implemented in C++ and are wrapped with PyBind11 to use in Python.
+It is built for quick and easy use of well-known performance-oriented algorithms and important data structures in the field of computational geometry in any Python program.
 
-The reason for the project is educational, I am challenging my self with implementing the algorithms so I can understand the theoretic material better.
-
-This is an on-going project and has new features every now and then.</p>
+This is an ongoing project, some features are done and ready, and some are under construction.</p>
 
 
-## List Of Implementations
+## Features
 <p>You can find the followong algorithms available:
 
 * [Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
@@ -31,7 +29,8 @@ This is an on-going project and has new features every now and then.</p>
 
 All the algorithms are implemented using c++. 
 But a user can use this source code as a C++ extension for a Python program.
-All algorithms and classes are wrapperd with [pybind11](https://pybind11.readthedocs.io/en/stable/), 
+
+The source code is wrapperd with [pybind11](https://pybind11.readthedocs.io/en/stable/), 
 and you can find multiple code-examples of python programs with the wrapped package via the following [link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
 
 
