@@ -24,8 +24,14 @@ def generate_random_segments(n: int) -> list:
 
     segments = []
     for i in range(n):
-        segments.append([[random.randint(0, 10), random.randint(0, 10)],
-                         [random.randint(0, 10), random.randint(0, 10)]])
+        x1, y1 = random.randint(0, 10), random.randint(0, 10)
+        x2, y2 = random.randint(0, 10), random.randint(0, 10)
+
+        while x1 == x2 and y1 == y2:
+            x1, y1 = random.randint(0, 10), random.randint(0, 10)
+            x2, y2 = random.randint(0, 10), random.randint(0, 10)
+
+        segments.append([[x1, y1], [x2, y2]])
 
     return segments
 
