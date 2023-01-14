@@ -112,6 +112,3 @@ After scanning dependencies and build are finish, you can use it as an extension
       <summary>Smallest Enclosing Disc</summary>
       <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/EnclosingDisc.png width=250 height=250 /></p>     
 </details>
-
-## Issues
-* Segment intersection is currently on and off, a problem with the balanced segement tree is causing the segment to be un-predictable.
