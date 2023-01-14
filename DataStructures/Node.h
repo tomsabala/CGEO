@@ -1,8 +1,15 @@
-//
-// Created by tomsabala on 1/14/23.
-//
+#include "../2D/Shapes_2D/Segment2d.h"
 
-#ifndef CGEO_NODE_H
-#define CGEO_NODE_H
-
-#endif //CGEO_NODE_H
+class Node{
+public:
+    Shapes2D::Segment2d *s;
+    int height;
+    Node * left;
+    Node * right;
+    Node(Shapes2D::Segment2d *seg){
+        height = 1;
+        s = seg;
+        left = NULL;
+        right = NULL;
+    }
+};
