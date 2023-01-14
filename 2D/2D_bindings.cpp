@@ -1,6 +1,7 @@
 #include "2D_bindings.h"
 #include "../extern/pybind11/include/pybind11/pybind11.h"
 #include "../extern/pybind11/include/pybind11/stl.h"
+
 double round_to(double value, double precision = 1.0)
 {
     return std::round(value / precision) * precision;
@@ -113,20 +114,19 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def(py::init<>())
             .def("intersection", &Algorithms2d::SegmentIntersection2d::solve, "solve segment intersection");
 
-    py::class_<TreeNode>(h, "TreeNode")
-            .def(py::init<Shapes2D::Segment2d>())
-            .def("getSegment", &TreeNode::getSegment, "get segment value");
+    py::class_<Node>(h, "Node")
+            .def(py::init<Shapes2D::Segment2d *>());
 
-    py::class_<BST>(h, "SegmentTree")
-            .def(py::init<>())
-            .def("insert", &BST::insert, "insert a new segment to the tree")
-            .def("searchSegment", &BST::searchSegment, "search a segment inside the tree and return its pointer")
-            .def("searchPoint", &BST::searchPoint, "search for a segment that contains a given point inside the tree")
-            .def("maxx", &BST::maxx, "return the maximum segment in the tree")
-            .def("minn", &BST::minn, "return the minimum segment in the tree")
-            .def("InOrder", &BST::walkInOrder, "print the tree segment in an in-order walk")
-            .def("remove", &BST::remove, "remove a segment from the tree")
-            .def("setHeight", &BST::setHeight, "set the height of the tree");
+    py::class_<SegmentBalancedTree>(h, "SegmentTree")
+            .def("insert", &SegmentBalancedTree::insert, "insert a new segment to the tree")
+            .def("searchSegment", &SegmentBalancedTree::search, "search a segment inside the tree and return its pointer")
+            .def("searchPoint", &SegmentBalancedTree::search_p, "search for a segment that contains a given point inside the tree")
+            .def("maxx", &SegmentBalancedTree::maxx, "return the maximum segment in the tree")
+            .def("minn", &SegmentBalancedTree::minn, "return the minimum segment in the tree")
+            .def("InOrder", &SegmentBalancedTree::walkInOrder, "print the tree segment in an in-order walk")
+            .def("remove", &SegmentBalancedTree::remove, "remove a segment from the tree")
+            .def("getPred", &SegmentBalancedTree::getPred, "get predecessor of node")
+            .def("getSucc", &SegmentBalancedTree::getSucc, "get successor of node");
 
     py::class_<Shapes2D::Triangle2d>(h, "Triangle")
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
