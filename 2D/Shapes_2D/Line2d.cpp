@@ -151,3 +151,7 @@ Shapes2D::Point2d *Line2d::getProjection(Shapes2D::Point2d *point) {
 
     return Line2d::line_intersection(this, orthogonal_l);
 }
+
+bool Line2d::isHorizon() {
+    return !isVertical() && *getSlope() == 0;
+}

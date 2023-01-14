@@ -15,6 +15,7 @@ public:
 
     double* getSlope();
     bool isVertical();
+    bool isHorizon();
     double* getY_intersect();
     double* getX_intersect();
     std::pair<bool, double> getY_fromX(double x);
