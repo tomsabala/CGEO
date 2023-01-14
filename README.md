@@ -2,11 +2,11 @@
 <img src=examples/PlotImages/Logo.png width=350 height=250/>
 <p/>
 <p align="center">
-<img src="https://img.shields.io/badge/License-GNU%203.0-green.svg" align="left">
+<img src="https://img.shields.io/badge/License-GNU%203.0-green.svg">
    <img src="https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social">
    <img src="https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green">
    <img src="https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue">
-   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" align="right">
+   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg">
 <p/>
 
 # CGEO
