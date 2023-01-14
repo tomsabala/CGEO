@@ -88,7 +88,7 @@ After scanning dependencies and build are finish, you can use it as an extension
 
 <details>
       <summary>Segement Intersection</summary>
-      <p><img src=examples/PlotImages/SegmentIntersection.png width=250 height=250/></p>
+      <p><img src=examples/PlotImages/Segment_Intersection.png width=250 height=250/></p>
    
    * The input is given as a list of segments, and the algorithms is coloring all segments intersections with blue.
      
