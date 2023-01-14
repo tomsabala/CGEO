@@ -8,7 +8,7 @@
 #include <map>
 #include "../Shapes_2D/Segment2d.h"
 #include "../Shapes_2D/Line2d.h"
-#include "../../DataStructures/BBST.h"
+#include "../../DataStructures/SegmentBalancedTree.h"
 
 
 namespace Algorithms2d{
@@ -44,27 +44,27 @@ namespace Algorithms2d{
                   bool test);
 
         void
-        intersect(std::vector<Shapes2D::Segment2d> *segments,
+        intersect(std::vector<Shapes2D::Segment2d *> *segments,
                   std::vector<Shapes2D::Point2d *> *intersections);
 
         void
         handleEventPoint(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
                          std::multimap<Shapes2D::Point2d *, int, event_comp> *events,
-                         BST *status,
+                         SegmentBalancedTree *status,
                          std::vector<Shapes2D::Point2d *> *intersections);
 
-        std::vector<Shapes2D::Segment2d>
+        std::vector<Shapes2D::Segment2d *>
         findInteriorMap(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
-                        BST *status);
+                        SegmentBalancedTree *status);
 
-        bool isInterior(Shapes2D::Segment2d s, Shapes2D::Point2d p);
+        bool isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d *p);
 
-        void print_status(BST *status);
+        void print_status(SegmentBalancedTree *status);
 
         void print_events(std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
 
         std::vector<Shapes2D::Point2d *>
-        solve(std::vector<Shapes2D::Segment2d> *segments);
+        solve(std::vector<Shapes2D::Segment2d *> *segments);
 
         void
         handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
