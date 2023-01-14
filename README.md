@@ -1,7 +1,7 @@
 <p align="center">
 <img src=examples/PlotImages/Logo.png width=350 height=250/>
 <p/>
-<p align-="center">
+<p align="center">
 <img src="https://img.shields.io/badge/License-GNU%203.0-green.svg" align="left">
    <img src="https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social">
    <img src="https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green">
