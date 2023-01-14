@@ -2,7 +2,11 @@
 <img src=examples/PlotImages/Logo.png width=350 height=250/>
 <p/>
 <p align-="center">
-![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)  ![C++](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social) ![Computational Geometry](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green)  ![Python](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+<img src="https://img.shields.io/badge/License-GNU%203.0-green.svg" align="left">
+   <img src="https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social">
+   <img src="https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green">
+   <img src="https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue">
+   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" align="right">
 <p/>
 
 # CGEO
