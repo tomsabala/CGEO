@@ -1,9 +1,9 @@
 from build import libGeo_2D as Geo
 from examples.Plots2D import SegmentsPlot
 
-segments_coord = SegmentsPlot.generate_random_segments(10)
+segments_coord = SegmentsPlot.generate_random_segments(20)
 
-segments_test = [0 for i in range(10)]
+segments_test = [0 for i in range(20)]
 for i, seg in enumerate(segments_coord):
     p = Geo.Point(seg[0][0], seg[0][1])
     q = Geo.Point(seg[1][0], seg[1][1])
