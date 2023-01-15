@@ -318,16 +318,18 @@ Point2d *Segment2d::getIntersect(Segment2d *s) {
     if (this->getUpper()->_eq_(s->getLower()) || this->getLower()->_eq_(s->getLower()))
         return s->getLower();
 
-    if(this->isIntersect(s)) {
-        double a = (this->getTarget()->getY() - this->getOrigin()->getY()) / (this->getTarget()->getX() - this->getOrigin()->getX());
-        double b = this->getOrigin()->getY() - (this->getOrigin()->getX() * a);
-        double c = (s->getTarget()->getY() - s->getOrigin()->getY()) / (s->getTarget()->getX() - s->getOrigin()->getX());
-        double d = s->getOrigin()->getY() - (s->getOrigin()->getX() * c);
+    if(this->isIntersect(s))
+    {
+        double s2_x = s->getTarget()->getX() - s->getOrigin()->getX();
+        double s2_y = s->getTarget()->getY() - s->getOrigin()->getY();
+        double s1_x = this->getTarget()->getX() - this->getOrigin()->getX();
+        double s1_y = this->getTarget()->getY() - this->getOrigin()->getY();
 
-        Shapes2D::Point2d* intersection = new Shapes2D::Point2d();
-        intersection->setX((b - d) / (c - a));
-        intersection->setY(b + (a * intersection->getX()));
-        return intersection;
+
+        double t = ( s2_x * (this->getOrigin()->getY() - s->getOrigin()->getY()) - s2_y * (this->getOrigin()->getX() - s->getOrigin()->getX())) / (-s2_x * s1_y + s1_x * s2_y);
+
+        return new Point2d(this->getOrigin()->getX() + t * s1_x, this->getOrigin()->getY() + t * s1_y);
+
     }
     return nullptr;
 }
@@ -353,5 +355,35 @@ Segment2d::~Segment2d() {
     delete this->target;
 }
 
+double Segment2d::getXfromY(double y) {
+    if (this->getOrigin()->getY() == this->getTarget()->getY())
+    {
+        if (y == this->getOrigin()->getY())
+            return this->getOrigin()->getX();
+
+        return DBL_MAX;
+    }
+
+    double t = (y - this->getTarget()->getY()) / (this->getOrigin()->getY() - this->getTarget()->getY());
+    if (0 <= t && t <= 1)
+        return t*this->getOrigin()->getX() + (1-t)*this->getTarget()->getX();
+    return DBL_MAX;
+}
+
+
+double Segment2d::getYfromX(double x) {
+    if (this->getOrigin()->getX() == this->getTarget()->getX())
+    {
+        if (x == this->getOrigin()->getX())
+            return this->getOrigin()->getY();
+
+        return DBL_MAX;
+    }
+
+    double t = (x - this->getTarget()->getX()) / (this->getOrigin()->getX() - this->getTarget()->getX());
+    if (0 <= t && t <= 1)
+        return t*this->getOrigin()->getY() + (1-t)*this->getTarget()->getY();
+    return DBL_MAX;
+}
 
 

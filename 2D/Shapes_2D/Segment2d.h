@@ -55,6 +55,8 @@ namespace Shapes2D {
         Point2d* getIntersect(Segment2d *s);
         bool containPoint(Point2d p) const;
 
+        double getXfromY(double y);
+        double getYfromX(double x);
         ~Segment2d();
     };
 }
