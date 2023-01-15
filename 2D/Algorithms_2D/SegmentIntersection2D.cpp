@@ -3,7 +3,6 @@
 
 using namespace Algorithms2d;
 
-std::unordered_set<int> included_segments;
 std::unordered_set<std::pair<double, double>, pair_hashFunction> checked_points;
 std::map<std::pair<double, double>, std::vector<std::pair<Shapes2D::Segment2d*, int>>> Upper_end_point;
 std::map<std::pair<double, double>, std::vector<std::pair<Shapes2D::Segment2d*, int>>> Lower_end_point;
@@ -42,7 +41,8 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
     SegmentBalancedTree *status = new SegmentBalancedTree();
 
     /* insert upper and lower points */
-    for (int k = 0; k < (int)segments->size(); ++k) {
+    for (int k = 0; k < (int)segments->size(); ++k)
+    {
 
         Shapes2D::Point2d *lower_point;
         Shapes2D::Point2d *upper_point;
@@ -80,8 +80,8 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
     }
 
     /* start scanning the events */
-    int count =1;
-    while (!events.empty()) {
+    while (!events.empty())
+    {
         /*pick-up first event -- {reminder: multimap holds keys in sorted form}*/
         std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator event = events.begin();
 
@@ -95,37 +95,20 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
 
 /** check whether two segments intersect */
 std::pair<bool, Shapes2D::Point2d *>*
-        SegmentIntersection2d::intersect(const Shapes2D::Segment2d *a,
-                                         const Shapes2D::Segment2d *b,
+        SegmentIntersection2d::intersect(Shapes2D::Segment2d *a,
+                                         Shapes2D::Segment2d *b,
                                          bool test)
 {
-    Shapes2D::Point2d *ret = new Shapes2D::Point2d( 0, 0); /* return output */
-    Line2d *A, *B; /* two line objects reflected from a & b */
-
-    /* build lines */
-    A = new Line2d(a->getUpper(), a->getLower());
-    B = new Line2d(b->getUpper(), b->getLower());
-
-    /* find expected intersection point */
-    Shapes2D::Point2d * intersectPoint = Line2d::line_intersection(A, B);
-    if(intersectPoint == nullptr){ /* check point is not null, etc. intersection point des exist */
-        return new std::pair<bool, Shapes2D::Point2d *>(false, ret);
+    if (a->isIntersect(b))
+    {
+        if (test)
+            std::cout << a->toStr() << "and" << b->toStr() << "do intersect\n";
+        return new std::pair<bool, Shapes2D::Point2d *>(true, a->getIntersect(b));
     }
+    if (test)
+        std::cout << a->toStr() << "and" << b->toStr() << "do not intersect\n";
+    return new std::pair<bool, Shapes2D::Point2d *>(false, nullptr);
 
-    /* set return point value */
-    ret->setX(intersectPoint->getX());
-    ret->setY(intersectPoint->getY());
-
-    if(test){ /* a debugging line */
-        std::cout<<"test result is "<<ret->toStr()<<'\n';
-    }
-
-    /* tests, etc. check if point does lies on the two segments */
-    if(ret->getY() <= a->getUpper()->getY() && ret->getY() >= a->getLower()->getY() && ret->getY() <= b->getUpper()->getY() && ret->getY() >= b->getLower()->getY())
-        return new std::pair<bool, Shapes2D::Point2d *>(true, ret);
-
-    /* test failed, intersection point is not on the segments */
-    return new std::pair<bool, Shapes2D::Point2d *>(false, ret);
 }
 
 
@@ -142,65 +125,78 @@ SegmentIntersection2d::handleEventPoint(std::multimap<Shapes2D::Point2d *, int, 
                                         std::vector<Shapes2D::Point2d *> * intersections) {
     Shapes2D::Point2d *p = e->first;
     std::pair<double, double> point_pair = std::make_pair(p->getX(), p->getY());
-    std::vector<Shapes2D::Segment2d*> C_vector = findInteriorMap(e, status); /* C(p) */
+
+    /* C(p) is the vector of segments that have p as an interior point */
+    std::vector<Shapes2D::Segment2d*> C_vector = findInteriorMap(e, status);
 
     /* check if point is an intersection point, etc. point belongs to more than one segment */
     if(C_vector.size() + Lower_end_point[point_pair].size() + Upper_end_point[point_pair].size() > 1)
-    {
         intersections->push_back(p);
-    }
 
 
     /* delete L(p) and C(p) */
-    for (std::pair<Shapes2D::Segment2d *, int> pair : Lower_end_point[point_pair]) {
+    for (std::pair<Shapes2D::Segment2d *, int> pair : Lower_end_point[point_pair])
         status->remove(pair.first);
-        included_segments.erase(pair.second);
-    }
-    for (Shapes2D::Segment2d* seg : C_vector) {
+    for (Shapes2D::Segment2d* seg : C_vector)
         status->remove(seg);
-    }
 
     /* insert U(p) and C(p) */
-    for (std::pair<Shapes2D::Segment2d *, int> pair : Upper_end_point[point_pair]) {
+    for (std::pair<Shapes2D::Segment2d *, int> pair : Upper_end_point[point_pair])
         status->insert(pair.first);
-    }
-    for (Shapes2D::Segment2d* seg : C_vector) {
+    for (Shapes2D::Segment2d* seg : C_vector)
         status->insert(seg);
-    }
 
 
-    if(Upper_end_point[point_pair].size() + C_vector.size() == 0) { /* point is an end point only */
+    if(Upper_end_point[point_pair].size() + C_vector.size() == 0)
+    { /* point is an end point only */
 
-        Node *it = status->search_p(p); /* add functionality */
+        Node *it = status->search_p(p); /* pick the closest Node in the status to the point p */
 
-        if (it != NULL) {
-            Node *left = status->getPred(it);
-            Node *right = status->getSucc(it);
-
-            if (left != nullptr)
-                this->handle_segments(left->s, it->s, *p, events);
-            if (right != nullptr)
-                this->handle_segments(it->s, right->s, *p, events);
+        if (it != NULL)
+        { /* it should never be null unless, the tree is empty */
+            /* x coordinate of segment w.r.t to p.y */
+            double it_x = it->s->getXfromY(p->getY());
+            if (it_x <= p->getX())
+            { /* segment is to the left of the deleted element */
+                Node * right = status->getSucc(it);
+                if (right != nullptr)
+                    this->handle_segments(it->s, right->s, *p, events);
+            }
+            else
+            { /* segment is to the right of the deleted element */
+                Node * left = status->getPred(it);
+                if (left != nullptr)
+                    this->handle_segments(left->s, it->s, *p, events);
+            }
         }
     }
-    else {
+    else
+    {/* point is a segment intersect or start */
+
+        /* search for best closest segment in the tree w.r.t p */
         Node *left = status->search_p(p);
         Node *right = status->search_p(p);
 
-        while(left != status->minn() && left->s->containPoint(*p)) {
+        /* find first segment to the left that does not contain p */
+        while(left != status->minn() && left->s->containPoint(*p))
             left = status->getPred(left);
-        }
 
-        while(right != status->maxx() && right->s->containPoint(*p)){
+        /* find first segment to the right that does not contain p */
+        while(right != status->maxx() && right->s->containPoint(*p))
             right = status->getSucc(right);
-        }
 
-        if(!left->s->containPoint(*p)) {
+        if(!left->s->containPoint(*p))
+        { /* found segment from the left that does not contain p */
+
+            /* search for next intersection */
             Node *right2left = status->getSucc(left);
             this->handle_segments(right2left->s, left->s, *p, events);
         }
 
-        if(!right->s->containPoint(*p)) {
+        if(!right->s->containPoint(*p))
+        { /* found segment from the right that does not contain p */
+
+            /* search for next intersection */
             Node *left2right = status->getPred(right);
             this->handle_segments(right->s, left2right->s, *p, events);
         }
@@ -234,7 +230,7 @@ SegmentIntersection2d::findInteriorMap(std::multimap<Shapes2D::Point2d *, int, e
 
     for(int dir = 0; dir<=1; dir++){ /* two iteration, one for left side and one for right side */
 
-        Node *it = status->search(segment); /* walk through segment tree, from it and move forward */
+        Node *it = segment_node; /* walk through segment tree, from it and move forward */
 
         if (dir == 1){
             if(it->s->_eq_(status->maxx()->s)) continue;
@@ -275,7 +271,7 @@ bool SegmentIntersection2d::isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d
 void SegmentIntersection2d::handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
                                             Shapes2D::Point2d p,
                                             std::multimap<Shapes2D::Point2d*, int, event_comp> *events) {
-    std::pair<bool, Shapes2D::Point2d *>* intersect_result = intersect(s, t, true); /* compute the intersection point */
+    std::pair<bool, Shapes2D::Point2d *>* intersect_result = intersect(s, t, false); /* compute the intersection point */
 
     /* segment do intersect and the point haven't been discovered yet */
     if((*intersect_result).first && events->find((*intersect_result).second) == events->end()){
