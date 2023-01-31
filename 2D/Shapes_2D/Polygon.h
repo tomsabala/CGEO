@@ -39,6 +39,7 @@ namespace Shapes2D{
         Point2d* getLeftMost();
         int getRightMost_index();
         int getLeftMost_index();
+        void splice(int pos, Polygon& other, int first, int last );
 
         /* different */
         bool isConvex();

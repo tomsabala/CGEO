@@ -9,7 +9,7 @@
  * init vertices to be an empty vector
  */
 Shapes2D::Polygon::Polygon() {
-    this->vertices = std::vector<Point2d>();
+    vertices = std::vector<Point2d>();
 }
 
 /**
@@ -20,34 +20,30 @@ Shapes2D::Polygon::Polygon() {
  */
 Shapes2D::Polygon::Polygon(const std::vector<Point2d> &v) {
     double edge_sum = 0;
-    for (int i=0; i<v.size(); i++)
+    for (auto i=0; i<v.size(); i++)
     {
-        Point2d next = i == v.size()-1 ? v[0] : v[i+1];
+        auto& next = i == v.size()-1 ? v[0] : v[i+1];
         edge_sum += (next.getX() - v[i].getX()) * (next.getY() + v[i].getY());
     }
     if (edge_sum >= 0)
-        this->vertices.insert(this->vertices.begin(), v.begin(), v.end());
+        vertices.insert(vertices.begin(), v.begin(), v.end());
     else
-        this->vertices.insert(this->vertices.end(), v.rbegin(), v.rend());
+        vertices.insert(vertices.end(), v.rbegin(), v.rend());
 }
 
 Shapes2D::Polygon::Polygon(const std::vector<Point2d *> &v) {
     double edge_sum = 0;
-    for (int i=0; i<v.size(); i++)
+    for (auto i=0; i<v.size(); i++)
     {
-        Point2d next = i == v.size()-1 ? *v[0] : *v[i+1];
+        auto& next = i == v.size()-1 ? *v[0] : *v[i+1];
         edge_sum += (next.getX() - v[i]->getX()) * (next.getY() + v[i]->getY());
     }
     if (edge_sum >= 0)
-        for (int i=0; i<v.size(); i++)
-        {
-            this->vertices.push_back(*v.at(i));
-        }
+        for (auto i : v)
+            vertices.push_back(*i);
     else
-        for (int i=v.size()-1; i>=0; i--)
-        {
-            this->vertices.push_back(*v.at(i));
-        }
+        for (auto i=v.size()-1; i>=0; i--)
+            vertices.push_back(*v.at(i));
 }
 
 /**
@@ -55,7 +51,7 @@ Shapes2D::Polygon::Polygon(const std::vector<Point2d *> &v) {
  * @param p new Point2d object
  */
 void Shapes2D::Polygon::insert(const Shapes2D::Point2d &p) {
-    this->vertices.push_back(p);
+    vertices.push_back(p);
 }
 
 /**
@@ -64,8 +60,8 @@ void Shapes2D::Polygon::insert(const Shapes2D::Point2d &p) {
  * @param i index value {if i >= vertices.size(), then, p is inserted as last vertex}
  */
 void Shapes2D::Polygon::insert(const Shapes2D::Point2d &p, int i) {
-    if (i >= this->vertices.size()) this->insert(p);
-    else this->vertices.insert(this->vertices.begin() + i, p);
+    if (i >= vertices.size()) insert(p);
+    else vertices.insert(vertices.begin() + i, p);
 }
 
 /**
@@ -73,21 +69,21 @@ void Shapes2D::Polygon::insert(const Shapes2D::Point2d &p, int i) {
  * @param i index to be picked {if i >= vertices.size(), then, last vertex is picked}
  */
 Shapes2D::Point2d* Shapes2D::Polygon::getByIndex(int i) {
-    if (i >= this->vertices.size()) return &this->vertices.back();
+    if (i >= vertices.size()) return &vertices.back();
     else if (i < 0) return nullptr;
-    return &this->vertices.at(i);
+    return &vertices.at(i);
 }
 
 /**
  * get lowest point w.r.t lexicographic order
  */
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMin() {
-    if (this->getSize() == 0) return nullptr;
+    if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
     if (!res) {
         throw (Exception2D("malloc failed\n"));
     }
-    *res = *this->getByIndex(this->getLexMin_index());
+    *res = *getByIndex(getLexMin_index());
     return res;
 }
 
@@ -95,13 +91,11 @@ Shapes2D::Point2d *Shapes2D::Polygon::getLexMin() {
  * get lowest point index w.r.t lexicographic order
  */
 int Shapes2D::Polygon::getLexMin_index() {
-    if (this->getSize() == 0) return -1;
+    if (getSize() == 0) return -1;
     int res = 0;
-    for( int i=0; i<this->getSize(); i++) {
-        if (this->getByIndex(i)->_lt_(*this->getByIndex(res))) {
+    for( auto i=0; i<getSize(); i++)
+        if (getByIndex(i)->_lt_(*getByIndex(res)))
             res = i;
-        }
-    }
     return res;
 }
 
@@ -109,12 +103,12 @@ int Shapes2D::Polygon::getLexMin_index() {
  * get highest point index w.r.t lexicographic order
  */
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMax() {
-    if (this->getSize() == 0) return nullptr;
+    if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
     if (!res) {
         throw (Exception2D("malloc failed\n"));
     }
-    *res = *this->getByIndex(this->getLexMax_index());
+    *res = *getByIndex(getLexMax_index());
     return res;
 }
 
@@ -122,10 +116,10 @@ Shapes2D::Point2d *Shapes2D::Polygon::getLexMax() {
  * get highest point index w.r.t lexicographic order
  */
 int Shapes2D::Polygon::getLexMax_index() {
-    if (this->getSize() == 0) return -1;
+    if (getSize() == 0) return -1;
     int res = 0;
-    for(int i=0; i<this->getSize(); i++) {
-        if (this->getByIndex(res)->_lt_(*this->getByIndex(i))){
+    for(int i=0; i<getSize(); i++) {
+        if (getByIndex(res)->_lt_(*getByIndex(i))){
             res = i;
         }
     }
@@ -137,7 +131,7 @@ int Shapes2D::Polygon::getLexMax_index() {
  * @return sorted vector of type Point2d
  */
 std::vector<Shapes2D::Point2d> Shapes2D::Polygon::lexOrder() {
-    std::vector<Shapes2D::Point2d> res(this->vertices.begin(), this->vertices.end());
+    std::vector<Shapes2D::Point2d> res(vertices.begin(), vertices.end());
     std::sort(res.begin(), res.end(), [ ]( const Point2d& p, const Point2d& q )
     {
         return p.getY() < q.getY() || (p.getY() == q.getY() && p.getX() < q.getX());
@@ -151,12 +145,12 @@ std::vector<Shapes2D::Point2d> Shapes2D::Polygon::lexOrder() {
  */
 std::vector<Shapes2D::Segment2d> Shapes2D::Polygon::getEdges() {
     std::vector<Shapes2D::Segment2d> res;
-    for(int i=0; i<this->getSize(); i++) {
+    for(int i=0; i<getSize(); i++) {
         Segment2d* s;
-        if (i == this->getSize()-1)
-            s = new Segment2d(&this->vertices.back(), &this->vertices.front());
+        if (i == getSize()-1)
+            s = new Segment2d(&vertices.back(), &vertices.front());
         else
-            s = new Segment2d(this->getByIndex(i), this->getByIndex(i+1));
+            s = new Segment2d(getByIndex(i), getByIndex(i+1));
         res.push_back(*s);
     }
 
@@ -167,7 +161,7 @@ std::vector<Shapes2D::Segment2d> Shapes2D::Polygon::getEdges() {
  * @return polygon size aka number of vertices
  */
 int Shapes2D::Polygon::getSize() {
-    return (int)this->vertices.size();
+    return (int)vertices.size();
 }
 
 /**
@@ -175,11 +169,11 @@ int Shapes2D::Polygon::getSize() {
  * @return boolean value
  */
 bool Shapes2D::Polygon::isConvex() {
-    int n = this->getSize();
+    int n = getSize();
     if (n <= 2) return true;
-    bool step, sign = this->getByIndex(0)->oriePred(this->getByIndex(1), this->getByIndex(2)) > 0;
+    bool step, sign = getByIndex(0)->oriePred(getByIndex(1), getByIndex(2)) > 0;
     for(int i=0; i<n; i++) {
-        step = this->getByIndex(i%n)->oriePred(this->getByIndex((i+1)%n), this->getByIndex((i+2)%n)) > 0;
+        step = getByIndex(i%n)->oriePred(getByIndex((i+1)%n), getByIndex((i+2)%n)) > 0;
         if (step != sign) {
             return false;
         }
@@ -192,24 +186,24 @@ bool Shapes2D::Polygon::isConvex() {
  * @return boolean value
  */
 bool Shapes2D::Polygon::isY_Monotone() {
-    int n = this->getSize();
+    int n = getSize();
     if (n==0) return true;
 
     /* highest and lowest points indices */
-    int h = this->getLexMax_index();
-    int l = this->getLexMin_index();
+    int h = getLexMax_index();
+    int l = getLexMin_index();
 
     /* check for inner-cusps from h to l */
     int curr = h;
     while(curr % n != l) {
-        if (this->isInnerCusp(curr%n)) return false;
+        if (isInnerCusp(curr%n)) return false;
         curr++;
     }
 
     /* check for inner cusps from l to h */
     curr = l;
     while(curr % n != h) {
-        if (this->isInnerCusp(curr%n)) return false;
+        if (isInnerCusp(curr%n)) return false;
         curr++;
     }
 
@@ -217,10 +211,10 @@ bool Shapes2D::Polygon::isY_Monotone() {
 }
 
 bool Shapes2D::Polygon::isInnerCusp(int i) {
-    int n = this->getSize();
-    double prev_y = this->getByIndex(i == 0 ? n-1 : i-1)->getY();
-    double next_y = this->getByIndex((i+1)%n)->getY();
-    double curr_y = this->getByIndex(i)->getY();
+    int n = getSize();
+    double prev_y = getByIndex(i == 0 ? n-1 : i-1)->getY();
+    double next_y = getByIndex((i+1)%n)->getY();
+    double curr_y = getByIndex(i)->getY();
 
     return (prev_y > curr_y && next_y > curr_y) || (prev_y < curr_y && next_y < curr_y);
 }
@@ -228,12 +222,12 @@ bool Shapes2D::Polygon::isInnerCusp(int i) {
 
 bool Shapes2D::Polygon::anyInnerCusp(int i, bool (*func)(Point2d *, Point2d *, Point2d *))
 {
-    int n = this->getSize();
+    int n = getSize();
 
     int pred = i == 0 ? n-1 : i-1;
     int succ = i == n-1 ? 0 : i+1;
 
-    return func(this->getByIndex(pred), this->getByIndex(i), this->getByIndex(succ));
+    return func(getByIndex(pred), getByIndex(i), getByIndex(succ));
 }
 
 
@@ -241,7 +235,7 @@ bool Shapes2D::Polygon::anyInnerCusp(int i, bool (*func)(Point2d *, Point2d *, P
  * @return vector of all vertices
  */
 std::vector<Shapes2D::Point2d> Shapes2D::Polygon::getVertices() {
-    return this->vertices;
+    return vertices;
 }
 
 /**
@@ -249,12 +243,12 @@ std::vector<Shapes2D::Point2d> Shapes2D::Polygon::getVertices() {
  * @return Point2d object vertex
  */
 Shapes2D::Point2d *Shapes2D::Polygon::getRightMost() {
-    if (this->getSize() == 0) return nullptr;
+    if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
     if (!res) {
         throw (Exception2D("malloc failed\n"));
     }
-    *res = *this->getByIndex(this->getRightMost_index());
+    *res = *getByIndex(getRightMost_index());
     return res;
 }
 
@@ -264,8 +258,8 @@ Shapes2D::Point2d *Shapes2D::Polygon::getRightMost() {
  */
 int Shapes2D::Polygon::getRightMost_index() {
     int res = 0;
-    for(int i=1; i<this->getSize(); i++){
-        if(this->getByIndex(res)->getX() < this->getByIndex(i)->getX())
+    for(int i=1; i<getSize(); i++){
+        if(getByIndex(res)->getX() < getByIndex(i)->getX())
             res = i;
     }
 
@@ -277,12 +271,12 @@ int Shapes2D::Polygon::getRightMost_index() {
  * @return Point2d object vertex
  */
 Shapes2D::Point2d *Shapes2D::Polygon::getLeftMost() {
-    if (this->getSize() == 0) return nullptr;
+    if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
     if (!res) {
         throw (Exception2D("malloc failed\n"));
     }
-    *res = *this->getByIndex(this->getLeftMost_index());
+    *res = *getByIndex(getLeftMost_index());
     return res;
 }
 
@@ -292,8 +286,8 @@ Shapes2D::Point2d *Shapes2D::Polygon::getLeftMost() {
  */
 int Shapes2D::Polygon::getLeftMost_index() {
     int res = 0;
-    for(int i=1; i<this->getSize(); i++) {
-        if(this->getByIndex(res)->getX() < this->getByIndex(i)->getX()) {
+    for(int i=1; i<getSize(); i++) {
+        if(getByIndex(res)->getX() < getByIndex(i)->getX()) {
             res = i;
         }
     }
@@ -308,7 +302,7 @@ int Shapes2D::Polygon::getLeftMost_index() {
  */
 bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
     int res = 0;
-    std::vector<Segment2d> edges = this->getEdges();
+    std::vector<Segment2d> edges = getEdges();
 
     for(Segment2d e : edges)
     {
@@ -572,4 +566,12 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
 
 Shapes2D::Polygon::~Polygon() {
 
+}
+
+void Shapes2D::Polygon::splice(int pos, Polygon &other, int first, int last) {
+    const auto& pos_it = vertices.begin()+pos;
+    const auto& begin = other.vertices.begin()+first;
+    const auto& end = other.vertices.begin()+last;
+
+    vertices.insert(pos_it, begin, end);
 }

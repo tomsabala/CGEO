@@ -50,10 +50,15 @@ namespace Shapes2D {
 
         bool operator <(const Point2d & b) const
         {
-            if (y < b.y - eps) return true;
-            else if (y > b.y + eps) return false;
-            else if (x < b.x - eps) return true;
-            else return false;
+            if (std::abs(y-b.y) >= eps)
+                return y < b.y-eps;
+            return x < b.x - eps;
+        }
+        bool operator >(const Point2d & b) const
+        {
+            if (std::abs(y - b.y) >= eps)
+                return y > b.y+eps;
+            return x > b.x+eps;
         }
         bool operator ==(const Point2d & b) const
         {
