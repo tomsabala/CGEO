@@ -9,7 +9,6 @@
 #include "../Shapes_2D/Segment2d.h"
 #include "../Shapes_2D/Line2d.h"
 #include "../../DataStructures/SegmentBalancedTree.h"
-#include <boost/functional/hash.hpp>
 
 
 namespace Algorithms2d{
@@ -17,9 +16,8 @@ namespace Algorithms2d{
     {
         size_t operator()(const std::pair<double, double> &x) const
         {
-            return boost::hash_value(x);
-//            std::hash<double> int_hasher;
-//            return int_hasher(x.first) ^ int_hasher(x.second);
+            std::hash<std::string> hash_str;
+            return hash_str(std::to_string(x.first) + std::to_string(x.second));
         }
     };
 
