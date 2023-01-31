@@ -18,7 +18,7 @@ add_library(Geo_2D MODULE 2D/2D_bindings.cpp
                           2D/Algorithms_2D/ConvexHull2D.cpp
                           2D/Algorithms_2D/Triangulation2D.cpp
                           2D/Algorithms_2D/SegmentIntersection2D.cpp
-                          2D/Algorithms_2D/SmallestEnclosingDisk.cpp)
+                          2D/Algorithms_2D/SmallestEnclosingDisk.cpp 3D/Point3d.cpp 3D/Point3d.h 3D/Face3d.cpp 3D/Face3d.h)
 
 target_link_libraries(Geo_2D PUBLIC pybind11::module)
 
