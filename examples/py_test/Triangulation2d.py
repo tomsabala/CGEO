@@ -3,6 +3,9 @@ from examples.Plots2D import PolygonPlot
 
 
 _utility = Geo.TriangulationUtils()
+Point = Geo.libShapes_2D.Point
+Polygon = Geo.libShapes_2D.Polygon
+
 
 plt = PolygonPlot.PlotPolygon()
 for i in range(10):
@@ -12,14 +15,14 @@ for i in range(10):
                                               spikiness=0.5,
                                               num_vertices=10)
 
-    points_arr = [Geo.Point(x, y) for x, y in dots]
-    poly = Geo.Polygon(points_arr)
+    points_arr = [Point(x, y) for x, y in dots]
+    poly = Polygon(points_arr)
 
     # decompose to triangles
     Triangles = _utility.triangulate(poly)
     edges = []
 
-    for i, tri in enumerate(Triangles):
+    for tri in Triangles:
         vertex = tri.getVertex()
         edges.append((vertex[0], vertex[1]))
         edges.append((vertex[1], vertex[2]))
