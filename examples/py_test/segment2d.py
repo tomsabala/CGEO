@@ -1,5 +1,8 @@
 from examples.src.Segment2D import Segment2D as Segment, Point
 
+Segment = Geo.libShapes_2D.Segment
+Point = Geo.libShapes_2D.Point
+
 # Constructors
 s1 = Segment()
 p = Point(1, 1)

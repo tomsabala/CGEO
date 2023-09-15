@@ -1,15 +1,19 @@
 from build import libGeo_2D as Geo
 
-p1, q1 = Geo.Point(2, 10), Geo.Point(6, 6)
-s1 = Geo.Segment(p1, q1)
-p2, q2 = Geo.Point(6, 2), Geo.Point(8, 6)
-s2 = Geo.Segment(p2, q2)
-p3, q3 = Geo.Point(8, 8), Geo.Point(10, 4)
-s3 = Geo.Segment(p3, q3)
-p4, q4 = Geo.Point(10, 2), Geo.Point(12, 6)
-s4 = Geo.Segment(p4, q4)
+Point = Geo.libShapes_2D.Point
+Segment = Geo.libShapes_2D.Segment
+SegmentTree = Geo.libAlgorithms_2D.SegmentTree
 
-tree = Geo.SegmentTree()
+p1, q1 = Point(2, 10), Point(6, 6)
+s1 = Segment(p1, q1)
+p2, q2 = Point(6, 2), Point(8, 6)
+s2 = Segment(p2, q2)
+p3, q3 = Point(8, 8), Point(10, 4)
+s3 = Segment(p3, q3)
+p4, q4 = Point(10, 2), Point(12, 6)
+s4 = Segment(p4, q4)
+
+tree = SegmentTree()
 
 print(s1)
 print(s2)

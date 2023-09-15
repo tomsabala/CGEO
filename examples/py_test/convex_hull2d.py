@@ -1,7 +1,10 @@
 from build import libGeo_2D as Geo
 from examples.Plots2D import PolygonPlot
 
-_utility = Geo.ConvexHullUtils()
+_utility = Geo.libAlgorithms_2D.ConvexHullUtils()
+Point = Geo.libShapes_2D.Point
+Polygon = Geo.libShapes_2D.Polygon
+
 polygons = []
 
 for i in range(10):
@@ -10,8 +13,8 @@ for i in range(10):
                                               irregularity=0.5,
                                               spikiness=0.5,
                                               num_vertices=20)
-    points_arr = [Geo.Point(x, y) for x, y in dots]
-    poly = Geo.Polygon(points_arr)
+    points_arr = [Point(x, y) for x, y in dots]
+    poly = Polygon(points_arr)
     convex_poly = _utility.grahamConvexHull(poly)
     polygons.append((poly, convex_poly))
 
