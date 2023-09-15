@@ -1,6 +1,6 @@
 #include "2D_bindings.h"
-#include "../extern/pybind11/include/pybind11/pybind11.h"
-#include "../extern/pybind11/include/pybind11/stl.h"
+#include "pybind11/pybind11.h"
+#include "pybind11/stl.h"
 
 double round_to(double value, double precision = 1.0)
 {
@@ -12,7 +12,11 @@ namespace py = pybind11;
 PYBIND11_MODULE(libGeo_2D, h) {
     h.doc() = "2D geometric classes binding to python";
 
-    py::class_<Shapes2D::Point2d>(h, "Point")
+    auto h_shapes = h.def_submodule("libShapes_2D", "This is shapes lib");
+
+    auto h_algorithms = h.def_submodule("libAlgorithms_2D", "This is algorithms lib");
+
+    py::class_<Shapes2D::Point2d>(h_shapes, "Point")
             .def(py::init<>(), "empty constructor")
             .def(py::init<double, double>(), "standard constructor")
             .def_property("x", &Shapes2D::Point2d::getX, &Shapes2D::Point2d::setX)
@@ -27,7 +31,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("oriePred", &Shapes2D::Point2d::oriePred, "calculate orientation predicator")
             .def("toStr", &Shapes2D::Point2d::toStr, "return string representation of point")
             .def("__repr__",
-                [](Shapes2D::Point2d p) {
+                [](const Shapes2D::Point2d& p) {
                 std::string r("Point(");
                 std::string ret_x = std::to_string(round_to(p.getX(), 0.01));
                 ret_x = ret_x.substr(0, ret_x.find('.')+3);
@@ -39,16 +43,16 @@ PYBIND11_MODULE(libGeo_2D, h) {
                 r += ")";
                 return r;})
             .def("__lt__",
-                 [](Shapes2D::Point2d p, Shapes2D::Point2d q) {
+                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
                      return p._lt_(q);})
             .def("__gt__",
-                 [](Shapes2D::Point2d p, Shapes2D::Point2d q) {
+                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
                      return p._gt_(q);})
             .def("__eq__",
-                 [](Shapes2D::Point2d p, Shapes2D::Point2d q) {
+                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
                      return p._eq_(&q);});
 
-    py::class_<Shapes2D::Segment2d>(h, "Segment")
+    py::class_<Shapes2D::Segment2d>(h_shapes, "Segment")
             .def(py::init<>(), "empty constructor")
             .def(py::init<Shapes2D::Point2d*, Shapes2D::Point2d*>(), "standard constructor")
             .def(py::init<Shapes2D::Segment2d*>(), "constructing segment from other segment")
@@ -85,7 +89,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
                      return r;
                  });
 
-    py::class_<Shapes2D::Polygon>(h, "Polygon")
+    py::class_<Shapes2D::Polygon>(h_shapes, "Polygon")
             .def(py::init<>(), "empty constructor")
             .def(py::init<std::vector<Shapes2D::Point2d>>())
             .def("getVertices", &Shapes2D::Polygon::getVertices, "get all vertices in polygon")
@@ -105,19 +109,19 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("isInnerCusp", &Shapes2D::Polygon::isInnerCusp, "check whether given point is an inner cusp")
             .def("decomposeY_Monotone", &Shapes2D::Polygon::decomposeY_Monotone, "decompose the given polygon into y-monotone polygons");
 
-    py::class_<Algorithms2d::ConvexHull>(h, "ConvexHullUtils")
+    py::class_<Algorithms2d::ConvexHull>(h_algorithms, "ConvexHullUtils")
             .def(py::init<>())
             .def("grahamConvexHull", &Algorithms2d::ConvexHull::grahamConvexHull, "graham convex hull algorithm")
             .def("giftWrapConvexHull", &Algorithms2d::ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
 
-    py::class_<Algorithms2d::SegmentIntersection2d>(h, "SegmentIntersect")
+    py::class_<Algorithms2d::SegmentIntersection2d>(h_algorithms, "SegmentIntersect")
             .def(py::init<>())
             .def("intersection", &Algorithms2d::SegmentIntersection2d::solve, "solve segment intersection");
 
-    py::class_<Node>(h, "Node")
+    py::class_<Node>(h_algorithms, "Node")
             .def(py::init<Shapes2D::Segment2d *>());
 
-    py::class_<SegmentBalancedTree>(h, "SegmentTree")
+    py::class_<SegmentBalancedTree>(h_algorithms, "SegmentTree")
             .def("insert", &SegmentBalancedTree::insert, "insert a new segment to the tree")
             .def("searchSegment", &SegmentBalancedTree::search, "search a segment inside the tree and return its pointer")
             .def("searchPoint", &SegmentBalancedTree::search_p, "search for a segment that contains a given point inside the tree")
@@ -128,7 +132,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("getPred", &SegmentBalancedTree::getPred, "get predecessor of node")
             .def("getSucc", &SegmentBalancedTree::getSucc, "get successor of node");
 
-    py::class_<Shapes2D::Triangle2d>(h, "Triangle")
+    py::class_<Shapes2D::Triangle2d>(h_shapes, "Triangle")
             .def(py::init<Shapes2D::Point2d, Shapes2D::Point2d, Shapes2D::Point2d>())
             .def_property("a", &Shapes2D::Triangle2d::getA, &Shapes2D::Triangle2d::setA)
             .def_property("b", &Shapes2D::Triangle2d::getB, &Shapes2D::Triangle2d::setB)
@@ -136,11 +140,11 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("area", &Shapes2D::Triangle2d::area, "get area of triangle")
             .def("getVertex", &Shapes2D::Triangle2d::getVertices, "get vertex list");
 
-    py::class_<Algorithms2d::Triangulation2D>(h, "TriangulationUtils")
+    py::class_<Algorithms2d::Triangulation2D>(h_algorithms, "TriangulationUtils")
             .def(py::init<>())
             .def("triangulate", &Algorithms2d::Triangulation2D::triangulate, "triangulate polygon");
 
-    py::class_<Shapes2D::Circle2d>(h, "Circle")
+    py::class_<Shapes2D::Circle2d>(h_shapes, "Circle")
             .def(py::init<>())
             .def(py::init<double>())
             .def(py::init<double, Shapes2D::Point2d *>())
@@ -156,7 +160,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def("circleContains", &Shapes2D::Circle2d::circleContains, "check if a circle is contained in the circle")
             .def("polyContains", &Shapes2D::Circle2d::polyContains, "check if a polygon is contained in the circle");
 
-    py::class_<Algorithms2d::SmallestEnclosingDisk>(h, "EnclosingDistUtils")
+    py::class_<Algorithms2d::SmallestEnclosingDisk>(h_algorithms, "EnclosingDistUtils")
             .def(py::init<>())
             .def("findDisc", &Algorithms2d::SmallestEnclosingDisk::findDisc, "find enclosing disc");
 }
