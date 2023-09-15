@@ -1,4 +1,4 @@
-# Install script for directory: /home/tomsabala/workspace/PersonalP/CGEO
+# Install script for directory: /home/tomsabala/workspace/proj/geomtery/CGEO
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/tomsabala/workspace/PersonalP/CGEO/cmake-build-debug/extern/pybind11/cmake_install.cmake")
+  include("/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/extern/pybind11/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -54,7 +54,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE MODULE FILES "/home/tomsabala/workspace/PersonalP/CGEO/cmake-build-debug/libGeo_2D.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE MODULE FILES "/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/libGeo_2D.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -71,5 +71,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/tomsabala/workspace/PersonalP/CGEO/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
