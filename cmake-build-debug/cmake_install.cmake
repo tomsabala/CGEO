@@ -47,6 +47,21 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/extern/pybind11/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D/cmake_install.cmake")
+endif()
+
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so")
@@ -57,6 +72,10 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE MODULE FILES "/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/libGeo_2D.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so")
+    file(RPATH_CHANGE
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so"
+         OLD_RPATH "/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D:/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures:/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D:"
+         NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libGeo_2D.so")
     endif()

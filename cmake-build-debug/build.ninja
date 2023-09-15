@@ -47,7 +47,7 @@ cmake_ninja_workdir = /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-d
 #############################################
 # Order-only phony target for Geo_2D
 
-build cmake_object_order_depends_target_Geo_2D: phony || CMakeFiles/Geo_2D.dir
+build cmake_object_order_depends_target_Geo_2D: phony || cmake_object_order_depends_target_Algorithms2D cmake_object_order_depends_target_Datastructures2D cmake_object_order_depends_target_Shapes2D
 
 build CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/2D_bindings.cpp || cmake_object_order_depends_target_Geo_2D
   DEFINES = -DGeo_2D_EXPORTS
@@ -57,110 +57,6 @@ build CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o: CXX_COMPILER__Geo_2D_unsca
   OBJECT_DIR = CMakeFiles/Geo_2D.dir
   OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D
 
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Point2d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Point2d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Point2d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Segment2d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Segment2d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Segment2d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Polygon.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Polygon.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Polygon.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Line2d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Line2d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Line2d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Triangle2d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Triangle2d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Triangle2d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Circle2d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Circle2d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Circle2d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D
-
-build CMakeFiles/Geo_2D.dir/src/DataStructures/SegmentBalancedTree.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/DataStructures/SegmentBalancedTree.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/DataStructures/SegmentBalancedTree.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/DataStructures
-
-build CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/ConvexHull2D.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/ConvexHull2D.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/ConvexHull2D.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/Triangulation2D.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/Triangulation2D.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/Triangulation2D.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SegmentIntersection2D.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/SegmentIntersection2D.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SegmentIntersection2D.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D
-
-build CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SmallestEnclosingDisk.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/SmallestEnclosingDisk.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SmallestEnclosingDisk.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D
-
-build CMakeFiles/Geo_2D.dir/src/3D/Point3d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/3D/Point3d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/3D/Point3d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/3D
-
-build CMakeFiles/Geo_2D.dir/src/3D/Face3d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/3D/Face3d.cpp || cmake_object_order_depends_target_Geo_2D
-  DEFINES = -DGeo_2D_EXPORTS
-  DEP_FILE = CMakeFiles/Geo_2D.dir/src/3D/Face3d.cpp.o.d
-  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
-  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
-  OBJECT_DIR = CMakeFiles/Geo_2D.dir
-  OBJECT_FILE_DIR = CMakeFiles/Geo_2D.dir/src/3D
-
 
 # =============================================================================
 # Link build statements for MODULE_LIBRARY target Geo_2D
@@ -169,8 +65,9 @@ build CMakeFiles/Geo_2D.dir/src/3D/Face3d.cpp.o: CXX_COMPILER__Geo_2D_unscanned_
 #############################################
 # Link the shared module libGeo_2D.so
 
-build libGeo_2D.so: CXX_MODULE_LIBRARY_LINKER__Geo_2D_Debug CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Point2d.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Segment2d.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Polygon.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Line2d.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Triangle2d.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Shapes_2D/Circle2d.cpp.o CMakeFiles/Geo_2D.dir/src/DataStructures/SegmentBalancedTree.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/ConvexHull2D.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/Triangulation2D.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SegmentIntersection2D.cpp.o CMakeFiles/Geo_2D.dir/src/2D/Algorithms_2D/SmallestEnclosingDisk.cpp.o CMakeFiles/Geo_2D.dir/src/3D/Point3d.cpp.o CMakeFiles/Geo_2D.dir/src/3D/Face3d.cpp.o
+build libGeo_2D.so: CXX_MODULE_LIBRARY_LINKER__Geo_2D_Debug CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o | src/2D/Algorithms_2D/libAlgorithms2D.so src/DataStructures/libDatastructures2D.so src/2D/Shapes_2D/libShapes2D.so || src/2D/Algorithms_2D/libAlgorithms2D.so src/2D/Shapes_2D/libShapes2D.so src/DataStructures/libDatastructures2D.so
   LANGUAGE_COMPILE_FLAGS = -g
+  LINK_LIBRARIES = -Wl,-rpath,/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D:/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures:/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D:  src/2D/Algorithms_2D/libAlgorithms2D.so  src/DataStructures/libDatastructures2D.so  src/2D/Shapes_2D/libShapes2D.so
   OBJECT_DIR = CMakeFiles/Geo_2D.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -313,9 +210,410 @@ build extern/pybind11/CMakeFiles/install/strip.util: CUSTOM_COMMAND extern/pybin
 build extern/pybind11/install/strip: phony extern/pybind11/CMakeFiles/install/strip.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target Algorithms2D
+
+
+#############################################
+# Order-only phony target for Algorithms2D
+
+build cmake_object_order_depends_target_Algorithms2D: phony || cmake_object_order_depends_target_Datastructures2D cmake_object_order_depends_target_Shapes2D
+
+build src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/ConvexHull2D.cpp.o: CXX_COMPILER__Algorithms2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/ConvexHull2D.cpp || cmake_object_order_depends_target_Algorithms2D
+  DEFINES = -DAlgorithms2D_EXPORTS
+  DEP_FILE = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/ConvexHull2D.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+  OBJECT_FILE_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+
+build src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SegmentIntersection2D.cpp.o: CXX_COMPILER__Algorithms2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/SegmentIntersection2D.cpp || cmake_object_order_depends_target_Algorithms2D
+  DEFINES = -DAlgorithms2D_EXPORTS
+  DEP_FILE = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SegmentIntersection2D.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+  OBJECT_FILE_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+
+build src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SmallestEnclosingDisk.cpp.o: CXX_COMPILER__Algorithms2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/SmallestEnclosingDisk.cpp || cmake_object_order_depends_target_Algorithms2D
+  DEFINES = -DAlgorithms2D_EXPORTS
+  DEP_FILE = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SmallestEnclosingDisk.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+  OBJECT_FILE_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+
+build src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/Triangulation2D.cpp.o: CXX_COMPILER__Algorithms2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/Triangulation2D.cpp || cmake_object_order_depends_target_Algorithms2D
+  DEFINES = -DAlgorithms2D_EXPORTS
+  DEP_FILE = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/Triangulation2D.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+  OBJECT_FILE_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target Algorithms2D
+
+
+#############################################
+# Link the shared library src/2D/Algorithms_2D/libAlgorithms2D.so
+
+build src/2D/Algorithms_2D/libAlgorithms2D.so: CXX_SHARED_LIBRARY_LINKER__Algorithms2D_Debug src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/ConvexHull2D.cpp.o src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SegmentIntersection2D.cpp.o src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/SmallestEnclosingDisk.cpp.o src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/Triangulation2D.cpp.o | src/DataStructures/libDatastructures2D.so src/2D/Shapes_2D/libShapes2D.so || src/2D/Shapes_2D/libShapes2D.so src/DataStructures/libDatastructures2D.so
+  LANGUAGE_COMPILE_FLAGS = -g
+  LINK_LIBRARIES = -Wl,-rpath,/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures:/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D  src/DataStructures/libDatastructures2D.so  src/2D/Shapes_2D/libShapes2D.so
+  OBJECT_DIR = src/2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  SONAME = libAlgorithms2D.so
+  SONAME_FLAG = -Wl,-soname,
+  TARGET_FILE = src/2D/Algorithms_2D/libAlgorithms2D.so
+  TARGET_PDB = Algorithms2D.so.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/2D/Algorithms_2D/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/2D/Algorithms_2D/edit_cache: phony src/2D/Algorithms_2D/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/2D/Algorithms_2D/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/tomsabala/workspace/proj/geomtery/CGEO -B/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/2D/Algorithms_2D/rebuild_cache: phony src/2D/Algorithms_2D/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build src/2D/Algorithms_2D/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build src/2D/Algorithms_2D/CMakeFiles/install.util: CUSTOM_COMMAND src/2D/Algorithms_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build src/2D/Algorithms_2D/install: phony src/2D/Algorithms_2D/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build src/2D/Algorithms_2D/CMakeFiles/install/local.util: CUSTOM_COMMAND src/2D/Algorithms_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build src/2D/Algorithms_2D/install/local: phony src/2D/Algorithms_2D/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build src/2D/Algorithms_2D/CMakeFiles/install/strip.util: CUSTOM_COMMAND src/2D/Algorithms_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build src/2D/Algorithms_2D/install/strip: phony src/2D/Algorithms_2D/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target Datastructures2D
+
+
+#############################################
+# Order-only phony target for Datastructures2D
+
+build cmake_object_order_depends_target_Datastructures2D: phony || cmake_object_order_depends_target_Shapes2D
+
+build src/DataStructures/CMakeFiles/Datastructures2D.dir/SegmentBalancedTree.cpp.o: CXX_COMPILER__Datastructures2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/DataStructures/SegmentBalancedTree.cpp || cmake_object_order_depends_target_Datastructures2D
+  DEFINES = -DDatastructures2D_EXPORTS
+  DEP_FILE = src/DataStructures/CMakeFiles/Datastructures2D.dir/SegmentBalancedTree.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/DataStructures/CMakeFiles/Datastructures2D.dir
+  OBJECT_FILE_DIR = src/DataStructures/CMakeFiles/Datastructures2D.dir
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target Datastructures2D
+
+
+#############################################
+# Link the shared library src/DataStructures/libDatastructures2D.so
+
+build src/DataStructures/libDatastructures2D.so: CXX_SHARED_LIBRARY_LINKER__Datastructures2D_Debug src/DataStructures/CMakeFiles/Datastructures2D.dir/SegmentBalancedTree.cpp.o | src/2D/Shapes_2D/libShapes2D.so || src/2D/Shapes_2D/libShapes2D.so
+  LANGUAGE_COMPILE_FLAGS = -g
+  LINK_LIBRARIES = -Wl,-rpath,/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D  src/2D/Shapes_2D/libShapes2D.so
+  OBJECT_DIR = src/DataStructures/CMakeFiles/Datastructures2D.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  SONAME = libDatastructures2D.so
+  SONAME_FLAG = -Wl,-soname,
+  TARGET_FILE = src/DataStructures/libDatastructures2D.so
+  TARGET_PDB = Datastructures2D.so.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/DataStructures/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/DataStructures/edit_cache: phony src/DataStructures/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/DataStructures/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures && /snap/clion/249/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/tomsabala/workspace/proj/geomtery/CGEO -B/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/DataStructures/rebuild_cache: phony src/DataStructures/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build src/DataStructures/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build src/DataStructures/CMakeFiles/install.util: CUSTOM_COMMAND src/DataStructures/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build src/DataStructures/install: phony src/DataStructures/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build src/DataStructures/CMakeFiles/install/local.util: CUSTOM_COMMAND src/DataStructures/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build src/DataStructures/install/local: phony src/DataStructures/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build src/DataStructures/CMakeFiles/install/strip.util: CUSTOM_COMMAND src/DataStructures/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build src/DataStructures/install/strip: phony src/DataStructures/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for SHARED_LIBRARY target Shapes2D
+
+
+#############################################
+# Order-only phony target for Shapes2D
+
+build cmake_object_order_depends_target_Shapes2D: phony || src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Circle2d.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Circle2d.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Circle2d.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Line2d.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Line2d.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Line2d.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Point2d.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Point2d.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Point2d.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Polygon.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Polygon.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Polygon.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Segment2d.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Segment2d.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Segment2d.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Triangle2d.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/Triangle2d.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Triangle2d.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+
+build src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/__/Exception2D.cpp.o: CXX_COMPILER__Shapes2D_unscanned_Debug /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Exception2D.cpp || cmake_object_order_depends_target_Shapes2D
+  DEFINES = -DShapes2D_EXPORTS
+  DEP_FILE = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/__/Exception2D.cpp.o.d
+  FLAGS = -g -std=gnu++14 -fPIC -fdiagnostics-color=always
+  INCLUDES = -isystem /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/include -isystem /usr/include/python3.10
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  OBJECT_FILE_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/__
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target Shapes2D
+
+
+#############################################
+# Link the shared library src/2D/Shapes_2D/libShapes2D.so
+
+build src/2D/Shapes_2D/libShapes2D.so: CXX_SHARED_LIBRARY_LINKER__Shapes2D_Debug src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Circle2d.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Line2d.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Point2d.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Polygon.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Segment2d.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/Triangle2d.cpp.o src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir/__/Exception2D.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src/2D/Shapes_2D/CMakeFiles/Shapes2D.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  SONAME = libShapes2D.so
+  SONAME_FLAG = -Wl,-soname,
+  TARGET_FILE = src/2D/Shapes_2D/libShapes2D.so
+  TARGET_PDB = Shapes2D.so.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/2D/Shapes_2D/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/2D/Shapes_2D/edit_cache: phony src/2D/Shapes_2D/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/2D/Shapes_2D/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/tomsabala/workspace/proj/geomtery/CGEO -B/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/2D/Shapes_2D/rebuild_cache: phony src/2D/Shapes_2D/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build src/2D/Shapes_2D/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build src/2D/Shapes_2D/CMakeFiles/install.util: CUSTOM_COMMAND src/2D/Shapes_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build src/2D/Shapes_2D/install: phony src/2D/Shapes_2D/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build src/2D/Shapes_2D/CMakeFiles/install/local.util: CUSTOM_COMMAND src/2D/Shapes_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build src/2D/Shapes_2D/install/local: phony src/2D/Shapes_2D/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build src/2D/Shapes_2D/CMakeFiles/install/strip.util: CUSTOM_COMMAND src/2D/Shapes_2D/all
+  COMMAND = cd /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D && /snap/clion/249/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build src/2D/Shapes_2D/install/strip: phony src/2D/Shapes_2D/CMakeFiles/install/strip.util
+
+# =============================================================================
 # Target aliases.
 
+build Algorithms2D: phony src/2D/Algorithms_2D/libAlgorithms2D.so
+
+build Datastructures2D: phony src/DataStructures/libDatastructures2D.so
+
 build Geo_2D: phony libGeo_2D.so
+
+build Shapes2D: phony src/2D/Shapes_2D/libShapes2D.so
+
+build libAlgorithms2D.so: phony src/2D/Algorithms_2D/libAlgorithms2D.so
+
+build libDatastructures2D.so: phony src/DataStructures/libDatastructures2D.so
+
+build libShapes2D.so: phony src/2D/Shapes_2D/libShapes2D.so
 
 # =============================================================================
 # Folder targets.
@@ -325,7 +623,7 @@ build Geo_2D: phony libGeo_2D.so
 #############################################
 # Folder: /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
 
-build all: phony libGeo_2D.so extern/pybind11/all
+build all: phony libGeo_2D.so extern/pybind11/all src/2D/Algorithms_2D/all src/DataStructures/all src/2D/Shapes_2D/all
 
 # =============================================================================
 
@@ -335,20 +633,41 @@ build all: phony libGeo_2D.so extern/pybind11/all
 build extern/pybind11/all: phony
 
 # =============================================================================
+
+#############################################
+# Folder: /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Algorithms_2D
+
+build src/2D/Algorithms_2D/all: phony src/2D/Algorithms_2D/libAlgorithms2D.so
+
+# =============================================================================
+
+#############################################
+# Folder: /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/2D/Shapes_2D
+
+build src/2D/Shapes_2D/all: phony src/2D/Shapes_2D/libShapes2D.so
+
+# =============================================================================
+
+#############################################
+# Folder: /home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug/src/DataStructures
+
+build src/DataStructures/all: phony src/DataStructures/libDatastructures2D.so
+
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/FindPythonLibsNew.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/JoinPaths.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Common.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Tools.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDependentOption.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseArguments.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPythonInterp.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/FindPythonLibsNew.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/JoinPaths.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Common.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Tools.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/src/DataStructures/CMakeLists.txt /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDependentOption.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseArguments.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPythonInterp.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/FindPythonLibsNew.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/JoinPaths.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Common.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Tools.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDependentOption.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseArguments.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPythonInterp.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build /home/tomsabala/workspace/proj/geomtery/CGEO/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/FindPythonLibsNew.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/JoinPaths.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Common.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/extern/pybind11/tools/pybind11Tools.cmake /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Algorithms_2D/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/Shapes_2D/CMakeLists.txt /home/tomsabala/workspace/proj/geomtery/CGEO/src/DataStructures/CMakeLists.txt /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeDependentOption.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakePackageConfigHelpers.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeParseArguments.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPythonInterp.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-C.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /snap/clion/249/bin/cmake/linux/x64/share/cmake-3.26/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################
