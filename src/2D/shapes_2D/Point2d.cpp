@@ -3,7 +3,6 @@ int main() {}
 
 #include "Point2d.h"
 #include <cmath>
-#include "iostream"
 
 using namespace Shapes2D;
 
@@ -11,10 +10,7 @@ using namespace Shapes2D;
  * empty constructor
  * init x, y as (0, 0)
  */
-Point2d::Point2d() {
-    this->x = 0;
-    this->y = 0;
-}
+Point2d::Point2d() : x(0), y(0) {}
 
 /**
  * standard constructor
@@ -22,10 +18,7 @@ Point2d::Point2d() {
  *
  * @param ax, ay double type values
  */
-Point2d::Point2d(double ax, double ay) {
-    this->x = ax;
-    this->y = ay;
-}
+Point2d::Point2d(double ax, double ay) : x(ax) , y(ay) {}
 
 /**
  * Point2d using constructor
@@ -130,7 +123,7 @@ void Point2d::rotate(double &deg, Point2d *p) noexcept(false) {
     if(p == nullptr)
         throw (Exception2D("null pointer"));
     deg = fmod(deg, 360);
-    std::cout<<deg;
+
     /* compute cos and sin */
     double c = cos(2 * M_PI - deg * M_PI / 180);
     double s = sin(2 * M_PI - deg * M_PI / 180);
