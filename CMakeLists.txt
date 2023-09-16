@@ -3,9 +3,9 @@ project(CGEO C CXX)
 set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory( extern/pybind11 )
-add_subdirectory( src/2D/Algorithms_2D )
-add_subdirectory( src/DataStructures )
-add_subdirectory( src/2D/Shapes_2D )
+add_subdirectory(src/2D/algorithms_2D)
+add_subdirectory(src/data_structures)
+add_subdirectory(src/2D/shapes_2D)
 
 add_library(Geo_2D MODULE src/2D/2D_bindings.cpp)
 

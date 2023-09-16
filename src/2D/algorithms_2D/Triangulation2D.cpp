@@ -16,7 +16,7 @@ Triangulation2D::triangulate(Shapes2D::Polygon *poly)
     /* for each sub-poly, compute the responsive triangulation */
     for (Shapes2D::Polygon *sub_poly : poly_decompose)
     {
-        std::vector<Shapes2D::Triangle2d *> sub_res = this->triangulate_YMonotone(sub_poly);
+        std::vector<Shapes2D::Triangle2d *> sub_res = Algorithms2d::Triangulation2D::triangulate_YMonotone(sub_poly);
         res.insert(res.end(), sub_res.begin(), sub_res.end());
     }
 
@@ -38,14 +38,14 @@ Triangulation2D::triangulate_YMonotone(Shapes2D::Polygon *poly)
     /* poly is basically a triangle */
     if (poly->getSize() == 3)
     {
-        Shapes2D::Triangle2d *tri = new Shapes2D::Triangle2d(*poly->getByIndex(0), *poly->getByIndex(1), *poly->getByIndex(2));
+        auto *tri = new Shapes2D::Triangle2d(*poly->getByIndex(0), *poly->getByIndex(1), *poly->getByIndex(2));
         res.push_back(tri);
         return res;
     }
 
     /* sorted stack of vertex, from y=inf to y=-inf */
     std::stack<std::pair<Shapes2D::Point2d *, int>> vertex_Stack;
-    std::vector<std::pair<Shapes2D::Point2d *, int>> sorted_vertex = this->sortByY(poly);
+    std::vector<std::pair<Shapes2D::Point2d *, int>> sorted_vertex = Algorithms2d::Triangulation2D::sortByY(poly);
 
     /* init stack */
     int i=2;
@@ -56,7 +56,7 @@ Triangulation2D::triangulate_YMonotone(Shapes2D::Polygon *poly)
     while(i < sorted_vertex.size())
     {
         std::pair<Shapes2D::Point2d *, int> p = sorted_vertex[i];
-        this->popFromStack(&res, &vertex_Stack, p); /* compute the triangle and dynamically pop vertices from stack */
+        Algorithms2d::Triangulation2D::popFromStack(&res, &vertex_Stack, p); /* compute the triangle and dynamically pop vertices from stack */
 
         i++;
     }
@@ -131,7 +131,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
                 if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
-                    if(vertex_Stack->size() == 0)
+                    if(vertex_Stack->empty())
                         break;
                     vertex_Stack->push(second_pair);
                 }
@@ -147,7 +147,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
                 if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
-                    if(vertex_Stack->size() == 0)
+                    if(vertex_Stack->empty())
                         break;
                     vertex_Stack->push(second_pair);
                 }
@@ -173,7 +173,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
 std::vector<std::pair<Shapes2D::Point2d *, int>>
 Triangulation2D::sortByY(Shapes2D::Polygon *poly)
 {
-    std::pair<std::vector<std::pair<Shapes2D::Point2d *, int>>, std::vector<std::pair<Shapes2D::Point2d *, int>>> rails = this->findLeftRightRails(poly);
+    std::pair<std::vector<std::pair<Shapes2D::Point2d *, int>>, std::vector<std::pair<Shapes2D::Point2d *, int>>> rails = Algorithms2d::Triangulation2D::findLeftRightRails(poly);
 
     std::vector<std::pair<Shapes2D::Point2d *, int>> res;
 
@@ -228,13 +228,13 @@ Triangulation2D::findLeftRightRails(Shapes2D::Polygon *poly)
 
     for (int i=upperIndex; i!=lowerIndex; i=(i+1)%n)
     {
-        rightRail.push_back(std::make_pair(poly->getByIndex(i), 1));
+        rightRail.emplace_back(poly->getByIndex(i), 1);
     }
     for (int i=upperIndex==0?n-1:upperIndex-1; i!=lowerIndex; i=i==0?n-1:i-1)
     {
-        leftRail.push_back(std::make_pair(poly->getByIndex(i), 0));
+        leftRail.emplace_back(poly->getByIndex(i), 0);
     }
-    leftRail.push_back(std::make_pair(poly->getByIndex(lowerIndex), 0));
+    leftRail.emplace_back(poly->getByIndex(lowerIndex), 0);
 
     return std::make_pair(leftRail, rightRail);
 }

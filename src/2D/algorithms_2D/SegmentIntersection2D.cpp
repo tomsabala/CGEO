@@ -38,7 +38,7 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
     /*
      this is the segment tree that hold all segments in each point of the algorithm.
      */
-    SegmentBalancedTree *status = new SegmentBalancedTree();
+    auto *status = new SegmentBalancedTree();
 
     /* insert upper and lower points */
     for (int k = 0; k < (int)segments->size(); ++k)
@@ -60,12 +60,12 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
         std::pair<double, double> upper_pair = std::make_pair(upper_point->getX(), upper_point->getY());
 
         if(Lower_end_point.find(lower_pair) != Lower_end_point.end())
-            Lower_end_point[lower_pair].push_back(std::make_pair((*segments)[k], k));
+            Lower_end_point[lower_pair].emplace_back((*segments)[k], k);
         else
             Lower_end_point[lower_pair] = std::vector<std::pair<Shapes2D::Segment2d *, int>>{std::make_pair((*segments)[k], k)};
 
         if(Upper_end_point.find(upper_pair) != Upper_end_point.end())
-            Upper_end_point[upper_pair].push_back(std::make_pair((*segments)[k], k));
+            Upper_end_point[upper_pair].emplace_back((*segments)[k], k);
         else
             Upper_end_point[upper_pair] = std::vector<std::pair<Shapes2D::Segment2d*, int>>{std::make_pair((*segments)[k], k)};
 
@@ -83,7 +83,7 @@ SegmentIntersection2d::intersect(std::vector<Shapes2D::Segment2d *> *segments,
     while (!events.empty())
     {
         /*pick-up first event -- {reminder: multimap holds keys in sorted form}*/
-        std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator event = events.begin();
+        auto event = events.begin();
 
         status->sweepLine = event->first;
         handleEventPoint(event, &events, status, intersections);
@@ -152,7 +152,7 @@ SegmentIntersection2d::handleEventPoint(std::multimap<Shapes2D::Point2d *, int, 
 
         Node *it = status->search_p(p); /* pick the closest Node in the status to the point p */
 
-        if (it != NULL)
+        if (it != nullptr)
         { /* it should never be null unless, the tree is empty */
             /* x coordinate of segment w.r.t to p.y */
             double it_x = it->s->getXfromY(p->getY());
@@ -160,13 +160,13 @@ SegmentIntersection2d::handleEventPoint(std::multimap<Shapes2D::Point2d *, int, 
             { /* segment is to the left of the deleted element */
                 Node * right = status->getSucc(it);
                 if (right != nullptr)
-                    this->handle_segments(it->s, right->s, *p, events);
+                    Algorithms2d::SegmentIntersection2d::handle_segments(it->s, right->s, *p, events);
             }
             else
             { /* segment is to the right of the deleted element */
                 Node * left = status->getPred(it);
                 if (left != nullptr)
-                    this->handle_segments(left->s, it->s, *p, events);
+                    Algorithms2d::SegmentIntersection2d::handle_segments(left->s, it->s, *p, events);
             }
         }
     }
@@ -190,7 +190,7 @@ SegmentIntersection2d::handleEventPoint(std::multimap<Shapes2D::Point2d *, int, 
 
             /* search for next intersection */
             Node *right2left = status->getSucc(left);
-            this->handle_segments(right2left->s, left->s, *p, events);
+            Algorithms2d::SegmentIntersection2d::handle_segments(right2left->s, left->s, *p, events);
         }
 
         if(!right->s->containPoint(*p))
@@ -198,7 +198,7 @@ SegmentIntersection2d::handleEventPoint(std::multimap<Shapes2D::Point2d *, int, 
 
             /* search for next intersection */
             Node *left2right = status->getPred(right);
-            this->handle_segments(right->s, left2right->s, *p, events);
+            Algorithms2d::SegmentIntersection2d::handle_segments(right->s, left2right->s, *p, events);
         }
     }
 }
@@ -218,14 +218,14 @@ SegmentIntersection2d::findInteriorMap(std::multimap<Shapes2D::Point2d *, int, e
                                        {
     Node *segment_node = status->search_p(e->first);
 
-    if (segment_node == NULL)
-        return std::vector<Shapes2D::Segment2d *>();
+    if (segment_node == nullptr)
+        return {};
     Shapes2D::Segment2d *segment = segment_node->s;
 
     bool flag;
     std::vector<Shapes2D::Segment2d *> interior_segments;
 
-    if (this->isInterior(segment, e->first))
+    if (Algorithms2d::SegmentIntersection2d::isInterior(segment, e->first))
         interior_segments.push_back(segment);
 
     for(int dir = 0; dir<=1; dir++){ /* two iteration, one for left side and one for right side */
@@ -242,7 +242,7 @@ SegmentIntersection2d::findInteriorMap(std::multimap<Shapes2D::Point2d *, int, e
 
         flag = true;
         while(flag) {
-            if(!this->isInterior(it->s, e->first)){
+            if(!Algorithms2d::SegmentIntersection2d::isInterior(it->s, e->first)){
                 flag = false;
             } else {
                 interior_segments.push_back(it->s);
@@ -269,7 +269,7 @@ bool SegmentIntersection2d::isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d
 
 
 void SegmentIntersection2d::handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
-                                            Shapes2D::Point2d p,
+                                            const Shapes2D::Point2d& p,
                                             std::multimap<Shapes2D::Point2d*, int, event_comp> *events) {
     std::pair<bool, Shapes2D::Point2d *>* intersect_result = intersect(s, t, false); /* compute the intersection point */
 
@@ -293,7 +293,7 @@ SegmentIntersection2d::print_status(SegmentBalancedTree *status)
 
 void SegmentIntersection2d::print_events(
         std::multimap<Shapes2D::Point2d *, int, event_comp> *events) {
-    for(auto it = events->begin(); it != events->end(); it++){
-        std::cout<<it->first->toStr() << '\n';
+    for(auto & event : *events){
+        std::cout<<event.first->toStr() << '\n';
     }
 }

@@ -6,8 +6,8 @@ struct Exception2D : public std::exception{
 private:
     char const *msg;
 public:
-    Exception2D(char const *m) : msg(m){}
-    const char * what () const throw () {
+    explicit Exception2D(char const *m) : msg(m){}
+    const char * what () const noexcept override {
         return this->msg;
     }
 };

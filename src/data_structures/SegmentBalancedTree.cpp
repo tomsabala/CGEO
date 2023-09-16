@@ -11,7 +11,7 @@ void SegmentBalancedTree::insert(Shapes2D::Segment2d *s)
 Node * SegmentBalancedTree::_insert_(Node * head, Shapes2D::Segment2d *s)
 {
 
-    if(head==NULL) /* subtree is empty */
+    if(head==nullptr) /* subtree is empty */
     {
         size++;
         Node * tmp = new Node(s);
@@ -59,8 +59,8 @@ void SegmentBalancedTree::remove(Shapes2D::Segment2d *s){
 }
 
 Node * SegmentBalancedTree::_remove_(Node * head, Shapes2D::Segment2d *s){
-    if(head==NULL)  /* s not found */
-        return NULL;
+    if(head==nullptr)  /* s not found */
+        return nullptr;
 
     if(_le_(s, head->s)) /* s is on the left side if subtree */
     {
@@ -74,20 +74,20 @@ Node * SegmentBalancedTree::_remove_(Node * head, Shapes2D::Segment2d *s){
     else
     { /* s is head->s */
         Node * r = head->right;
-        if(head->right==NULL)
+        if(head->right==nullptr)
         {
             Node * l = head->left;
             delete(head);
             head = l;
         }
-        else if(head->left==NULL)
+        else if(head->left==nullptr)
         {
             delete(head);
             head = r;
         }
         else
         {
-            while(r->left!=NULL)
+            while(r->left!=nullptr)
                 r = r->left;
 
             head->s = r->s;
@@ -95,7 +95,7 @@ Node * SegmentBalancedTree::_remove_(Node * head, Shapes2D::Segment2d *s){
         }
     }
 
-    if(head==NULL)
+    if(head==nullptr)
         return head;
 
     head->height = 1 + std::max(_height_(head->left), _height_(head->right));
@@ -130,8 +130,8 @@ Node * SegmentBalancedTree::search(Shapes2D::Segment2d *s){
 }
 
 Node * SegmentBalancedTree::_search_(Node * head, Shapes2D::Segment2d *s){
-    if(head == NULL)
-        return NULL;
+    if(head == nullptr)
+        return nullptr;
 
     Shapes2D::Segment2d *head_s = head->s;
     if(head_s->_eq_(s))
@@ -152,14 +152,14 @@ Node * SegmentBalancedTree::search_p(Shapes2D::Point2d *p)
 
 Node * SegmentBalancedTree::_search_p_(Node * head, Shapes2D::Point2d *p)
 {
-    if(head == NULL)
-        return NULL;
+    if(head == nullptr)
+        return nullptr;
 
     Shapes2D::Segment2d *head_s = head->s;
     if (head_s->containPoint(*p))
         return head;
 
-    Line2d *v_l = new Line2d(head_s->getLower(), head_s->getUpper());
+    auto *v_l = new Line2d(head_s->getLower(), head_s->getUpper());
     double v_x = v_l->getX_fromY(sweepLine->getY()).second;
 
     Node *res;
@@ -167,14 +167,14 @@ Node * SegmentBalancedTree::_search_p_(Node * head, Shapes2D::Point2d *p)
     if (p->getX() < v_x)
     {
         res = _search_p_(head->left, p);
-        if (res == NULL)
+        if (res == nullptr)
             return head;
         return res;
     }
     else
     {
         res = _search_p_(head->right, p);
-        if (res == NULL)
+        if (res == nullptr)
             return head;
         return res;
     }
@@ -195,7 +195,7 @@ void SegmentBalancedTree::_walkInOrder_(Node * head)
 }
 
 int SegmentBalancedTree::_height_(Node * head){
-    if(head==NULL) return 0;
+    if(head==nullptr) return 0;
     return head->height;
 }
 
@@ -219,11 +219,11 @@ Node * SegmentBalancedTree::_leftRotation_(Node * head)
     return new_head;
 }
 
-bool SegmentBalancedTree::_le_(Shapes2D::Segment2d *v, Shapes2D::Segment2d *u) {
-    Line2d *v_l = new Line2d(v->getLower(), v->getUpper());
+bool SegmentBalancedTree::_le_(Shapes2D::Segment2d *v, Shapes2D::Segment2d *u) const {
+    auto *v_l = new Line2d(v->getLower(), v->getUpper());
     double v_x = (v_l->isHorizon()) ? sweepLine->getX() : v_l->getX_fromY(sweepLine->getY()).second;
 
-    Line2d *u_l = new Line2d(u->getLower(), u->getUpper());
+    auto *u_l = new Line2d(u->getLower(), u->getUpper());
     double u_x = (u_l->isHorizon()) ? sweepLine->getX() : u_l->getX_fromY(sweepLine->getY()).second;
 
     if (std::abs(v_x - u_x) > eps)
@@ -244,7 +244,7 @@ bool SegmentBalancedTree::_le_(Shapes2D::Segment2d *v, Shapes2D::Segment2d *u) {
 }
 
 
-Node *SegmentBalancedTree::maxx() {
+Node *SegmentBalancedTree::maxx() const {
     if (root == nullptr)
         return nullptr;
     Node *tmp = root;
@@ -253,7 +253,7 @@ Node *SegmentBalancedTree::maxx() {
     return tmp;
 }
 
-Node *SegmentBalancedTree::minn() {
+Node *SegmentBalancedTree::minn() const {
     if (root == nullptr)
         return nullptr;
     Node *tmp = root;

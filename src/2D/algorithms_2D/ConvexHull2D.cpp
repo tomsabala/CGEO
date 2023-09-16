@@ -1,6 +1,5 @@
 
 #include <algorithm>
-#include <iostream>
 #include "ConvexHull2D.h"
 
 using namespace Algorithms2d;
@@ -148,11 +147,11 @@ Shapes2D::Polygon *ConvexHull::divideAndConquerConvexHull(Shapes2D::Polygon poly
         throw Exception2D("failed to malloc memory\n");
     }
     std::vector<Shapes2D::Point2d> points = sortByX(&poly);
-    res = this->divideAndConquer_rec(points, 0, points.size()-1);
+    res = this->divideAndConquer_rec(points, 0, (int)points.size()-1);
     return res;
 }
 
-Shapes2D::Polygon *ConvexHull::divideAndConquer_rec(std::vector<Shapes2D::Point2d> points, int i, int j) {
+Shapes2D::Polygon *ConvexHull::divideAndConquer_rec(const std::vector<Shapes2D::Point2d>& points, int i, int j) {
     if (j - i <= 3) {
         return new Shapes2D::Polygon(points);
     }
@@ -186,13 +185,13 @@ std::vector<int> ConvexHull::merge(Shapes2D::Polygon *left_poly, Shapes2D::Polyg
     int left_ind = left_poly->getRightMost_index();
     int right_ind = right_poly->getLeftMost_index();
 
-    bool done = 0;
+    bool done = false;
     while(!done) {
         int res = merge_inv(left_poly, right_poly, left_ind, right_ind);
         if(res == 0){
             up_left = left_ind;
             up_right = right_ind;
-            done = 1;
+            done = true;
         }
         if(res == 1) {
             left_ind = (left_ind-1)%left_poly->getSize();
@@ -202,13 +201,13 @@ std::vector<int> ConvexHull::merge(Shapes2D::Polygon *left_poly, Shapes2D::Polyg
         }
     }
 
-    done = 0;
+    done = false;
     while(!done) {
         int res = merge_inv(left_poly, right_poly, left_ind, right_ind);
         if(res == 0){
             up_left = left_ind;
             up_right = right_ind;
-            done = 1;
+            done = true;
         }
         if(res == 1) {
             left_ind = (left_ind+1)%left_poly->getSize();

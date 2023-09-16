@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Shapes_2D/Circle2d.h"
-#include "../Shapes_2D/Triangle2d.h"
+#include "../shapes_2D/Circle2d.h"
+#include "../shapes_2D/Triangle2d.h"
 #include <vector>
 
 
@@ -10,17 +10,17 @@ namespace Algorithms2d{
     public:
         SmallestEnclosingDisk();
 
-        Shapes2D::Circle2d *
+        static Shapes2D::Circle2d *
         findDisc(std::vector<Shapes2D::Point2d *>);
 
     private:
-        Shapes2D::Circle2d *
+        static Shapes2D::Circle2d *
         findDisc_withOnePoint(std::vector<Shapes2D::Point2d *>, std::vector<int>, int);
 
-        Shapes2D::Circle2d *
+        static Shapes2D::Circle2d *
         findDisc_withTwoPoints(std::vector<Shapes2D::Point2d *>, std::vector<int>, int, int);
 
-        std::vector<int>
+        static std::vector<int>
         shuffle(int );
 
     };

@@ -17,7 +17,7 @@ Segment2d::Segment2d() {
  * init origin as p and target as q
  * @param p, q two Point2d type objects
 */
-Segment2d::Segment2d(Point2d *p, Point2d *q) : origin(p), target(q) {
+Segment2d::Segment2d(Point2d *p, Point2d *q) {
     origin = (Point2d*) malloc(sizeof(Point2d));
     target = (Point2d*) malloc(sizeof(Point2d));
     if(!origin || !target)

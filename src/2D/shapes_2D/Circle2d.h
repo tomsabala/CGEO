@@ -11,12 +11,13 @@ namespace Shapes2D
     private:
         double r;
         Point2d *c;
+
         static std::pair<double, Point2d*> circleFrom3Points(Point2d *, Point2d *, Point2d *);
 
     public:
         /* constructors */
         Circle2d();
-        Circle2d(double );
+        explicit Circle2d(double );
         Circle2d(double, Point2d *);
         Circle2d(Point2d *, Point2d *);
         Circle2d(Point2d *, Point2d *, Point2d *);

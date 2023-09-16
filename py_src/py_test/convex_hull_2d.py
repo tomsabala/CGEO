@@ -1,5 +1,5 @@
 from build import libGeo_2D as Geo
-from examples.Plots2D import PolygonPlot
+from py_src.plots_2d import PolygonPlot
 
 _utility = Geo.libAlgorithms_2D.ConvexHullUtils()
 Point = Geo.libShapes_2D.Point

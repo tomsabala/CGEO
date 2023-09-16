@@ -1,9 +1,11 @@
 from __future__ import annotations
-import typing
+from typing import Union
 from build import libGeo_2D as Geo
 from examples.src.Point2D import Point2D as Point
+from examples.src.utilities.error_handling.error_utilities import *
 
 
+@handle_errors_for_class
 class Segment2D:
     def __init__(self, *args):
         if len(args) == 0:
@@ -73,16 +75,14 @@ class Segment2D:
     def rotate(self, d: float) -> None:
         self._segment.rotate(d)
 
-    def oriePred(self, *args) -> float:
-        if len(args) == 0:
-            raise ValueError('missing arguments')
-        if len(args) > 1:
-            raise ValueError('too many arguments')
-        if isinstance(args[0], Point):
-            return self._segment.oriePred(args[0].point)
-        elif isinstance(args[0], Segment2D):
-            return self._segment.oriePred(args[0].segment)
-        raise TypeError('invalid argument')
+    def oriePred(self, other: Union[Point, Segment2D]) -> float:
+        if not isinstance(other, (Point, Segment2D)):
+            raise TypeError('Invalid argument type. Expected Point or Segment2D.')
+
+        if isinstance(other, Point):
+            return self._segment.oriePred(other.point)
+
+        return self._segment.oriePred(other.segment)
 
     def isParallel(self, other: Segment2D) -> bool:
         return self._segment.isParallel(other.segment)
@@ -90,16 +90,14 @@ class Segment2D:
     def isVertical(self, other: Segment2D) -> bool:
         return self._segment.isVertical(other.segment)
 
-    def dist(self, *args) -> float:
-        if len(args) == 0:
-            raise ValueError('missing arguments')
-        if len(args) > 1:
-            raise ValueError('too many arguments')
-        if isinstance(args[0], Point):
-            return self._segment.dist(Point(args[0]).point)
-        if isinstance(args[0], Segment2D):
-            return self._segment.dist(args[0].segment)
-        raise TypeError('invalid argument')
+    def dist(self, other: Union[Point, Segment2D]) -> float:
+        if not isinstance(other, (Point, Segment2D)):
+            raise TypeError('Invalid argument type. Expected Point or Segment2D.')
+
+        if isinstance(other, Point):
+            return self._segment.dist(other.point)
+
+        return self._segment.dist(other.segment)
 
     def isIntersect(self, other: Segment2D) -> bool:
         return self._segment.isIntersect(other.segment)

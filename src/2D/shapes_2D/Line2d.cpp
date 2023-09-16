@@ -1,5 +1,4 @@
 
-#include <iostream>
 #include "Line2d.h"
 
 /**
@@ -26,8 +25,7 @@ Line2d::Line2d(double m, Shapes2D::Point2d point, bool is_vertical)
  */
 Line2d::Line2d(double m, double x, double y, bool is_vertical)
     : slope(m), vertical(is_vertical) {
-    Shapes2D::Point2d *point = new Shapes2D::Point2d(x, y);
-    p = *point;
+    p = *(new Shapes2D::Point2d(x, y));
 }
 
 /**

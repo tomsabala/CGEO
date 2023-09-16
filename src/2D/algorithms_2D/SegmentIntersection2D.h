@@ -2,13 +2,13 @@
 
 #include <algorithm>
 #include <iostream>
-#include <math.h>
-#include <float.h>
+#include <cmath>
+#include <cfloat>
 #include <unordered_set>
 #include <map>
-#include "../Shapes_2D/Segment2d.h"
-#include "../Shapes_2D/Line2d.h"
-#include "../../DataStructures/SegmentBalancedTree.h"
+#include "../shapes_2D/Segment2d.h"
+#include "../shapes_2D/Line2d.h"
+#include "../../data_structures/SegmentBalancedTree.h"
 
 
 namespace Algorithms2d{
@@ -29,7 +29,7 @@ namespace Algorithms2d{
             double a_y = a->getY(), a_x = a->getX();
             double b_y = b->getY(), b_x = b->getX();
 
-            if (a_y > b_y + eps || abs(a_y - b_y) <= eps && a_x < b_x) return true;
+            if (a_y > b_y + eps || std::abs(a_y - b_y) <= eps && a_x < b_x) return true;
             return false;
         }
     };
@@ -38,37 +38,37 @@ namespace Algorithms2d{
     public:
         SegmentIntersection2d() = default;
 
-        std::pair<bool, Shapes2D::Point2d *>*
+        static std::pair<bool, Shapes2D::Point2d *>*
         intersect(Shapes2D::Segment2d *a,
                   Shapes2D::Segment2d *b,
                   bool test);
 
-        void
+        static void
         intersect(std::vector<Shapes2D::Segment2d *> *segments,
                   std::vector<Shapes2D::Point2d *> *intersections);
 
-        void
+        static void
         handleEventPoint(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
                          std::multimap<Shapes2D::Point2d *, int, event_comp> *events,
                          SegmentBalancedTree *status,
                          std::vector<Shapes2D::Point2d *> *intersections);
 
-        std::vector<Shapes2D::Segment2d *>
+        static std::vector<Shapes2D::Segment2d *>
         findInteriorMap(std::multimap<Shapes2D::Point2d *, int, event_comp>::iterator e,
                         SegmentBalancedTree *status);
 
-        bool isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d *p);
+        static bool isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d *p);
 
-        void print_status(SegmentBalancedTree *status);
+        static void print_status(SegmentBalancedTree *status);
 
-        void print_events(std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
+        static void print_events(std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
 
-        std::vector<Shapes2D::Point2d *>
+        static std::vector<Shapes2D::Point2d *>
         solve(std::vector<Shapes2D::Segment2d *> *segments);
 
-        void
+        static void
         handle_segments(Shapes2D::Segment2d *s, Shapes2D::Segment2d *t,
-                        Shapes2D::Point2d p,
+                        const Shapes2D::Point2d& p,
                         std::multimap<Shapes2D::Point2d *, int, event_comp> *events);
     };
 }
