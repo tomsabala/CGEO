@@ -53,6 +53,12 @@ class Segment2D:
     def segment(self) -> Geo.libShapes_2D.Segment:
         return self._segment
 
+    @classmethod
+    def fromCSegment(cls, cSegment: Geo.libShapes_2D.Segment):
+        newSegment = cls()
+        newSegment._segment = cSegment
+        return newSegment
+
     def __originX(self) -> float:
         return self.origin.x
 
