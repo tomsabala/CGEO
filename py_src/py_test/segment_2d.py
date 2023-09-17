@@ -1,4 +1,4 @@
-from py_src.modules.Segment2D import Segment2D as Segment, Point
+from py_src.modules.segment_2d import Segment2D as Segment, Point
 
 Segment = Geo.libShapes_2D.Segment
 Point = Geo.libShapes_2D.Point

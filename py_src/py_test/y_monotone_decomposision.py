@@ -1,5 +1,5 @@
 from build import libGeo_2D as Geo
-from examples.Plots2D import PolygonPlot
+from py_src.plots_2d import polygon_plot
 
 
 Point = Geo.libShapes_2D.Point

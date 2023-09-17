@@ -1,6 +1,6 @@
 from build import libGeo_2D as Geo
 import random
-import py_src.plots_2d.CirclePlot as CirclePlot
+import py_src.plots_2d.circle_plot as CirclePlot
 
 
 triUtility = Geo.libAlgorithms_2D.TriangulationUtils()

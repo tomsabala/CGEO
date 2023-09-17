@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 class PlotSegments:
     def __init__(self):
         pass
 
-    def plot(self, xy: np.array, dots, **kwargs) -> None:
-
+    @staticmethod
+    def plot(xy: np.array, dots, **kwargs) -> None:
         fig, ax = plt.subplots(figsize=(10, 10))
         ab_pairs = np.c_[xy[0], xy[1]]
         ab_args = ab_pairs.reshape(-1, 2, 2).swapaxes(1, 2).reshape(-1, 2)

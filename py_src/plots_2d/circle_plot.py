@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 from matplotlib import patches
-from build import libGeo_2D as Geo
+
 
 class PlotCircles:
     def __init__(self):
         pass
 
-    def plotEnclosingDisc(self, dots, circle) -> None:
+    @staticmethod
+    def plotEnclosingDisc(dots, circle) -> None:
 
         fig = plt.figure()
         ax = fig.add_subplot()

@@ -1,4 +1,3 @@
-
 import math
 import random
 from typing import List, Tuple
@@ -12,7 +11,8 @@ class PlotPolygon:
     def __init__(self):
         pass
 
-    def plotConvexHull(self, dots: np.array, **kwargs) -> None:
+    @staticmethod
+    def plotConvexHull(dots: np.array, **kwargs) -> None:
 
         """
         imp from : https://stackoverflow.com/questions/43971259/how-to-draw-polygons-with-python
@@ -31,7 +31,7 @@ class PlotPolygon:
             plt.scatter(x, y, color='black')
         plt.show()
 
-    def plotPolygons(self, poly: np.array, sub_polygons: np.array) ->None:
+    def plotPolygons(self, poly: np.array, sub_polygons: np.array) -> None:
 
         p = Polygon(poly, facecolor='pink', edgecolor='black')
         _, ax = plt.subplots()
@@ -62,17 +62,18 @@ class PlotPolygon:
             plt.plot([x.x, y.x], [x.y, y.y], color='blue', marker='|')
         plt.show()
 
-
-    def getBoundingBox(self, dots):
+    @staticmethod
+    def getBoundingBox(dots):
         x = [x for (x, _) in dots]
         y = [y for (_, y) in dots]
 
         return max(x), min(x), max(y), min(y)
 
-def main(tests, titles=None):
-    for test1, test2 in tests:
-        plt = PlotPolygon()
-        max_x, min_x, max_y, min_y = plt.getBoundingBox(test1)
+
+def main(_tests, titles=None):
+    for test1, test2 in _tests:
+        _plt = PlotPolygon()
+        max_x, min_x, max_y, min_y = _plt.getBoundingBox(test1)
 
         kwargs = {'max_x': max_x, 'min_x': min_x, 'max_y': max_y, 'min_y': min_y, 'hull': test2, 'titles': titles}
         PlotPolygon().plotConvexHull(test1, **kwargs)
@@ -136,7 +137,6 @@ def clip(value, lower, upper):
 
 
 if __name__ == "__main__":
-
     tests = [
         [[1, 1], [-1, -1], [1, -1]],
         [[0, 1], [1, 4], [6, 2], [1, 2], [0.5, 1.5]],
@@ -144,5 +144,3 @@ if __name__ == "__main__":
         [[0, 0], [1, 1], [0, 1], [1, 0]],
     ]
     main(tests)
-
-

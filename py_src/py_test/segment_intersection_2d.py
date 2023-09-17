@@ -1,5 +1,5 @@
 from build import libGeo_2D as Geo
-from py_src.plots_2d import SegmentsPlot
+from py_src.plots_2d import segments_plot
 
 Point = Geo.libShapes_2D.Point
 Segment = Geo.libShapes_2D.Segment

@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import Union
 from build import libGeo_2D as Geo
-from examples.src.Point2D import Point2D as Point
-from examples.src.utilities.error_handling.error_utilities import *
+from py_src.modules.point_2d import Point2D as Point
+from py_src.utilities.error_handling.error_utilities import *
 
 
 @handle_errors_for_class
