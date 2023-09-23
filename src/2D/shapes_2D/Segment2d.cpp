@@ -46,12 +46,14 @@ Point2d *Segment2d::getTarget() const{
     return this->target;
 }
 
-void Segment2d::setOrigin(Point2d *new_p) {
-    this->origin = new_p;
+void Segment2d::setOrigin(const Point2d& new_p) {
+    this->origin->setX(new_p.getX());
+    this->origin->setY(new_p.getY());
 }
 
-void Segment2d::setTarget(Point2d *new_p) {
-    this->target = new_p;
+void Segment2d::setTarget(const Point2d& new_p) {
+    this->target->setX(new_p.getX());
+    this->target->setY(new_p.getY());
 }
 
 /**
@@ -198,8 +200,8 @@ bool Segment2d::_gt_(Segment2d *s) noexcept(false) {
 void Segment2d::copySegment(Segment2d *s) noexcept(false) {
     if (s == nullptr)
         throw (Exception2D("null pointer"));
-    this->setOrigin(s->getOrigin());
-    this->setTarget(s->getTarget());
+    this->setOrigin(*s->getOrigin());
+    this->setTarget(*s->getTarget());
 }
 
 /**

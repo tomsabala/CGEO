@@ -11,7 +11,7 @@ Circle2d::Circle2d()
 
 /**
  * semi-empty constructor,
- * creates a circle from radius r, cetered in (0, 0)
+ * creates a circle from radius r, centered in (0, 0)
  * @param r: a double value radius
  */
 Circle2d::Circle2d(double radius)
@@ -52,7 +52,7 @@ Circle2d::Circle2d(Point2d *p, Point2d *q, Point2d *t) {
  * return the circle's radius
  * @return r, value type
  */
-double Circle2d::getRadius() {return this->r;}
+double Circle2d::getRadius() const {return this->r;}
 
 /**
  * set the circle radius to be radius
@@ -130,10 +130,7 @@ bool Circle2d::segIntersect(Segment2d *s) {
  */
 bool Circle2d::polyIntersect(Polygon *poly) {
     /* the minimum complexity is O(n), as by start we need to read the polygon data */
-    for (Segment2d s : poly->getEdges())
-        if(this->segIntersect(&s))
-            return true;
-    return false;
+    return std::any_of(poly->getEdges().begin(), poly->getEdges().end(), [this](Segment2d *s) {return this->segIntersect(s);});
 }
 
 /**
@@ -181,11 +178,11 @@ int Circle2d::circleContains(Circle2d *circ) {
  */
 int Circle2d::polyContains(Polygon *poly) {
     bool flag = true;
-    for (Segment2d s : poly->getEdges())
+    for (Segment2d *s : poly->getEdges())
     {
-        if (this->segIntersect(&s))
+        if (this->segIntersect(s))
             return 0;
-        flag = this->segmentContains(&s);
+        flag = this->segmentContains(s);
     }
     return flag ? 1 : -1;
 }
@@ -213,13 +210,13 @@ std::pair<double, Point2d *> Circle2d::circleFrom3Points(Point2d *p, Point2d *q,
     Line2d *l1, *l2;
     /* line 1: between p and q construction */
 
-    Point2d *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
+    auto *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
     if (p->getY() == q->getY())
         l1 = new Line2d(0, *mid_point1, true);
     else
         l1 = new Line2d(-1/( (p->getY() - q->getY()) / (p->getX() - q->getX())), *mid_point1, false);
 
-    Point2d *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
+    auto *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
     if (p->getY() == t->getY())
         l2 = new Line2d(0, *mid_point2, true);
     else

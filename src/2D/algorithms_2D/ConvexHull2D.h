@@ -11,7 +11,7 @@ namespace Algorithms2d{
     public:
         ConvexHull()= default;;
 
-        static Shapes2D::Polygon* grahamConvexHull(Shapes2D::Polygon poly);
+        static Shapes2D::Polygon* grahamConvexHull(Shapes2D::Polygon *poly);
         static Shapes2D::Polygon* giftWrapConvexHull(Shapes2D::Polygon poly);
 
         Shapes2D::Polygon* divideAndConquerConvexHull(Shapes2D::Polygon poly);

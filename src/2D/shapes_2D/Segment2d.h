@@ -26,8 +26,8 @@ namespace Shapes2D {
         Point2d* getLower() const;
         void setUpper(Point2d p) const;
         void setLower(Point2d p) const;
-        void setOrigin(Point2d *new_p) noexcept(false);
-        void setTarget(Point2d *new_p) noexcept(false);
+        void setOrigin(const Point2d& new_p) noexcept(false);
+        void setTarget(const Point2d& new_p) noexcept(false);
         double getSlope();
         double getLength();
 

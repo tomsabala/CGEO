@@ -23,7 +23,7 @@ namespace Shapes2D
         Circle2d(Point2d *, Point2d *, Point2d *);
 
         /* getter and setter */
-        double getRadius();
+        double getRadius() const;
         void setRadius(double radius);
         Point2d* getCenter();
         void setCenter(Point2d *p);

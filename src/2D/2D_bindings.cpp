@@ -111,7 +111,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
 
     py::class_<Algorithms2d::ConvexHull>(h_algorithms, "ConvexHullUtils")
             .def(py::init<>())
-            .def("grahamConvexHull", &Algorithms2d::ConvexHull::grahamConvexHull, "graham convex hull algorithm")
+            .def_static("grahamConvexHull", &Algorithms2d::ConvexHull::grahamConvexHull, "graham convex hull algorithm")
             .def("giftWrapConvexHull", &Algorithms2d::ConvexHull::giftWrapConvexHull, "gift wrapping convex hull algorithm");
 
     py::class_<Algorithms2d::SegmentIntersection2d>(h_algorithms, "SegmentIntersect")

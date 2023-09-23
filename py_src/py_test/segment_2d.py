@@ -1,8 +1,5 @@
 from py_src.modules.segment_2d import Segment2D as Segment, Point
 
-Segment = Geo.libShapes_2D.Segment
-Point = Geo.libShapes_2D.Point
-
 # Constructors
 s1 = Segment()
 p = Point(1, 1)
@@ -41,5 +38,3 @@ print("s1 : {}".format(s1))
 print("s2 : {}\n".format(s2))
 print("orientation for s2->s1 is {} (positive)".format(s2.oriePred(s1)))
 print("orientation for s1->s2 is {} (negative)\n".format(s1.oriePred(s2)))
-
-

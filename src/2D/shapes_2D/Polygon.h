@@ -32,7 +32,7 @@ namespace Shapes2D{
         Point2d* getLexMax();
         int getLexMax_index();
         std::vector<Point2d> lexOrder();
-        std::vector<Segment2d> getEdges();
+        std::vector<Segment2d *> getEdges();
         std::vector<Point2d> getVertices();
         int getSize();
         Point2d* getRightMost();

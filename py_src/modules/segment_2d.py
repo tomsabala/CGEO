@@ -25,6 +25,9 @@ class Segment2D:
     def __copy__(self):
         return Segment2D(self.origin, self.target)
 
+    def __str__(self):
+        return str(self._segment)
+
     @property
     def origin(self) -> Geo.libShapes_2D.Point:
         return self._segment.origin
