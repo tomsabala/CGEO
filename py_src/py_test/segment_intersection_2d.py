@@ -1,11 +1,7 @@
-from build import libGeo_2D as Geo
-from py_src.plots_2d import segments_plot
-
-Point = Geo.libShapes_2D.Point
-Segment = Geo.libShapes_2D.Segment
-
-interUtility = Geo.libAlgorithms_2D.SegmentIntersect()
-
+from py_src.plots_2d import segments_plot as SegmentsPlot
+from py_src.modules.point_2d import Point2D as Point
+from py_src.modules.segment_2d import Segment2D as Segment
+from py_src.utilities.c_utilities.global_c_utils import segmentIntersection
 
 segments_coord = SegmentsPlot.generate_random_segments(20)
 
@@ -17,7 +13,7 @@ for i, seg in enumerate(segments_coord):
     segments_test.append(seg)
 
 try:
-    intersection_points = interUtility.intersection(segments_test)
+    intersection_points = segmentIntersection(segments_test)
 
     seg2plot = [[[seg.target.x, seg.target.y], [seg.origin.x, seg.origin.y]] for seg in segments_test]
 

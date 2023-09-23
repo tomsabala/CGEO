@@ -1,5 +1,4 @@
 from py_src.plots_2d import polygon_plot as PolygonPlot
-from py_src.modules.point_2d import Point2D as Point
 from py_src.utilities.c_utilities.global_c_utils import *
 
 
