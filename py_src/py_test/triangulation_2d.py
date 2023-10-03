@@ -1,10 +1,7 @@
-from build import libGeo_2D as Geo
-from py_src.plots_2d import polygon_plot
-
-
-_utility = Geo.TriangulationUtils()
-Point = Geo.libShapes_2D.Point
-Polygon = Geo.libShapes_2D.Polygon
+from py_src.plots_2d import polygon_plot as PolygonPlot
+from py_src.utilities.c_utilities.global_c_utils import triangulate
+from py_src.modules.point_2d import Point2D as Point
+from py_src.modules.polygon import Polygon
 
 
 plt = PolygonPlot.PlotPolygon()
@@ -19,11 +16,11 @@ for i in range(10):
     poly = Polygon(points_arr)
 
     # decompose to triangles
-    Triangles = _utility.triangulate(poly)
+    Triangles = triangulate(poly)
     edges = []
 
     for tri in Triangles:
-        vertex = tri.getVertex()
+        vertex = tri.getVertices()
         edges.append((vertex[0], vertex[1]))
         edges.append((vertex[1], vertex[2]))
         edges.append((vertex[2], vertex[0]))

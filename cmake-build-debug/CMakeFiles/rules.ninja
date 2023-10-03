@@ -99,7 +99,7 @@ rule CXX_SHARED_LIBRARY_LINKER__Shapes2D_Debug
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/clion/249/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/tomsabala/workspace/proj/geomtery/CGEO -B/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
+  command = /snap/clion/250/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/tomsabala/workspace/proj/geomtery/CGEO -B/home/tomsabala/workspace/proj/geomtery/CGEO/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 
@@ -108,7 +108,7 @@ rule RERUN_CMAKE
 # Rule for cleaning all built files.
 
 rule CLEAN
-  command = /snap/clion/249/bin/ninja/linux/x64/ninja $FILE_ARG -t clean $TARGETS
+  command = /snap/clion/250/bin/ninja/linux/x64/ninja $FILE_ARG -t clean $TARGETS
   description = Cleaning all built files...
 
 
@@ -116,6 +116,6 @@ rule CLEAN
 # Rule for printing all primary targets available.
 
 rule HELP
-  command = /snap/clion/249/bin/ninja/linux/x64/ninja -t targets
+  command = /snap/clion/250/bin/ninja/linux/x64/ninja -t targets
   description = All primary targets available:
 

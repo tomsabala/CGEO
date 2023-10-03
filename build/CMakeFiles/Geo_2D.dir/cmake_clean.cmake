@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o"
-  "CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o.d"
+  "CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o"
+  "CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o.d"
   "libGeo_2D.pdb"
   "libGeo_2D.so"
 )

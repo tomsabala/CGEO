@@ -184,7 +184,7 @@ Algorithms2D: cmake_check_build_system
 
 # fast build rule for target.
 Algorithms2D/fast:
-	$(MAKE) $(MAKESILENT) -f 2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/build.make 2D/Algorithms_2D/CMakeFiles/Algorithms2D.dir/build
+	$(MAKE) $(MAKESILENT) -f src/2D/algorithms_2D/CMakeFiles/Algorithms2D.dir/build.make src/2D/algorithms_2D/CMakeFiles/Algorithms2D.dir/build
 .PHONY : Algorithms2D/fast
 
 #=============================================================================
@@ -197,7 +197,7 @@ Datastructures2D: cmake_check_build_system
 
 # fast build rule for target.
 Datastructures2D/fast:
-	$(MAKE) $(MAKESILENT) -f DataStructures/CMakeFiles/Datastructures2D.dir/build.make DataStructures/CMakeFiles/Datastructures2D.dir/build
+	$(MAKE) $(MAKESILENT) -f src/data_structures/CMakeFiles/Datastructures2D.dir/build.make src/data_structures/CMakeFiles/Datastructures2D.dir/build
 .PHONY : Datastructures2D/fast
 
 #=============================================================================
@@ -210,32 +210,32 @@ Shapes2D: cmake_check_build_system
 
 # fast build rule for target.
 Shapes2D/fast:
-	$(MAKE) $(MAKESILENT) -f 2D/Shapes_2D/CMakeFiles/Shapes2D.dir/build.make 2D/Shapes_2D/CMakeFiles/Shapes2D.dir/build
+	$(MAKE) $(MAKESILENT) -f src/2D/shapes_2D/CMakeFiles/Shapes2D.dir/build.make src/2D/shapes_2D/CMakeFiles/Shapes2D.dir/build
 .PHONY : Shapes2D/fast
 
-2D/2D_bindings.o: 2D/2D_bindings.cpp.o
-.PHONY : 2D/2D_bindings.o
+src/2D/2D_bindings.o: src/2D/2D_bindings.cpp.o
+.PHONY : src/2D/2D_bindings.o
 
 # target to build an object file
-2D/2D_bindings.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o
-.PHONY : 2D/2D_bindings.cpp.o
+src/2D/2D_bindings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o
+.PHONY : src/2D/2D_bindings.cpp.o
 
-2D/2D_bindings.i: 2D/2D_bindings.cpp.i
-.PHONY : 2D/2D_bindings.i
+src/2D/2D_bindings.i: src/2D/2D_bindings.cpp.i
+.PHONY : src/2D/2D_bindings.i
 
 # target to preprocess a source file
-2D/2D_bindings.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.i
-.PHONY : 2D/2D_bindings.cpp.i
+src/2D/2D_bindings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.i
+.PHONY : src/2D/2D_bindings.cpp.i
 
-2D/2D_bindings.s: 2D/2D_bindings.cpp.s
-.PHONY : 2D/2D_bindings.s
+src/2D/2D_bindings.s: src/2D/2D_bindings.cpp.s
+.PHONY : src/2D/2D_bindings.s
 
 # target to generate assembly for a file
-2D/2D_bindings.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.s
-.PHONY : 2D/2D_bindings.cpp.s
+src/2D/2D_bindings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Geo_2D.dir/build.make CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.s
+.PHONY : src/2D/2D_bindings.cpp.s
 
 # Help Target
 help:
@@ -253,9 +253,9 @@ help:
 	@echo "... Datastructures2D"
 	@echo "... Geo_2D"
 	@echo "... Shapes2D"
-	@echo "... 2D/2D_bindings.o"
-	@echo "... 2D/2D_bindings.i"
-	@echo "... 2D/2D_bindings.s"
+	@echo "... src/2D/2D_bindings.o"
+	@echo "... src/2D/2D_bindings.i"
+	@echo "... src/2D/2D_bindings.s"
 .PHONY : help
 
 

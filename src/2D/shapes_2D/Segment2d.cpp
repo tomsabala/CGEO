@@ -78,7 +78,7 @@ Point2d *Segment2d::getLower() const{
  * set upper point to new point
  * @param p new point object
  */
-void Segment2d::setUpper(Point2d p) const {
+void Segment2d::setUpper(const Point2d& p) const {
     Point2d *new_point;
     new_point = (Point2d *) malloc(sizeof(Point2d));
     if(new_point == nullptr)
@@ -98,7 +98,7 @@ void Segment2d::setUpper(Point2d p) const {
  * set lower point to new point
  * @param p new point object
  */
-void Segment2d::setLower(Point2d p) const {
+void Segment2d::setLower(const Point2d& p) const {
     Point2d *new_point;
     new_point = (Point2d *) malloc(sizeof(Point2d));
     if(new_point == nullptr)
@@ -133,16 +133,16 @@ double Segment2d::getSlope() {
  * calculate length of segment
  * @return double type value length
  */
-double Segment2d::getLength() {
+double Segment2d::getLength() const {
     Point2d *p = this->getOrigin();
-    return p->dist(this->getTarget());
+    return p->dist(*this->getTarget());
 }
 
 /**
  * shift segment by p
  * @param p point type object
  */
-void Segment2d::adder(Point2d *p) noexcept(false) {
+void Segment2d::adder(Point2d *p) const noexcept(false) {
     Point2d *o=this->getOrigin(), *t=this->getTarget();
     try {
         o->adder(p);
@@ -156,7 +156,7 @@ void Segment2d::adder(Point2d *p) noexcept(false) {
  * twist segment with degree deg
  * @param deg double type degree
  */
-void Segment2d::rotate(double &deg) {
+void Segment2d::rotate(double &deg) const {
     this->getTarget()->rotate(deg, this->getOrigin());
 }
 
@@ -165,7 +165,7 @@ void Segment2d::rotate(double &deg) {
  * @param s segment2d object
  * @return boolean
  */
-bool Segment2d::_eq_(Segment2d *s) noexcept(false) {
+bool Segment2d::_eq_(Segment2d *s) const noexcept(false) {
     if (s == nullptr)
         throw(Exception2D("null pointer"));
     return this->getOrigin()->_eq_(s->getOrigin()) && this->getTarget()->_eq_(s->getTarget());
@@ -174,7 +174,7 @@ bool Segment2d::_eq_(Segment2d *s) noexcept(false) {
 /**
  * return true if segment is less then s
  */
-bool Segment2d::_lt_(Segment2d *s) noexcept(false) {
+bool Segment2d::_lt_(Segment2d *s) const noexcept(false) {
     if (s == nullptr)
         throw(Exception2D("null pointer"));
     if (this->getUpper()->getX() == s->getUpper()->getX())
@@ -185,7 +185,7 @@ bool Segment2d::_lt_(Segment2d *s) noexcept(false) {
 /**
  * return true if segment is less then s
  */
-bool Segment2d::_gt_(Segment2d *s) noexcept(false) {
+bool Segment2d::_gt_(Segment2d *s) const noexcept(false) {
     if (s == nullptr)
         throw(Exception2D("null pointer"));
     if (this->getUpper()->getX() == s->getUpper()->getX())
@@ -283,7 +283,7 @@ double Segment2d::dist(Point2d *p) noexcept(false) {
     if (p == nullptr)
         throw (Exception2D("null pointer"));
 
-    Line2d *l = new Line2d(this->getOrigin(), this->getTarget());
+    auto *l = new Line2d(this->getOrigin(), this->getTarget());
 
     return l->dist(p);
 }
@@ -293,7 +293,7 @@ double Segment2d::dist(Point2d *p) noexcept(false) {
  * @param s another given segment
  * @return boolean
  */
-bool Segment2d::isIntersect(Segment2d *s) {
+bool Segment2d::isIntersect(Segment2d *s) const {
     if (s == nullptr)
         throw (Exception2D("null pointer"));
     if(this->oriePred(s->getOrigin()) >= 0 && this->oriePred(s->getTarget()) <= 0){
@@ -314,7 +314,7 @@ bool Segment2d::isIntersect(Segment2d *s) {
     return false;
 }
 
-Point2d *Segment2d::getIntersect(Segment2d *s) {
+Point2d *Segment2d::getIntersect(Segment2d *s) const {
     if (this->getUpper()->_eq_(s->getUpper()) || this->getLower()->_eq_(s->getUpper()))
         return s->getUpper();
     if (this->getUpper()->_eq_(s->getLower()) || this->getLower()->_eq_(s->getLower()))
@@ -357,7 +357,7 @@ Segment2d::~Segment2d() {
     delete this->target;
 }
 
-double Segment2d::getXfromY(double y) {
+double Segment2d::getXfromY(double y) const {
     if (this->getOrigin()->getY() == this->getTarget()->getY())
     {
         if (y == this->getOrigin()->getY())
@@ -373,7 +373,7 @@ double Segment2d::getXfromY(double y) {
 }
 
 
-double Segment2d::getYfromX(double x) {
+double Segment2d::getYfromX(double x) const {
     if (this->getOrigin()->getX() == this->getTarget()->getX())
     {
         if (x == this->getOrigin()->getX())

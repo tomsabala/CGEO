@@ -30,10 +30,10 @@ Circle2d::Circle2d(double radius, Point2d * center)
  * construct a circle with r=dist(p, q)/2 and center in the middle of pq segment
  * @param p, q : two points in the plane
  */
-Circle2d::Circle2d(Point2d *p, Point2d *q)
+Circle2d::Circle2d(const Point2d& p, const Point2d& q)
 {
-    this->c = new Point2d((p->getX() + q->getX())/2, (p->getY() + q->getY())/2);
-    this->r = p->dist(q) / 2;
+    this->c = new Point2d((p.getX() + q.getX())/2, (p.getY() + q.getY())/2);
+    this->r = p.dist(q) / 2;
 }
 
 /**
@@ -41,7 +41,7 @@ Circle2d::Circle2d(Point2d *p, Point2d *q)
  * @param p, q, t : three points in the plane.
  * assuming that p, q, and t don't lie on one line.
  */
-Circle2d::Circle2d(Point2d *p, Point2d *q, Point2d *t) {
+Circle2d::Circle2d(const Point2d& p, const Point2d& q, const Point2d& t) {
     std::pair<double, Point2d *> vals = Circle2d::circleFrom3Points(p, q, t);
 
     this->c = vals.second;
@@ -78,7 +78,7 @@ void Circle2d::setCenter(Point2d *p) {this->c->setX(p->getX()); this->c->setY(p-
  * @return true iff circles are intersecting.
  */
 bool Circle2d::circleIntersect(Circle2d *circ) {
-    double centers_dist = this->c->dist(circ->c);
+    double centers_dist = this->c->dist(*circ->c);
     return centers_dist >= std::abs(this->r - circ->r) && centers_dist <= this->r + circ->r;
 }
 
@@ -139,7 +139,7 @@ bool Circle2d::polyIntersect(Polygon *poly) {
  * @return 1 if the point is inside the circle, 0 if the point is on the circle or -1 otherwise
  */
 int Circle2d::pointContains(Point2d *p) {
-    double d = this->c->dist(p);
+    double d = this->c->dist(*p);
     if (d > this->r) return -1;
     if (d == this->r) return 0;
     return 1;
@@ -166,7 +166,7 @@ int Circle2d::segmentContains(Segment2d *s) {
 int Circle2d::circleContains(Circle2d *circ) {
     if (this->circleIntersect(circ))
         return 0;
-    if (this->c->dist(circ->c) + circ->r <= this->r)
+    if (this->c->dist(*circ->c) + circ->r <= this->r)
         return 1;
     return -1;
 }
@@ -193,7 +193,7 @@ int Circle2d::polyContains(Polygon *poly) {
  * @param p, q, t : 3 points in the plane
  */
 void Circle2d::setCircle(Point2d *p, Point2d *q, Point2d *t) {
-    std::pair<double, Point2d *> val = Circle2d::circleFrom3Points(p, q, t);
+    std::pair<double, Point2d *> val = Circle2d::circleFrom3Points(*p, *q, *t);
 
     delete this->c;
 
@@ -205,22 +205,22 @@ void Circle2d::setCircle(Point2d *p, Point2d *q, Point2d *t) {
  * this function finds the properties of a circle that goes through a 3 points in the plane.
  * @param p, q, t : 3 points in the plane
  */
-std::pair<double, Point2d *> Circle2d::circleFrom3Points(Point2d *p, Point2d *q, Point2d *t) {
+std::pair<double, Point2d *> Circle2d::circleFrom3Points(const Point2d& p, const Point2d& q, const Point2d& t) {
     /* we need to build the orthogonal lines passing through the middle of two edges of the triangle */
     Line2d *l1, *l2;
     /* line 1: between p and q construction */
 
-    auto *mid_point1 = new Point2d((p->getX() + q->getX()) / 2, (p->getY() + q->getY()) / 2);
-    if (p->getY() == q->getY())
+    auto *mid_point1 = new Point2d((p.getX() + q.getX()) / 2, (p.getY() + q.getY()) / 2);
+    if (p.getY() == q.getY())
         l1 = new Line2d(0, *mid_point1, true);
     else
-        l1 = new Line2d(-1/( (p->getY() - q->getY()) / (p->getX() - q->getX())), *mid_point1, false);
+        l1 = new Line2d(-1/( (p.getY() - q.getY()) / (p.getX() - q.getX())), *mid_point1, false);
 
-    auto *mid_point2 = new Point2d((p->getX() + t->getX()) / 2, (p->getY() + t->getY()) / 2);
-    if (p->getY() == t->getY())
+    auto *mid_point2 = new Point2d((p.getX() + t.getX()) / 2, (p.getY() + t.getY()) / 2);
+    if (p.getY() == t.getY())
         l2 = new Line2d(0, *mid_point2, true);
     else
-        l2 = new Line2d(-1/( (p->getY() - t->getY()) / (p->getX() - t->getX())), *mid_point2, false);
+        l2 = new Line2d(-1/( (p.getY() - t.getY()) / (p.getX() - t.getX())), *mid_point2, false);
 
 
     Point2d *center = Line2d::line_intersection(l1, l2);

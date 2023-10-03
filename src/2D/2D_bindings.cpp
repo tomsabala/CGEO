@@ -148,7 +148,7 @@ PYBIND11_MODULE(libGeo_2D, h) {
             .def(py::init<>())
             .def(py::init<double>())
             .def(py::init<double, Shapes2D::Point2d *>())
-            .def(py::init<Shapes2D::Point2d *, Shapes2D::Point2d *, Shapes2D::Point2d *>())
+            .def(py::init<Shapes2D::Point2d , Shapes2D::Point2d , Shapes2D::Point2d >())
             .def_property("r", &Shapes2D::Circle2d::getRadius, &Shapes2D::Circle2d::setRadius)
             .def_property("center", &Shapes2D::Circle2d::getCenter, &Shapes2D::Circle2d::setCenter)
             .def("circleIntersect", &Shapes2D::Circle2d::circleIntersect, "check if the circle intersect with a given circle")

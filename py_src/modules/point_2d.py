@@ -69,5 +69,5 @@ class Point2D:
         return self._point.oriePred(q._point, r._point)
 
     @property
-    def point(self):
+    def cPoint(self):
         return self._point

@@ -16,10 +16,10 @@ class Polygon:
         elif getVectorType(args) != Point.__name__:
             raise TypeError('invalid argument')
         else:
-            self._polygon = Geo.libShapes_2D.Polygon([p.point for p in args])
+            self._polygon = Geo.libShapes_2D.Polygon([p.cPoint for p in args])
 
     @property
-    def polygon(self) -> Geo.libShapes_2D.Polygon:
+    def cPolygon(self) -> Geo.libShapes_2D.Polygon:
         return self._polygon
 
     @property
@@ -50,9 +50,9 @@ class Polygon:
 
     def insert(self, vertex: Point, index=-1) -> None:
         if index < 0:
-            self._polygon.insert(vertex.point)
+            self._polygon.insert(vertex.cPoint)
         else:
-            self._polygon.insert(vertex.point, index)
+            self._polygon.insert(vertex.cPoint, index)
 
     def getByIndex(self, index: int) -> Point:
         return Point.fromCPoint(self._polygon.getByIndex(index))
@@ -79,4 +79,4 @@ class Polygon:
         return self._polygon.isInnerCusp(index)
 
     def decomposeToYMonotone(self) -> list[Polygon]:
-        return [self.fromCPolygon(cPolygon) for cPolygon in self._polygon.decomposeY_Monotone()]
+        return [Polygon.fromCPolygon(cPolygon) for cPolygon in self._polygon.decomposeY_Monotone()]
