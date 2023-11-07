@@ -80,3 +80,6 @@ class Polygon:
 
     def decomposeToYMonotone(self) -> list[Polygon]:
         return [Polygon.fromCPolygon(cPolygon) for cPolygon in self._polygon.decomposeY_Monotone()]
+
+    def toList(self) -> list:
+        return [[p.x, p.y] for p in self.getVertices()]

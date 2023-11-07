@@ -1,13 +1,13 @@
 from py_src.plots_2d import polygon_plot as PolygonPlot
 from py_src.modules.point_2d import Point2D as Point
 from py_src.modules.polygon import Polygon
+from py_src.utilities.get_random_polygon import generateRandomPolygonPoints
 
-
-dots = PolygonPlot.generateRandomPolygons(center=(0, 0),
-                                          avg_radius=10,
-                                          irregularity=0.2,
-                                          spikiness=0.5,
-                                          num_vertices=20)
+dots = generateRandomPolygonPoints(center=(0, 0),
+                                   avg_radius=10,
+                                   irregularity=0.2,
+                                   spikiness=0.5,
+                                   num_vertices=20)
 
 points_arr = [Point(x, y) for x, y in dots]
 poly = Polygon(points_arr)

@@ -1,15 +1,15 @@
 from py_src.plots_2d import polygon_plot as PolygonPlot
 from py_src.utilities.c_utilities.global_c_utils import *
-
+from py_src.utilities.get_random_polygon import generateRandomPolygonPoints
 
 polygons = []
 
 for i in range(10):
-    dots = PolygonPlot.generateRandomPolygons(center=(0, 0),
-                                              avg_radius=20,
-                                              irregularity=0.5,
-                                              spikiness=0.5,
-                                              num_vertices=20)
+    dots = generateRandomPolygonPoints(center=(0, 0),
+                                       avg_radius=20,
+                                       irregularity=0.5,
+                                       spikiness=0.5,
+                                       num_vertices=20)
     points_arr = [Point(x, y) for x, y in dots]
     poly = Polygon(points_arr)
     convex_poly = giftWrapConvexHull(poly)
