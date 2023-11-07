@@ -112,3 +112,4 @@ After scanning dependencies and build are finish, you can use it as an extension
       <summary>Smallest Enclosing Disc</summary>
       <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/EnclosingDisc.png width=250 height=250 /></p>     
 </details>
+
