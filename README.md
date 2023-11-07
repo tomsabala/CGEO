@@ -1,5 +1,5 @@
 <p align="center">
-<img src=examples/PlotImages/Logo.png width=350 height=250/>
+<img src=py_src/plot_images/Logo.png width=350 height=250/>
 <p/>
 <p align="center">
 <img src="https://img.shields.io/badge/License-GNU%203.0-green.svg">
@@ -80,7 +80,7 @@ After scanning dependencies and build are finish, you can use it as an extension
 ## Some Nice Examples
 <details>
       <summary>Convex-Hull</summary>
-      <p><img src=examples/PlotImages/convex_hull.png width=250 height=250/> <img src=examples/PlotImages/Convex_Hull002.png width=250 height=250 /></p>
+      <p><img src=py_src/plot_images/convex_hull.png width=250 height=250/> <img src=py_src/plot_images/Convex_Hull002.png width=250 height=250 /></p>
    
    * The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
      
@@ -88,7 +88,7 @@ After scanning dependencies and build are finish, you can use it as an extension
 
 <details>
       <summary>Segement Intersection</summary>
-      <p><img src=examples/PlotImages/Segment_Intersection.png width=250 height=250/></p>
+      <p><img src=py_src/plot_images/Segment_Intersection.png width=250 height=250/></p>
    
    * The input is given as a list of segments, and the algorithms is coloring all segments intersections with blue.
      
@@ -96,7 +96,7 @@ After scanning dependencies and build are finish, you can use it as an extension
 
 <details>
       <summary>Y-Monotone Polygons Decomposition</summary>
-      <p><img src=examples/PlotImages/y_decomposition.png width=250 height=250 /></p>  
+      <p><img src=py_src/plot_images/y_decomposition.png width=250 height=250 /></p>  
          
    * The pink layer is the initial polygon form, and the green layer is the convex hull of the follow polygon.
    * A [reference](https://en.wikipedia.org/wiki/Monotone_polygon) for y-monotone polygons definition.
@@ -105,10 +105,10 @@ After scanning dependencies and build are finish, you can use it as an extension
 
 <details>
       <summary>Basic Polygon Triangulation</summary>
-      <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
+      <p><img src=py_src/plot_images/Ppolygon_Triangulating.jpeg width=250 height=250 /></p>     
 </details>
 
 <details>
       <summary>Smallest Enclosing Disc</summary>
-      <p><img src=https://github.com/tomsabala/CGEO/blob/main/examples/PlotImages/EnclosingDisc.png width=250 height=250 /></p>     
+      <p><img src=py_src/plot_images/EnclosingDisc.png width=250 height=250 /></p>     
 </details>
