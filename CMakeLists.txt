@@ -14,6 +14,8 @@ target_link_libraries(Geo_2D PRIVATE Algorithms2D)
 target_link_libraries(Geo_2D PRIVATE Datastructures2D)
 target_link_libraries(Geo_2D PUBLIC pybind11::module)
 
+pybind11_add_module(Point2D MODULE src/2D/shapes_2D/Point2d.cpp)
+
 install(TARGETS Geo_2D
         PUBLIC_HEADER
         DESTINATION lib

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export workspaceDir=../CGEO
 mkdir build
 cd build
 cmake -DBoost_NO_BOOST_CMAKE=TRUE \
