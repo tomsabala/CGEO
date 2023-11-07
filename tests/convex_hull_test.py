@@ -1,15 +1,18 @@
 import json
 
 from shapely.geometry import Polygon as sPolygon
+import pytest
 
 from py_src.modules.polygon import Polygon, Point
 from py_src.utilities.c_utilities.global_c_utils import grahamConvexHull
 from py_src.utilities.get_random_polygon import generateRandomPolygonPoints, toConvexContour
 
+
 def _getPolygonSizeTests():
     with open('polygon_size_tests.json', 'r') as file:
         polygonSizeTests = json.load(file)
     return polygonSizeTests
+
 
 def _generateRandomPolygon(n: int):
     dots = generateRandomPolygonPoints(center=(0, 0),
