@@ -39,12 +39,18 @@ class Point2D:
     def __gt__(self, other: Point2D) -> bool:
         return self._point.__gt__(other._point)
 
-    def to_dict(self) -> dict:
+    def toDict(self) -> dict:
         return {"x": self.x, "y": self.y}
 
     @classmethod
-    def from_dict(cls, data) -> Point2D:
+    def fromDict(cls, data) -> Point2D:
         return cls(data["x"], data["y"])
+
+    @classmethod
+    def fromCPoint(cls, cPoint: Geo.libShapes_2D.Point):
+        newPoint = cls()
+        newPoint._point = cPoint
+        return newPoint
 
     @property
     def norm(self) -> float:
@@ -63,5 +69,5 @@ class Point2D:
         return self._point.oriePred(q._point, r._point)
 
     @property
-    def point(self):
+    def cPoint(self):
         return self._point

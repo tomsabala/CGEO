@@ -15,15 +15,18 @@ class Segment2D:
             self._segment = Geo.libShapes_2D.Segment(args[0].origin, args[0].target)
         elif len(args) == 2:
             assert(isinstance(args[0], Point) and isinstance(args[1], Point))
-            self._segment = Geo.libShapes_2D.Segment(args[0].point, args[1].point)
+            self._segment = Geo.libShapes_2D.Segment(args[0].cPoint, args[1].cPoint)
         else:
             raise ValueError('too many arguments')
 
     def __eq__(self, other: Segment2D) -> bool:
-        return self._segment.__eq__(other.segment)
+        return self._segment.__eq__(other.cSegment)
 
     def __copy__(self):
         return Segment2D(self.origin, self.target)
+
+    def __str__(self):
+        return str(self._segment)
 
     @property
     def origin(self) -> Geo.libShapes_2D.Point:
@@ -31,7 +34,7 @@ class Segment2D:
 
     @origin.setter
     def origin(self, value: Point | Geo.libShapes_2D.Point) -> None:
-        self._segment.origin = value if isinstance(value, Geo.libShapes_2D.Point) else value.point
+        self._segment.origin = value if isinstance(value, Geo.libShapes_2D.Point) else value.cPoint
 
     @property
     def target(self) -> Geo.libShapes_2D.Point:
@@ -39,7 +42,7 @@ class Segment2D:
 
     @target.setter
     def target(self, value: Point | Geo.libShapes_2D.Point) -> None:
-        self._segment.target = value if isinstance(value, Geo.libShapes_2D.Point) else value.point
+        self._segment.target = value if isinstance(value, Geo.libShapes_2D.Point) else value.cPoint
 
     @property
     def slope(self) -> float:
@@ -50,8 +53,14 @@ class Segment2D:
         return self._segment.getLength()
 
     @property
-    def segment(self) -> Geo.libShapes_2D.Segment:
+    def cSegment(self) -> Geo.libShapes_2D.Segment:
         return self._segment
+
+    @classmethod
+    def fromCSegment(cls, cSegment: Geo.libShapes_2D.Segment):
+        newSegment = cls()
+        newSegment._segment = cSegment
+        return newSegment
 
     def __originX(self) -> float:
         return self.origin.x
@@ -80,24 +89,24 @@ class Segment2D:
             raise TypeError('Invalid argument type. Expected Point or Segment2D.')
 
         if isinstance(other, Point):
-            return self._segment.oriePred(other.point)
+            return self._segment.oriePred(other.cPoint)
 
-        return self._segment.oriePred(other.segment)
+        return self._segment.oriePred(other.cSegment)
 
     def isParallel(self, other: Segment2D) -> bool:
-        return self._segment.isParallel(other.segment)
+        return self._segment.isParallel(other.cSegment)
 
     def isVertical(self, other: Segment2D) -> bool:
-        return self._segment.isVertical(other.segment)
+        return self._segment.isVertical(other.cSegment)
 
     def dist(self, other: Union[Point, Segment2D]) -> float:
         if not isinstance(other, (Point, Segment2D)):
             raise TypeError('Invalid argument type. Expected Point or Segment2D.')
 
         if isinstance(other, Point):
-            return self._segment.dist(other.point)
+            return self._segment.dist(other.cPoint)
 
-        return self._segment.dist(other.segment)
+        return self._segment.dist(other.cSegment)
 
     def isIntersect(self, other: Segment2D) -> bool:
-        return self._segment.isIntersect(other.segment)
+        return self._segment.isIntersect(other.cSegment)

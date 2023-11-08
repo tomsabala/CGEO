@@ -69,32 +69,32 @@ include CMakeFiles/Geo_2D.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Geo_2D.dir/flags.make
 
-CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o: CMakeFiles/Geo_2D.dir/flags.make
-CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o: ../2D/2D_bindings.cpp
-CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o: CMakeFiles/Geo_2D.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tomsabala/workspace/proj/geomtery/CGEO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o -MF CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o.d -o CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o -c /home/tomsabala/workspace/proj/geomtery/CGEO/2D/2D_bindings.cpp
+CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o: CMakeFiles/Geo_2D.dir/flags.make
+CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o: ../src/2D/2D_bindings.cpp
+CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o: CMakeFiles/Geo_2D.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tomsabala/workspace/proj/geomtery/CGEO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o -MF CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o.d -o CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o -c /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/2D_bindings.cpp
 
-CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tomsabala/workspace/proj/geomtery/CGEO/2D/2D_bindings.cpp > CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.i
+CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/2D_bindings.cpp > CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.i
 
-CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tomsabala/workspace/proj/geomtery/CGEO/2D/2D_bindings.cpp -o CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.s
+CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tomsabala/workspace/proj/geomtery/CGEO/src/2D/2D_bindings.cpp -o CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.s
 
 # Object files for target Geo_2D
 Geo_2D_OBJECTS = \
-"CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o"
+"CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o"
 
 # External object files for target Geo_2D
 Geo_2D_EXTERNAL_OBJECTS =
 
-libGeo_2D.so: CMakeFiles/Geo_2D.dir/2D/2D_bindings.cpp.o
+libGeo_2D.so: CMakeFiles/Geo_2D.dir/src/2D/2D_bindings.cpp.o
 libGeo_2D.so: CMakeFiles/Geo_2D.dir/build.make
-libGeo_2D.so: 2D/Algorithms_2D/libAlgorithms2D.so
-libGeo_2D.so: DataStructures/libDatastructures2D.so
-libGeo_2D.so: 2D/Shapes_2D/libShapes2D.so
+libGeo_2D.so: src/2D/algorithms_2D/libAlgorithms2D.so
+libGeo_2D.so: src/data_structures/libDatastructures2D.so
+libGeo_2D.so: src/2D/shapes_2D/libShapes2D.so
 libGeo_2D.so: CMakeFiles/Geo_2D.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tomsabala/workspace/proj/geomtery/CGEO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module libGeo_2D.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Geo_2D.dir/link.txt --verbose=$(VERBOSE)

@@ -11,10 +11,10 @@ using namespace Algorithms2d;
  * @return subset of Points picked from the original polygon, which forms the convex hull.
  * @url https://en.wikipedia.org/wiki/Graham_scan
  */
-Shapes2D::Polygon *ConvexHull::grahamConvexHull(Shapes2D::Polygon poly) {
-    int n = poly.getSize();
+Shapes2D::Polygon *ConvexHull::grahamConvexHull(Shapes2D::Polygon *poly) {
+    int n = poly->getSize();
     /* init sorted vector, result and stack for algorithm */
-    std::vector<Shapes2D::Point2d> sorted_points = sortByX(&poly);
+    std::vector<Shapes2D::Point2d> sorted_points = sortByX(poly);
     std::stack<Shapes2D::Point2d> stack;
     std::vector<Shapes2D::Point2d> res;
 

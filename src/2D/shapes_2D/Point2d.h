@@ -27,7 +27,7 @@ namespace Shapes2D {
 
         /* norm && distances methods */
         double norm() const;
-        double dist(Point2d *p) const noexcept(false);
+        double dist(const Point2d& p) const noexcept(false);
         /**
          * insert few methods of distances such as:
          * dist to segment, dist to circular i.e.

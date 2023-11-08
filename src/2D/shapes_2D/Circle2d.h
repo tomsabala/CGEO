@@ -12,18 +12,18 @@ namespace Shapes2D
         double r;
         Point2d *c;
 
-        static std::pair<double, Point2d*> circleFrom3Points(Point2d *, Point2d *, Point2d *);
+        static std::pair<double, Point2d*> circleFrom3Points(const Point2d&, const Point2d&, const Point2d&);
 
     public:
         /* constructors */
         Circle2d();
         explicit Circle2d(double );
         Circle2d(double, Point2d *);
-        Circle2d(Point2d *, Point2d *);
-        Circle2d(Point2d *, Point2d *, Point2d *);
+        Circle2d(const Point2d& , const Point2d& );
+        Circle2d(const Point2d& , const Point2d& , const Point2d& );
 
         /* getter and setter */
-        double getRadius();
+        double getRadius() const;
         void setRadius(double radius);
         Point2d* getCenter();
         void setCenter(Point2d *p);

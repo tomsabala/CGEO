@@ -142,15 +142,15 @@ std::vector<Shapes2D::Point2d> Shapes2D::Polygon::lexOrder() {
  * get vector of edges by order
  * @return vector of type Segment2d
  */
-std::vector<Shapes2D::Segment2d> Shapes2D::Polygon::getEdges() {
-    std::vector<Shapes2D::Segment2d> res;
+std::vector<Shapes2D::Segment2d *> Shapes2D::Polygon::getEdges() {
+    std::vector<Shapes2D::Segment2d *> res;
     for(int i=0; i<getSize(); i++) {
         Segment2d* s;
         if (i == getSize()-1)
             s = new Segment2d(&vertices.back(), &vertices.front());
         else
             s = new Segment2d(getByIndex(i), getByIndex(i+1));
-        res.push_back(*s);
+        res.push_back(s);
     }
 
     return res;
@@ -301,13 +301,13 @@ int Shapes2D::Polygon::getLeftMost_index() {
  */
 bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
     int res = 0;
-    std::vector<Segment2d> edges = getEdges();
+    std::vector<Segment2d *> edges = getEdges();
 
-    for(Segment2d e : edges)
+    for(const Segment2d *e : edges)
     {
-        if (e.getUpper()->getY() > p->getY() && e.getLower()->getY() < p->getY())
+        if (e->getUpper()->getY() > p->getY() && e->getLower()->getY() < p->getY())
         {
-            if(e.getLower()->oriePred(e.getUpper(), p) > 0)
+            if(e->getLower()->oriePred(e->getUpper(), p) > 0)
                 res = !res;
         }
     }
@@ -563,9 +563,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     return res;
 }
 
-Shapes2D::Polygon::~Polygon() {
-
-}
+Shapes2D::Polygon::~Polygon() = default;
 
 void Shapes2D::Polygon::splice(int pos, Polygon &other, int first, int last) {
     const auto& pos_it = vertices.begin()+pos;

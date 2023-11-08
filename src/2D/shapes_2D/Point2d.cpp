@@ -75,12 +75,9 @@ double Point2d::norm() const {
  * @param p point2d type object
  * @return double value sqrt((x1-x2)^2 + (y1-y2)^2)
  */
-double Point2d::dist(Shapes2D::Point2d *p) const {
-    if(p== nullptr)
-        throw(Exception2D("null pointer"));
-
+double Point2d::dist(const Shapes2D::Point2d& p) const {
     double ax = this->getX(), ay = this->getY();
-    double bx = p->getX(), by = p->getY();
+    double bx = p.getX(), by = p.getY();
 
     return std::sqrt(pow(ax-bx, 2) + pow(ay-by, 2));
 }
@@ -192,5 +189,5 @@ bool Point2d::_gt_(Point2d &p) const {
     return this->getY()>p.getY()+eps || (std::abs(this->getY() - p.getY()) <= eps && this->getX() > p.getX());
 }
 
-Point2d::~Point2d() {}
+Point2d::~Point2d() = default;
 

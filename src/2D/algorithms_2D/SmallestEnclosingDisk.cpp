@@ -1,6 +1,6 @@
 
 #include <random>
-#include <ctime>
+#include <algorithm>
 #include "SmallestEnclosingDisk.h"
 
 using namespace Algorithms2d;
@@ -14,25 +14,23 @@ SmallestEnclosingDisk::SmallestEnclosingDisk() = default;
  * @param points : set of points in the plane
  * @return a Circle in the plane.
  */
-Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2d *> points)
+Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2d >& points)
 {
 
-    srand((unsigned) time(nullptr));
-    std::vector<int> permutation = shuffle((int)points.size());
+    std::shuffle(points.begin(), points.end(), std::mt19937(std::random_device()()));
 
-    /* init circle */
-    auto *circle = new Shapes2D::Circle2d(points[permutation[0]],
-                                                        points[permutation[1]]);
+    /* init ret */
+    auto *ret = new Shapes2D::Circle2d(points.at(0),
+                                       points.at(1));
 
 
-    for (int i=2; i<permutation.size(); ++i)
-        if (circle->pointContains(points[permutation[i]]) == -1)
+    for (int i=2; i<points.size(); ++i)
+        if (ret->pointContains(&points.at(i)) == -1)
         {
-            delete circle;
-            circle = findDisc_withOnePoint(points, permutation, i);
+            std::swap(*ret, *findDisc_withOnePoint(points, i));
         }
 
-    return circle;
+    return ret;
 }
 
 /**
@@ -44,22 +42,21 @@ Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2
  * @return a circle that includes all points with indices in permutation
  */
 Shapes2D::Circle2d *
-SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d *> points, std::vector<int> permutation, int I)
+SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d >& points, int I)
 {
 
     /* init circle */
-    auto *circle = new Shapes2D::Circle2d(points[permutation[0]],
-                                                        points[permutation[I]]);
+    auto *circle = new Shapes2D::Circle2d(points.at(0),
+                                                        points.at(I));
 
     for (int i=1; i<I; ++i)
-        if (circle->pointContains(points[permutation[i]]) == -1)
+        if (circle->pointContains(&points.at(i)) == -1)
         {
-            delete circle;
-            circle = findDisc_withTwoPoints(points, permutation, i, permutation[I]);
-        }
+            std::swap(*circle, *findDisc_withTwoPoints(points, i, I));
+         }
+
 
     return circle;
-
 }
 
 /**
@@ -71,34 +68,14 @@ SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d *> po
  * @return a circle that includes all points with indices in permutation
  */
 Shapes2D::Circle2d *
-SmallestEnclosingDisk::findDisc_withTwoPoints(std::vector<Shapes2D::Point2d *> points,
-                                              std::vector<int> permutation, int I, int J) {
+SmallestEnclosingDisk::findDisc_withTwoPoints(std::vector<Shapes2D::Point2d >& points,
+                                              int I, int J) {
 
-    auto *circ = new Shapes2D::Circle2d(points[permutation[I]], points[J]);
+    auto *circ = new Shapes2D::Circle2d(points.at(I), points.at(J));
 
     for (int i=0; i<I; i++)
-        if (circ->pointContains(points[permutation[i]]) == -1)
-            circ->setCircle(points[permutation[I]], points[J], points[permutation[i]]);
+        if (circ->pointContains(&points.at(i)) == -1)
+            circ->setCircle(&points.at(I), &points.at(J), &points.at(i));
 
     return circ;
 }
-
-std::vector<int> SmallestEnclosingDisk::shuffle(int N) {
-    int r, tmp;
-
-    std::vector<int> res(N, 0);
-    for (int i=0; i<N; i++)
-        res[i] = i;
-
-    for (int i=0; i<N; i++)
-    {
-        r = (rand()%(N-i)) + i;
-        tmp = res[i];
-        res[i] = res[r];
-        res[r] = tmp;
-    }
-
-    return res;
-}
-
-

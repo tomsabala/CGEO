@@ -1,20 +1,18 @@
-from build import libGeo_2D as Geo
-from py_src.plots_2d import polygon_plot
+from py_src.plots_2d import polygon_plot as PolygonPlot
+from py_src.modules.point_2d import Point2D as Point
+from py_src.modules.polygon import Polygon
+from py_src.utilities.get_random_polygon import generateRandomPolygonPoints
 
-
-Point = Geo.libShapes_2D.Point
-Polygon = Geo.libShapes_2D.Polygon
-
-dots = PolygonPlot.generateRandomPolygons(center=(0, 0),
-                                          avg_radius=10,
-                                          irregularity=0.2,
-                                          spikiness=0.5,
-                                          num_vertices=20)
+dots = generateRandomPolygonPoints(center=(0, 0),
+                                   avg_radius=10,
+                                   irregularity=0.2,
+                                   spikiness=0.5,
+                                   num_vertices=20)
 
 points_arr = [Point(x, y) for x, y in dots]
 poly = Polygon(points_arr)
 
-sub_polygons = Polygon.decomposeY_Monotone(poly)
+sub_polygons = poly.decomposeToYMonotone()
 
 sub_polygons_points = []
 for p in sub_polygons:

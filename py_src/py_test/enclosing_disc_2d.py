@@ -1,27 +1,19 @@
-from build import libGeo_2D as Geo
 import random
 import py_src.plots_2d.circle_plot as CirclePlot
-
-
-triUtility = Geo.libAlgorithms_2D.TriangulationUtils()
-discUtils = Geo.EnclosingDistUtils()
-Point = Geo.libShapes_2D.Point
+from py_src.modules.point_2d import Point2D as Point
+from py_src.utilities.c_utilities.global_c_utils import enclosingDisc
 
 
 def generatePoints(n=10):
     _points = []
     for i in range(n):
-        points.append((random.randint(-10, 10), random.randint(-10, 10)))
+        _points.append(Point(random.randint(-10, 10), random.randint(-10, 10)))
 
     return _points
 
 
-points_vector = generatePoints(100)
+points_vector = generatePoints(50)
 
-points = []
-for p in points_vector:
-    points.append(Point(p[0], p[1]))
+disc = enclosingDisc(points_vector)
 
-disc = discUtils.findDisc(points)
-
-CirclePlot.PlotCircles().plotEnclosingDisc(points, disc)
+CirclePlot.PlotCircles().plotEnclosingDisc(points_vector, disc)

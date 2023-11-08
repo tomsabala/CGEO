@@ -24,21 +24,21 @@ namespace Shapes2D {
         Point2d* getTarget() const;
         Point2d* getUpper() const;
         Point2d* getLower() const;
-        void setUpper(Point2d p) const;
-        void setLower(Point2d p) const;
-        void setOrigin(Point2d *new_p) noexcept(false);
-        void setTarget(Point2d *new_p) noexcept(false);
+        void setUpper(const Point2d& p) const;
+        void setLower(const Point2d& p) const;
+        void setOrigin(const Point2d& new_p) noexcept(false);
+        void setTarget(const Point2d& new_p) noexcept(false);
         double getSlope();
-        double getLength();
+        double getLength() const;
 
         /* shifting methods */
-        void adder(Point2d *p) noexcept(false);
-        void rotate(double &deg);
+        void adder(Point2d *p) const noexcept(false);
+        void rotate(double &deg) const;
 
         /* built-in methods */
-        bool _eq_(Segment2d *s) noexcept(false);
-        bool _lt_(Segment2d *s) noexcept(false);
-        bool _gt_(Segment2d *s) noexcept(false);
+        bool _eq_(Segment2d *s) const noexcept(false);
+        bool _lt_(Segment2d *s) const noexcept(false);
+        bool _gt_(Segment2d *s) const noexcept(false);
         void copySegment(Segment2d *s) noexcept(false);
         std::string toStr() const;
 
@@ -51,12 +51,12 @@ namespace Shapes2D {
         bool isVertical(Segment2d *s) noexcept(false);
         double dist(Segment2d *s) noexcept(false);
         double dist(Point2d *p) noexcept(false);
-        bool isIntersect(Segment2d *s);
-        Point2d* getIntersect(Segment2d *s);
+        bool isIntersect(Segment2d *s) const;
+        Point2d* getIntersect(Segment2d *s) const;
         bool containPoint(Point2d p) const;
 
-        double getXfromY(double y);
-        double getYfromX(double x);
+        double getXfromY(double y) const;
+        double getYfromX(double x) const;
         ~Segment2d();
     };
 }
