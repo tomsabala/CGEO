@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared -Wl,-soname,libShapes2D.so -o libShapes2D.so CMakeFiles/Shapes2D.dir/Circle2d.cpp.o CMakeFiles/Shapes2D.dir/Line2d.cpp.o CMakeFiles/Shapes2D.dir/Point2d.cpp.o CMakeFiles/Shapes2D.dir/Polygon.cpp.o CMakeFiles/Shapes2D.dir/Segment2d.cpp.o CMakeFiles/Shapes2D.dir/Triangle2d.cpp.o CMakeFiles/Shapes2D.dir/__/Exception2D.cpp.o 
