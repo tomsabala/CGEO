@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -flto -shared  -o Point2D.cpython-310-x86_64-linux-gnu.so CMakeFiles/Point2D.dir/src/2D/shapes_2D/Point2d.cpp.o 
