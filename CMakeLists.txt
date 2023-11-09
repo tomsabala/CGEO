@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 project(CGEO C CXX)
 set(CMAKE_CXX_STANDARD 14)
 
-add_subdirectory( extern/pybind11 )
+add_subdirectory( extern/pybind11 EXCLUDE_FROM_ALL)
 add_subdirectory(src/2D/algorithms_2D)
 add_subdirectory(src/data_structures)
 add_subdirectory(src/2D/shapes_2D)
