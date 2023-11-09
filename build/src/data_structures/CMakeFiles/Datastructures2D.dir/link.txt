@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libDatastructures2D.so -o libDatastructures2D.so CMakeFiles/Datastructures2D.dir/SegmentBalancedTree.cpp.o  -Wl,-rpath,/home/tomsabala/workspace/proj/geomtery/CGEO/build/src/2D/shapes_2D ../2D/shapes_2D/libShapes2D.so 
