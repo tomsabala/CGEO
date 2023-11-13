@@ -1,5 +1,5 @@
 
-![](logo.png)
+![](https://github.com/tomsabala/CGEO/raw/main/logo.png)
 
 [![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)](https://img.shields.io/badge/License-GNU%203.0-green.svg)
 [![](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social)](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social)
