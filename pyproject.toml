@@ -1,24 +1,18 @@
-[build-system]
-requires = [
-  "setuptools>=42",
-  "pybind11>=2.10.0",
+[project]
+name = "cgeo"
+version = "0.0.1"
+authors = [
+  { name="Tom Sabala", email="sabala144@gmail.com" },
 ]
-build-backend = "setuptools.build_meta"
-
-
-[tool.cibuildwheel]
-test-command = "python {project}/tests/test.py"
-test-skip = "*universal2:arm64"
-
-
-[tool.ruff]
-target-version = "py37"
-
-[tool.ruff.lint]
-extend-select = [
-  "B",   # flake8-bugbear
-  "I",   # isort
-  "PGH", # pygrep-hooks
-  "RUF", # Ruff-specific
-  "UP",  # pyupgrade
+description = "Open source package for computational geometry"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License (GPL)",
+  "Operating System :: Unix",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/tomsabala/CGEO"
+"Bug Tracker" = "https://github.com/tomsabala/CGEO/issues"
