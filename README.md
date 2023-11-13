@@ -1,13 +1,12 @@
-<p align="center">
-![](https://github.com/tomsabala/CGEO/blob/main/py_src/plot_images/Logo.png)
-<p/>
-<p align="center">
-<img src="https://img.shields.io/badge/License-GNU%203.0-green.svg">
-   <img src="https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social">
-   <img src="https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green">
-   <img src="https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue">
-   <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg">
-<p/>
+
+[![](https://github.com/tomsabala/CGEO/blob/main/py_src/plot_images/Logo.png)]()
+
+[![License](https://img.shields.io/badge/License-GNU%203.0-green.svg)](https://img.shields.io/badge/License-GNU%203.0-green.svg)
+[![](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social)](https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social)
+[![Computational](https://img.shields.io/static/v1?label=Computational&message=Geometry&color=green)]()
+[![Made with](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)](https://img.shields.io/static/v1?label=Made%20With&message=Python&color=blue)
+[![Maintained?](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
+
 
 # CGEO
 
@@ -76,7 +75,7 @@ In order to run your `file.py` program:
 
 After scanning dependencies and build are finish, you can use it as an extension in your own python environment.
 
-
+<!--- 
 ## Some Nice Examples
 <details>
       <summary>Convex-Hull</summary>
@@ -113,3 +112,4 @@ After scanning dependencies and build are finish, you can use it as an extension
       <p>![](https://github.com/tomsabala/CGEO/blob/main/py_src/plot_images/EnclosingDisc.png)</p>     
 </details>
 
+-- >
