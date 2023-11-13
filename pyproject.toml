@@ -1,6 +1,6 @@
 [project]
 name = "cgeo"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Tom Sabala", email="sabala144@gmail.com" },
 ]
