@@ -16,3 +16,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/tomsabala/CGEO"
 "Bug Tracker" = "https://github.com/tomsabala/CGEO/issues"
+
+[tool.setuptools]
+packages = ["cgeo"]
+package-dir = {"" = "py_src"}
