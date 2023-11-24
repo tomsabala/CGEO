@@ -1,6 +1,6 @@
 from __future__ import annotations
 from build import libGeo_2D as Geo
-from py_src.utilities.error_handling.error_utilities import *
+from py_src.cgeo.utilities.error_handling.error_utilities import *
 
 
 @handle_errors_for_class

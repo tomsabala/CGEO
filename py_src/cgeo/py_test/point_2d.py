@@ -1,4 +1,4 @@
-from py_src.modules.point_2d import Point2D as Point
+from py_src.cgeo.modules.point_2d import Point2D as Point
 from copy import copy
 
 # constructors

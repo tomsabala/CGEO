@@ -1,4 +1,4 @@
-from py_src.modules.segment_2d import Segment2D as Segment, Point
+from py_src.cgeo.modules.segment_2d import Segment2D as Segment, Point
 
 # Constructors
 s1 = Segment()

@@ -1,7 +1,7 @@
 import random
-import py_src.plots_2d.circle_plot as CirclePlot
-from py_src.modules.point_2d import Point2D as Point
-from py_src.utilities.c_utilities.global_c_utils import enclosingDisc
+import py_src.cgeo.plots_2d.circle_plot as CirclePlot
+from py_src.cgeo.modules.point_2d import Point2D as Point
+from py_src.cgeo.utilities.c_utilities.global_c_utils import enclosingDisc
 
 
 def generatePoints(n=10):

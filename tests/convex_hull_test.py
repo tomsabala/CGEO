@@ -1,11 +1,10 @@
 import json
 
 from shapely.geometry import Polygon as sPolygon
-import pytest
 
-from py_src.modules.polygon import Polygon, Point
-from py_src.utilities.c_utilities.global_c_utils import grahamConvexHull
-from py_src.utilities.get_random_polygon import generateRandomPolygonPoints, toConvexContour
+from py_src.cgeo.modules.polygon import Polygon, Point
+from py_src.cgeo.utilities.c_utilities.global_c_utils import grahamConvexHull
+from py_src.cgeo.utilities.get_random_polygon import generateRandomPolygonPoints, toConvexContour
 
 
 def _getPolygonSizeTests():

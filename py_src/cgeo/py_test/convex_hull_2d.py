@@ -1,6 +1,6 @@
-from py_src.plots_2d import polygon_plot as PolygonPlot
-from py_src.utilities.c_utilities.global_c_utils import *
-from py_src.utilities.get_random_polygon import generateRandomPolygonPoints
+from py_src.cgeo.plots_2d import polygon_plot as PolygonPlot
+from py_src.cgeo.utilities.c_utilities.global_c_utils import *
+from py_src.cgeo.utilities.get_random_polygon import generateRandomPolygonPoints
 
 polygons = []
 
