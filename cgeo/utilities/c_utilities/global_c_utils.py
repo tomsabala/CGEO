@@ -1,9 +1,9 @@
 from build import libGeo_2D as Geo
-from py_src.cgeo.modules.polygon import Polygon
-from py_src.cgeo.modules.segment_2d import Segment2D as Segment
-from py_src.cgeo.modules.point_2d import Point2D as Point
-from py_src.cgeo.modules.triangle import Triangle
-from py_src.cgeo.modules.circle import Circle
+from cgeo.modules.polygon import Polygon
+from cgeo.modules.segment_2d import Segment2D as Segment
+from cgeo.modules.point_2d import Point2D as Point
+from cgeo.modules.triangle import Triangle
+from cgeo.modules.circle import Circle
 
 
 def grahamConvexHull(polygon: Polygon) -> Polygon:

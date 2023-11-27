@@ -1,7 +1,7 @@
-from py_src.cgeo.plots_2d import segments_plot as SegmentsPlot
-from py_src.cgeo.modules.point_2d import Point2D as Point
-from py_src.cgeo.modules.segment_2d import Segment2D as Segment
-from py_src.cgeo.utilities.c_utilities.global_c_utils import segmentIntersection
+from cgeo.plots_2d import segments_plot as SegmentsPlot
+from cgeo.modules.point_2d import Point2D as Point
+from cgeo.modules.segment_2d import Segment2D as Segment
+from cgeo.utilities.c_utilities.global_c_utils import segmentIntersection
 
 segments_coord = SegmentsPlot.generate_random_segments(20)
 

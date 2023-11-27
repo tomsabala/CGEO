@@ -1,8 +1,8 @@
-from py_src.cgeo.plots_2d import polygon_plot as PolygonPlot
-from py_src.cgeo.utilities.c_utilities.global_c_utils import triangulate
-from py_src.cgeo.modules.point_2d import Point2D as Point
-from py_src.cgeo.modules.polygon import Polygon
-from py_src.cgeo.utilities.get_random_polygon import generateRandomPolygonPoints
+from cgeo.plots_2d import polygon_plot as PolygonPlot
+from cgeo.utilities.c_utilities.global_c_utils import triangulate
+from cgeo.modules.point_2d import Point2D as Point
+from cgeo.modules.polygon import Polygon
+from cgeo.utilities.get_random_polygon import generateRandomPolygonPoints
 
 
 plt = PolygonPlot.PlotPolygon()

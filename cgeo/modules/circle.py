@@ -1,10 +1,10 @@
 from __future__ import annotations
 from build import libGeo_2D as Geo
-from py_src.cgeo.utilities.error_handling.error_utilities import handle_errors_for_class
-from py_src.cgeo.modules.segment_2d import Segment2D as Segment
-from py_src.cgeo.modules.point_2d import Point2D as Point
-from py_src.cgeo.modules.triangle import Triangle
-from py_src.cgeo.modules.polygon import Polygon
+from cgeo.utilities.error_handling.error_utilities import handle_errors_for_class
+from cgeo.modules.segment_2d import Segment2D as Segment
+from cgeo.modules.point_2d import Point2D as Point
+from cgeo.modules.triangle import Triangle
+from cgeo.modules.polygon import Polygon
 
 
 @handle_errors_for_class

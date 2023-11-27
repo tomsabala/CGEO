@@ -1,7 +1,7 @@
-from py_src.cgeo.plots_2d import polygon_plot as PolygonPlot
-from py_src.cgeo.modules.point_2d import Point2D as Point
-from py_src.cgeo.modules.polygon import Polygon
-from py_src.cgeo.utilities.get_random_polygon import generateRandomPolygonPoints
+from cgeo.plots_2d import polygon_plot as PolygonPlot
+from cgeo.modules.point_2d import Point2D as Point
+from cgeo.modules.polygon import Polygon
+from cgeo.utilities.get_random_polygon import generateRandomPolygonPoints
 
 dots = generateRandomPolygonPoints(center=(0, 0),
                                    avg_radius=10,
