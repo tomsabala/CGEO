@@ -1,12 +1,13 @@
 from __future__ import annotations
-from build import libGeo_2D as Geo
 from cgeo.utilities.error_handling.error_utilities import *
+
+from cgeo import _cgeo
 
 
 @handle_errors_for_class
 class Point2D:
     def __init__(self, x=0.0, y=0.0):
-        self._point = Geo.libShapes_2D.Point(x, y)
+        self._point = _cgeo.libShapes_2D.Point(x, y)
 
     @property
     def x(self) -> float:
@@ -47,7 +48,7 @@ class Point2D:
         return cls(data["x"], data["y"])
 
     @classmethod
-    def fromCPoint(cls, cPoint: Geo.libShapes_2D.Point):
+    def fromCPoint(cls, cPoint: _cgeo.libShapes_2D.Point):
         newPoint = cls()
         newPoint._point = cPoint
         return newPoint

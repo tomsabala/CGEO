@@ -1,21 +1,22 @@
 from __future__ import annotations
-from build import libGeo_2D as Geo
 from cgeo.utilities.error_handling.error_utilities import handle_errors_for_class
 from cgeo.modules.segment_2d import Segment2D as Segment
 from cgeo.modules.point_2d import Point2D as Point
 from cgeo.modules.triangle import Triangle
 from cgeo.modules.polygon import Polygon
 
+from cgeo import _cgeo
+
 
 @handle_errors_for_class
 class Circle:
     def __init__(self, r=0.0, center=Point(0, 0)):
-        self._circle = Geo.libShapes_2D.Circle(r, center.cPoint)
+        self._circle = _cgeo.libShapes_2D.Circle(r, center.cPoint)
 
     @classmethod
     def fromTriangle(cls, triangle: Triangle) -> Circle:
         newCircle = cls()
-        cCircle = Geo.libShapes_2D.Circle(triangle.a.cPoint, triangle.b.cPoint, triangle.c.cPoint)
+        cCircle = _cgeo.libShapes_2D.Circle(triangle.a.cPoint, triangle.b.cPoint, triangle.c.cPoint)
         newCircle._circle = cCircle
         return newCircle
 
@@ -28,11 +29,11 @@ class Circle:
         return Point.fromCPoint(self._circle.center)
 
     @property
-    def cCircle(self) -> Geo.libShapes_2D.Circle:
+    def cCircle(self) -> _cgeo.libShapes_2D.Circle:
         return self._circle
 
     @classmethod
-    def fromCCircle(cls, cCircle: Geo.libShapes_2D.Circle) -> Circle:
+    def fromCCircle(cls, cCircle: _cgeo.libShapes_2D.Circle) -> Circle:
         newCircle = cls()
         newCircle._circle = cCircle
         return newCircle

@@ -1,10 +1,10 @@
 from __future__ import annotations
-from build import libGeo_2D as Geo
 from cgeo.utilities.get_vector_type import getVectorType
 from cgeo.utilities.error_handling.error_utilities import handle_errors_for_class
 from cgeo.modules.point_2d import Point2D as Point
 from cgeo.modules.segment_2d import Segment2D as Segment
 
+from cgeo import _cgeo
 
 @handle_errors_for_class
 class Polygon:
@@ -12,14 +12,14 @@ class Polygon:
         if args is None:
             args = []
         if len(args) == 0:
-            self._polygon = Geo.libShapes_2D.Polygon()
+            self._polygon = _cgeo.libShapes_2D.Polygon()
         elif getVectorType(args) != Point.__name__:
             raise TypeError('invalid argument')
         else:
-            self._polygon = Geo.libShapes_2D.Polygon([p.cPoint for p in args])
+            self._polygon = _cgeo.libShapes_2D.Polygon([p.cPoint for p in args])
 
     @property
-    def cPolygon(self) -> Geo.libShapes_2D.Polygon:
+    def cPolygon(self) -> _cgeo.libShapes_2D.Polygon:
         return self._polygon
 
     @property
@@ -39,7 +39,7 @@ class Polygon:
         return self._polygon.isY_Monotone()
 
     @classmethod
-    def fromCPolygon(cls, cPolygon: Geo.libShapes_2D.Polygon) -> Polygon:
+    def fromCPolygon(cls, cPolygon: _cgeo.libShapes_2D.Polygon) -> Polygon:
         newPolygon = cls()
         newPolygon._polygon = cPolygon
         return newPolygon
