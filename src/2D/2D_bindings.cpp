@@ -9,7 +9,7 @@ double round_to(double value, double precision = 1.0)
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(libGeo_2D, h) {
+PYBIND11_MODULE(EXTENSION_NAME, h) {
     h.doc() = "2D geometric classes binding to python";
 
     auto h_shapes = h.def_submodule("libShapes_2D", "This is shapes lib");
