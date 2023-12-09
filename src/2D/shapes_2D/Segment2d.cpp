@@ -85,7 +85,7 @@ void Segment2d::setUpper(const Point2d& p) const {
         throw Exception2D("an error occurred\n");
 
     new_point = new Point2d(p.getX(), p.getY());
-    if(this->getUpper()->_eq_(this->getTarget())){
+    if(this->getUpper() == this->getTarget()){
         this->target->setX(new_point->getX());
         this->target->setY(new_point->getY());
     } else {
@@ -105,7 +105,7 @@ void Segment2d::setLower(const Point2d& p) const {
         throw Exception2D("an error occurred\n");
 
     new_point = new Point2d(p.getX(), p.getY());
-    if(this->getLower()->_eq_(this->getTarget())){
+    if(this->getLower() == this->getTarget()) {
         this->target->setX(new_point->getX());
         this->target->setY(new_point->getY());
     } else {
@@ -145,8 +145,8 @@ double Segment2d::getLength() const {
 void Segment2d::adder(Point2d *p) const noexcept(false) {
     Point2d *o=this->getOrigin(), *t=this->getTarget();
     try {
-        o->adder(p);
-        t->adder(p);
+        o->adder(*p);
+        t->adder(*p);
     } catch (Exception2D &e) {
         throw e;
     }
@@ -157,7 +157,7 @@ void Segment2d::adder(Point2d *p) const noexcept(false) {
  * @param deg double type degree
  */
 void Segment2d::rotate(double &deg) const {
-    this->getTarget()->rotate(deg, this->getOrigin());
+    this->getTarget()->rotate(deg, *this->getOrigin());
 }
 
 /**
@@ -168,7 +168,7 @@ void Segment2d::rotate(double &deg) const {
 bool Segment2d::_eq_(Segment2d *s) const noexcept(false) {
     if (s == nullptr)
         throw(Exception2D("null pointer"));
-    return this->getOrigin()->_eq_(s->getOrigin()) && this->getTarget()->_eq_(s->getTarget());
+    return this->getOrigin() == s->getOrigin() && this->getTarget() == s->getTarget();
 }
 
 /**
@@ -211,9 +211,9 @@ void Segment2d::copySegment(Segment2d *s) noexcept(false) {
  * @return double value
  */
 double Segment2d::oriePred(Segment2d *s) const noexcept(false) {
-    if(s == nullptr || !s->getOrigin()->_eq_(this->getOrigin()))
+    if(s == nullptr || s->getOrigin() != this->getOrigin())
         throw (Exception2D("s is either null pointer or the two segment dont collide at the origin"));
-    return this->getOrigin()->oriePred(this->getTarget(), s->getTarget());
+    return this->getOrigin()->oriePred(*this->getTarget(), *s->getTarget());
 }
 
 /**
@@ -223,7 +223,7 @@ double Segment2d::oriePred(Segment2d *s) const noexcept(false) {
  */
 double Segment2d::oriePred(Point2d *p) const noexcept(false) {
     try {
-        return this->getOrigin()->oriePred(this->getTarget(), p);
+        return this->getOrigin()->oriePred(*this->getTarget(), *p);
     } catch (Exception2D &e){
         throw e;
     }
@@ -315,9 +315,9 @@ bool Segment2d::isIntersect(Segment2d *s) const {
 }
 
 Point2d *Segment2d::getIntersect(Segment2d *s) const {
-    if (this->getUpper()->_eq_(s->getUpper()) || this->getLower()->_eq_(s->getUpper()))
+    if (this->getUpper() == s->getUpper() || this->getLower() == s->getUpper())
         return s->getUpper();
-    if (this->getUpper()->_eq_(s->getLower()) || this->getLower()->_eq_(s->getLower()))
+    if (this->getUpper() == s->getLower() || this->getLower() == s->getLower())
         return s->getLower();
 
     if(this->isIntersect(s))

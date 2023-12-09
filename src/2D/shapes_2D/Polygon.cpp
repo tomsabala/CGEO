@@ -170,9 +170,9 @@ int Shapes2D::Polygon::getSize() {
 bool Shapes2D::Polygon::isConvex() {
     int n = getSize();
     if (n <= 2) return true;
-    bool step, sign = getByIndex(0)->oriePred(getByIndex(1), getByIndex(2)) > 0;
+    bool step, sign = getByIndex(0)->oriePred(*getByIndex(1), *getByIndex(2)) > 0;
     for(int i=0; i<n; i++) {
-        step = getByIndex(i%n)->oriePred(getByIndex((i+1)%n), getByIndex((i+2)%n)) > 0;
+        step = getByIndex(i%n)->oriePred(*getByIndex((i+1)%n), *getByIndex((i+2)%n)) > 0;
         if (step != sign) {
             return false;
         }
@@ -307,7 +307,7 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
     {
         if (e->getUpper()->getY() > p->getY() && e->getLower()->getY() < p->getY())
         {
-            if(e->getLower()->oriePred(e->getUpper(), p) > 0)
+            if(e->getLower()->oriePred(*e->getUpper(), *p) > 0)
                 res = !res;
         }
     }
@@ -336,7 +336,7 @@ int Shapes2D::Polygon::next_InnerCusp(Shapes2D::Polygon *poly, bool upper)
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() > b->getY() && c->getY() > b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -348,7 +348,7 @@ int Shapes2D::Polygon::next_InnerCusp(Shapes2D::Polygon *poly, bool upper)
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() < b->getY() && c->getY() < b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -435,7 +435,7 @@ int Shapes2D::Polygon::findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, i
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() < b->getY() && c->getY() < b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -470,7 +470,7 @@ int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, in
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() > b->getY() && c->getY() > b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;

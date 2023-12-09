@@ -32,7 +32,7 @@ Line2d::Line2d(double m, double x, double y, bool is_vertical)
  * constructor with two points
  */
 Line2d::Line2d(Shapes2D::Point2d *point1, Shapes2D::Point2d *point2) noexcept(false){
-    if (point1->_eq_(point2))
+    if (point1 == point2)
         throw (Exception2D("two points are equal\n"));
     if (std::abs(point1->getX() - point2->getX()) <= eps){
         slope = 0;
