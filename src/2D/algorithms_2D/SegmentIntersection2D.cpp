@@ -264,7 +264,7 @@ SegmentIntersection2d::findInteriorMap(std::multimap<Shapes2D::Point2d *, int, e
 
 bool SegmentIntersection2d::isInterior(Shapes2D::Segment2d *s, Shapes2D::Point2d *p) {
     if(!s->containPoint(*p)) return false; /* point is not on the segment */
-    return !s->getUpper()->_eq_(p) && !s->getLower()->_eq_(p); /* check that the point is truly interior */
+    return s->getUpper() != p && s->getLower() != p; /* check that the point is truly interior */
 }
 
 

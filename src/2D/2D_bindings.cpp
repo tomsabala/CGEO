@@ -21,8 +21,8 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
             .def(py::init<double, double>(), "standard constructor")
             .def_property("x", &Shapes2D::Point2d::getX, &Shapes2D::Point2d::setX)
             .def_property("y", &Shapes2D::Point2d::getY, &Shapes2D::Point2d::setY)
-            .def("copyPoint", &Shapes2D::Point2d::copyPoint, "copy point coordinates",
-            py::arg("point"))
+//            .def("copyPoint", &Shapes2D::Point2d::copyPoint, "copy point coordinates",
+//            py::arg("point"))
             .def("norm", &Shapes2D::Point2d::norm, "calculate point norm")
             .def("dist", &Shapes2D::Point2d::dist, "calculate distance to another point",
             py::arg("point"))
@@ -41,16 +41,16 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
                 ret_y = ret_y.substr(0, ret_y.find('.')+3);
                 r += ret_y;
                 r += ")";
-                return r;})
-            .def("__lt__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._lt_(q);})
-            .def("__gt__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._gt_(q);})
-            .def("__eq__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._eq_(&q);});
+                return r;});
+//            .def("__lt__",
+//                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
+//                     return p._lt_(q);})
+//            .def("__gt__",
+//                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
+//                     return p._gt_(q);})
+//            .def("__eq__",
+//                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
+//                     return p._eq_(&q);});
 
     py::class_<Shapes2D::Segment2d>(h_shapes, "Segment")
             .def(py::init<>(), "empty constructor")
