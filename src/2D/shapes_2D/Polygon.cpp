@@ -79,9 +79,7 @@ Shapes2D::Point2d* Shapes2D::Polygon::getByIndex(int i) {
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMin() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLexMin_index());
     return res;
 }
@@ -104,9 +102,7 @@ int Shapes2D::Polygon::getLexMin_index() {
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMax() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLexMax_index());
     return res;
 }
@@ -244,9 +240,7 @@ std::vector<Shapes2D::Point2d> Shapes2D::Polygon::getVertices() {
 Shapes2D::Point2d *Shapes2D::Polygon::getRightMost() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getRightMost_index());
     return res;
 }
@@ -272,9 +266,7 @@ int Shapes2D::Polygon::getRightMost_index() {
 Shapes2D::Point2d *Shapes2D::Polygon::getLeftMost() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLeftMost_index());
     return res;
 }
@@ -305,9 +297,9 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
 
     for(const Segment2d *e : edges)
     {
-        if (e->getUpper()->getY() > p->getY() && e->getLower()->getY() < p->getY())
+        if (e->getUpper().getY() > p->getY() && e->getLower().getY() < p->getY())
         {
-            if(e->getLower()->oriePred(*e->getUpper(), *p) > 0)
+            if(e->getLower().oriePred(e->getUpper(), *p) > 0)
                 res = !res;
         }
     }
@@ -496,8 +488,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     if (downInnerCusp != -1)
     {
         int u = findDiagonalFromDownInnerCusp(poly, downInnerCusp);
-        if (u == -1)
-            throw (Exception2D("un expected error occurred\n"));
+
         Shapes2D::Polygon *poly1, *poly2;
         std::vector<Shapes2D::Point2d *> poly1_points, poly2_points;
 
@@ -529,8 +520,6 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     if (upperInnerCusp != -1)
     {
         int u = findDiagonalFromUpperInnerCusp(poly, upperInnerCusp);
-        if (u == -1)
-            throw (Exception2D("un expected error occurred\n"));
 
         Shapes2D::Polygon *poly1, *poly2;
         std::vector<Shapes2D::Point2d *> poly1_points, poly2_points;

@@ -143,9 +143,7 @@ Shapes2D::Polygon *ConvexHull::giftWrapConvexHull(Shapes2D::Polygon poly) {
  */
 Shapes2D::Polygon *ConvexHull::divideAndConquerConvexHull(Shapes2D::Polygon poly) {
     auto *res = (Shapes2D::Polygon *) malloc(sizeof (Shapes2D::Polygon));
-    if(res == nullptr){
-        throw Exception2D("failed to malloc memory\n");
-    }
+
     std::vector<Shapes2D::Point2d> points = sortByX(&poly);
     res = this->divideAndConquer_rec(points, 0, (int)points.size()-1);
     return res;
