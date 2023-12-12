@@ -1,5 +1,4 @@
 
-int main() {}
 
 #include "Point2d.h"
 #include <cmath>

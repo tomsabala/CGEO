@@ -20,5 +20,7 @@ namespace Shapes2D{
         double area();
         bool isWide();
         static bool isWide(Shapes2D::Point2d A, Shapes2D::Point2d B, Shapes2D::Point2d C);
+
+        ~Triangle2d() = default;
     };
 }

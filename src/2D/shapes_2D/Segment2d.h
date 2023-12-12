@@ -10,53 +10,67 @@
 namespace Shapes2D {
     class Segment2d {
     private:
-        Point2d *origin, *target;
+        Point2d origin, target;
 
     public:
         /* constructors */
-        Segment2d();
-        Segment2d(Shapes2D::Point2d *p, Shapes2D::Point2d *q);
-        explicit Segment2d(const Segment2d *s);
-        explicit Segment2d(Segment2d *s);
+        Segment2d(const Shapes2D::Point2d &p, const Shapes2D::Point2d &q);
 
         /* getter and setter */
-        Point2d* getOrigin() const;
-        Point2d* getTarget() const;
-        Point2d* getUpper() const;
-        Point2d* getLower() const;
-        void setUpper(const Point2d& p) const;
-        void setLower(const Point2d& p) const;
+        [[nodiscard]] Point2d getOrigin() const;
+        [[nodiscard]] Point2d getTarget() const;
+        [[nodiscard]] Point2d getUpper() const;
+        [[nodiscard]] Point2d getLower() const;
+        void setUpper(const Point2d& p);
+        void setLower(const Point2d& p);
         void setOrigin(const Point2d& new_p) noexcept(false);
         void setTarget(const Point2d& new_p) noexcept(false);
-        double getSlope();
-        double getLength() const;
+        [[nodiscard]] double getSlope() const;
+        [[nodiscard]] double getLength() const;
 
         /* shifting methods */
-        void adder(Point2d *p) const noexcept(false);
-        void rotate(double &deg) const;
-
-        /* built-in methods */
-        bool _eq_(Segment2d *s) const noexcept(false);
-        bool _lt_(Segment2d *s) const noexcept(false);
-        bool _gt_(Segment2d *s) const noexcept(false);
-        void copySegment(Segment2d *s) noexcept(false);
-        std::string toStr() const;
+        void adder(const Point2d &p) const;
+        void rotate(double &deg) const;\
 
         /* orientation predict */
-        double oriePred(Segment2d *s) const noexcept(false);
-        double oriePred(Point2d *p) const noexcept(false);
+        [[nodiscard]] double oriePred(const Segment2d &s) const noexcept(false);
+        [[nodiscard]] double oriePred(const Point2d &p) const noexcept(false);
 
         /* different */
-        bool isParallel(Segment2d *s) noexcept(false);
-        bool isVertical(Segment2d *s) noexcept(false);
-        double dist(Segment2d *s) noexcept(false);
-        double dist(Point2d *p) noexcept(false);
-        bool isIntersect(Segment2d *s) const;
-        Point2d* getIntersect(Segment2d *s) const;
-        bool containPoint(Point2d p) const;
+        [[nodiscard]] bool isParallel(const Segment2d &s) const noexcept(false);
+        [[nodiscard]] bool isVertical(const Segment2d &s) const noexcept(false);
+        [[nodiscard]] double dist(const Segment2d &s) const noexcept(false);
+        [[nodiscard]] double dist(const Point2d &p) const noexcept(false);
+        bool isIntersect(const Segment2d &s) const;
+        [[nodiscard]] Point2d * getIntersect(const Segment2d &s) const;
+        [[nodiscard]] bool containPoint(const Point2d &p) const;
 
-        double getXfromY(double y) const;
-        double getYfromX(double x) const;
+        [[nodiscard]] double getXfromY(const double &y) const;
+        [[nodiscard]] double getYfromX(const double &x) const;
+
+        /* built-in methods */
+        [[nodiscard]] std::string toStr() const;
+        bool operator <(const Segment2d & s) const
+        {
+            if (this->getUpper().getX() == s.getUpper().getX())
+                return this->getLower().getX() < s.getLower().getX();
+            return this->getUpper().getX() < s.getUpper().getX();
+        }
+        bool operator >(const Segment2d & s) const
+        {
+            if (this->getUpper().getX() == s.getUpper().getX())
+                return this->getLower().getX() > s.getLower().getX();
+            return this->getUpper().getX() > s.getUpper().getX();
+        }
+        bool operator ==(const Segment2d & s) const
+        {
+            return this->getOrigin() == s.getOrigin() && this->getTarget() == s.getTarget();
+        }
+        bool operator !=(const Segment2d & s) const
+        {
+            return this->getOrigin() != s.getOrigin() || this->getTarget() != s.getTarget();
+        }
+
         ~Segment2d();
     };
 }

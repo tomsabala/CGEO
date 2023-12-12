@@ -93,7 +93,7 @@ int Shapes2D::Polygon::getLexMin_index() {
     if (getSize() == 0) return -1;
     int res = 0;
     for( auto i=0; i<getSize(); i++)
-        if (getByIndex(i)->_lt_(*getByIndex(res)))
+        if (getByIndex(i) < getByIndex(res))
             res = i;
     return res;
 }
@@ -118,7 +118,7 @@ int Shapes2D::Polygon::getLexMax_index() {
     if (getSize() == 0) return -1;
     int res = 0;
     for(int i=0; i<getSize(); i++) {
-        if (getByIndex(res)->_lt_(*getByIndex(i))){
+        if (getByIndex(res) < getByIndex(i)){
             res = i;
         }
     }
@@ -147,9 +147,9 @@ std::vector<Shapes2D::Segment2d *> Shapes2D::Polygon::getEdges() {
     for(int i=0; i<getSize(); i++) {
         Segment2d* s;
         if (i == getSize()-1)
-            s = new Segment2d(&vertices.back(), &vertices.front());
+            s = new Segment2d(vertices.back(), vertices.front());
         else
-            s = new Segment2d(getByIndex(i), getByIndex(i+1));
+            s = new Segment2d(*getByIndex(i), *getByIndex(i+1));
         res.push_back(s);
     }
 

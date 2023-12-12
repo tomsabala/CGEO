@@ -8,21 +8,27 @@ public:
     Shapes2D::Point2d p;
     bool vertical;
 
-    Line2d();
-    Line2d(double m, Shapes2D::Point2d point, bool is_vertical);
-    Line2d(double m, double x, double y, bool is_vertical);
-    Line2d(Shapes2D::Point2d* point1, Shapes2D::Point2d* point2) noexcept(false);
+    Line2d(double m, const Shapes2D::Point2d& point, bool is_vertical);
+
+    __attribute__((unused)) Line2d(double m, double x, double y, bool is_vertical);
+    Line2d(const Shapes2D::Point2d &point1, const Shapes2D::Point2d &point2) noexcept(false);
 
     double* getSlope();
-    bool isVertical();
+    bool isVertical() const;
     bool isHorizon();
-    double* getY_intersect();
-    double* getX_intersect();
-    std::pair<bool, double> getY_fromX(double x);
-    std::pair<bool, double> getX_fromY(double y);
-    double dist(Shapes2D::Point2d *);
 
-    static Shapes2D::Point2d* line_intersection(Line2d* u, Line2d* v);
-    Shapes2D::Point2d * getProjection(Shapes2D::Point2d *);
+    __attribute__((unused)) double* getY_intersect() const;
+
+    __attribute__((unused)) double* getX_intersect() const;
+
+    __attribute__((unused)) std::pair<bool, double> getY_fromX(double x) const;
+    std::pair<bool, double> getX_fromY(double y) const;
+    double dist(__attribute__((unused)) const Shapes2D::Point2d &);
+
+    Shapes2D::Point2d* line_intersection(Line2d* v);
+
+    __attribute__((unused)) Shapes2D::Point2d * getProjection(Shapes2D::Point2d *);
+
+    ~Line2d();
 };
 

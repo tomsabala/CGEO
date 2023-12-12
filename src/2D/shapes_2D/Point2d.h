@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include "../Exception2D.h"
 #include <vector>
 #include <string>
 

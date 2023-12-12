@@ -88,7 +88,7 @@ bool Circle2d::circleIntersect(Circle2d *circ) {
  * @return true iff circles intersect
  */
 bool Circle2d::lineIntersect(Line2d *l) {
-    return l->dist(this->getCenter()) <= this->r;
+    return l->dist(*this->getCenter()) <= this->r;
 }
 
 /**
@@ -104,16 +104,16 @@ bool Circle2d::segIntersect(Segment2d *s) {
     and check if we have 0<=t<=1 */
 
     /* we note (x1,y1),(x2,y2) == (a,b),(c,d) and circle center == (xc, yc)*/
-    double a_c = s->getOrigin()->getX() - s->getTarget()->getX();
-    double b_d = s->getOrigin()->getY() - s->getTarget()->getY();
+    double a_c = s->getOrigin().getX() - s->getTarget().getX();
+    double b_d = s->getOrigin().getY() - s->getTarget().getY();
 
-    double c_xc = s->getTarget()->getX() - this->c->getX();
-    double d_yc = s->getTarget()->getY() - this->c->getY();
+    double c_xc = s->getTarget().getX() - this->c->getX();
+    double d_yc = s->getTarget().getY() - this->c->getY();
 
     double bb = 4*pow(a_c * c_xc + b_d * d_yc, 2);
     double ac4 = 4*(pow(a_c, 2) + pow(b_d, 2))*
-            (pow(c->getX(), 2)+pow(c->getY(), 2)+pow(s->getTarget()->getX(), 2)+pow(s->getTarget()->getY(), 2) -
-            pow(r, 2) - 2*s->getTarget()->getX()*c->getX() - 2*s->getTarget()->getY()*c->getY());
+            (pow(c->getX(), 2)+pow(c->getY(), 2)+pow(s->getTarget().getX(), 2)+pow(s->getTarget().getY(), 2) -
+            pow(r, 2) - 2*s->getTarget().getX()*c->getX() - 2*s->getTarget().getY()*c->getY());
 
     if (bb - ac4 < 0)
         return false;
@@ -138,8 +138,8 @@ bool Circle2d::polyIntersect(Polygon *poly) {
  * @param p a point in the plane
  * @return 1 if the point is inside the circle, 0 if the point is on the circle or -1 otherwise
  */
-int Circle2d::pointContains(Point2d *p) {
-    double d = this->c->dist(*p);
+int Circle2d::pointContains(const Point2d &p) {
+    double d = this->c->dist(p);
     if (d > this->r) return -1;
     if (d == this->r) return 0;
     return 1;
@@ -223,7 +223,7 @@ std::pair<double, Point2d *> Circle2d::circleFrom3Points(const Point2d& p, const
         l2 = new Line2d(-1/( (p.getY() - t.getY()) / (p.getX() - t.getX())), *mid_point2, false);
 
 
-    Point2d *center = Line2d::line_intersection(l1, l2);
+    Point2d *center = l1->line_intersection(l2);
     double radius = center->dist(p);
 
     delete mid_point1;
