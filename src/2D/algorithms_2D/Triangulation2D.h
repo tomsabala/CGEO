@@ -23,5 +23,7 @@ namespace Algorithms2d{
         popFromStack(std::vector<Shapes2D::Triangle2d *> * res,
                      std::stack<std::pair<Shapes2D::Point2d *, int>> *vertex_Stack,
                      std::pair<Shapes2D::Point2d *, int> p);
+
+        ~Triangulation2D()=default;
     };
 }
