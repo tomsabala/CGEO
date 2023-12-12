@@ -37,7 +37,7 @@ namespace Shapes2D
         bool polyIntersect(Polygon *poly);
 
         /* containers checking methods */
-        int pointContains(Point2d *p);
+        int pointContains(const Point2d &p);
         int segmentContains(Segment2d *s);
         int circleContains(Circle2d *c);
         int polyContains(Polygon *poly);

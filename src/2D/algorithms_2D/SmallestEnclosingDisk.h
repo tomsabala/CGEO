@@ -13,6 +13,8 @@ namespace Algorithms2d{
         static Shapes2D::Circle2d *
         findDisc(std::vector<Shapes2D::Point2d >& );
 
+        ~SmallestEnclosingDisk()=default;
+
     private:
         static Shapes2D::Circle2d *
         findDisc_withOnePoint(std::vector<Shapes2D::Point2d >& , int);

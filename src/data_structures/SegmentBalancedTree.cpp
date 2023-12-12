@@ -1,14 +1,14 @@
 
 #include "SegmentBalancedTree.h"
 
-void SegmentBalancedTree::insert(Shapes2D::Segment2d *s)
+void SegmentBalancedTree::insert(const Shapes2D::Segment2d &s)
 {
     if (search(s) != nullptr) /* keys are unique */
         return;
     root=_insert_(root, s);
 }
 
-Node * SegmentBalancedTree::_insert_(Node * head, Shapes2D::Segment2d *s)
+Node * SegmentBalancedTree::_insert_(Node * head, const Shapes2D::Segment2d &s)
 {
 
     if(head==nullptr) /* subtree is empty */
@@ -54,11 +54,11 @@ Node * SegmentBalancedTree::_insert_(Node * head, Shapes2D::Segment2d *s)
 }
 
 
-void SegmentBalancedTree::remove(Shapes2D::Segment2d *s){
+void SegmentBalancedTree::remove(const Shapes2D::Segment2d& s){
     root=_remove_(root, s);
 }
 
-Node * SegmentBalancedTree::_remove_(Node * head, Shapes2D::Segment2d *s){
+Node * SegmentBalancedTree::_remove_(Node * head, const Shapes2D::Segment2d& s){
     if(head==nullptr)  /* s not found */
         return nullptr;
 
@@ -125,16 +125,16 @@ Node * SegmentBalancedTree::_remove_(Node * head, Shapes2D::Segment2d *s){
 }
 
 
-Node * SegmentBalancedTree::search(Shapes2D::Segment2d *s){
+Node * SegmentBalancedTree::search(const Shapes2D::Segment2d &s){
     return _search_(root, s);
 }
 
-Node * SegmentBalancedTree::_search_(Node * head, Shapes2D::Segment2d *s){
+Node * SegmentBalancedTree::_search_(Node * head, const Shapes2D::Segment2d &s){
     if(head == nullptr)
         return nullptr;
 
-    Shapes2D::Segment2d *head_s = head->s;
-    if(head_s->_eq_(s))
+    Shapes2D::Segment2d head_s = head->s;
+    if(head_s == s)
         return head;
 
     if(_le_(s, head_s))
@@ -145,26 +145,28 @@ Node * SegmentBalancedTree::_search_(Node * head, Shapes2D::Segment2d *s){
 
 }
 
-Node * SegmentBalancedTree::search_p(Shapes2D::Point2d *p)
+Node * SegmentBalancedTree::search_p(const Shapes2D::Point2d& p)
 {
     return _search_p_(root, p);
 }
 
-Node * SegmentBalancedTree::_search_p_(Node * head, Shapes2D::Point2d *p)
+Node * SegmentBalancedTree::_search_p_(Node * head, const Shapes2D::Point2d &p)
 {
     if(head == nullptr)
         return nullptr;
 
-    Shapes2D::Segment2d *head_s = head->s;
-    if (head_s->containPoint(*p))
+    Shapes2D::Segment2d head_s = head->s;
+    if (head_s.containPoint(p))
         return head;
 
-    auto *v_l = new Line2d(head_s->getLower(), head_s->getUpper());
+    auto *v_l = new Line2d(head_s.getLower(), head_s.getUpper());
     double v_x = v_l->getX_fromY(sweepLine->getY()).second;
+
+    delete v_l;
 
     Node *res;
 
-    if (p->getX() < v_x)
+    if (p.getX() < v_x)
     {
         res = _search_p_(head->left, p);
         if (res == nullptr)
@@ -189,9 +191,8 @@ void SegmentBalancedTree::_walkInOrder_(Node * head)
     if (head == nullptr)
         return;
     _walkInOrder_(head->left);
-    std::cout<<head->s->toStr();
+    std::cout<<head->s.toStr();
     _walkInOrder_(head->right);
-
 }
 
 int SegmentBalancedTree::_height_(Node * head){
@@ -219,26 +220,29 @@ Node * SegmentBalancedTree::_leftRotation_(Node * head)
     return new_head;
 }
 
-bool SegmentBalancedTree::_le_(Shapes2D::Segment2d *v, Shapes2D::Segment2d *u) const {
-    auto *v_l = new Line2d(v->getLower(), v->getUpper());
+bool SegmentBalancedTree::_le_(const Shapes2D::Segment2d& v, const Shapes2D::Segment2d& u) const {
+    auto *v_l = new Line2d(v.getLower(), v.getUpper());
     double v_x = (v_l->isHorizon()) ? sweepLine->getX() : v_l->getX_fromY(sweepLine->getY()).second;
 
-    auto *u_l = new Line2d(u->getLower(), u->getUpper());
+    auto *u_l = new Line2d(u.getLower(), u.getUpper());
     double u_x = (u_l->isHorizon()) ? sweepLine->getX() : u_l->getX_fromY(sweepLine->getY()).second;
+
+    delete u_l;
+    delete v_l;
 
     if (std::abs(v_x - u_x) > eps)
         return v_x < u_x;
 
-    Shapes2D::Point2d *u_lower, *v_lower;
-    if (u->getLower()->getY() == u->getUpper()->getY())
-        u_lower = u->getUpper();
+    Shapes2D::Point2d u_lower, v_lower;
+    if (u.getLower().getY() == u.getUpper().getY())
+        u_lower = u.getUpper();
     else
-        u_lower = u->getLower();
+        u_lower = u.getLower();
 
-    if (v->getLower()->getY() == v->getUpper()->getY())
-        v_lower = v->getUpper();
+    if (v.getLower().getY() == v.getUpper().getY())
+        v_lower = v.getUpper();
     else
-        v_lower = v->getLower();
+        v_lower = v.getLower();
 
     return sweepLine->oriePred(u_lower, v_lower) < 0;
 }
@@ -273,7 +277,7 @@ Node* SegmentBalancedTree::getPred(Node *x){
 
     for (int i=0; i<nodes.size()-1; i++)
     {
-        if (nodes[i+1]->s->_eq_(x->s))
+        if (nodes[i+1]->s == x->s)
             return nodes[i];
     }
 
@@ -291,7 +295,7 @@ Node* SegmentBalancedTree::getSucc(Node *x){
 
     for (int i=1; i<nodes.size(); i++)
     {
-        if (nodes[i-1]->s->_eq_(x->s))
+        if (nodes[i-1]->s == x->s)
             return nodes[i];
     }
 
@@ -306,3 +310,5 @@ void SegmentBalancedTree::_items_(std::vector<Node *> *res, Node * head) {
     res->push_back(head);
     _items_(res, head->right);
 }
+
+SegmentBalancedTree::SegmentBalancedTree() : sweepLine(new Shapes2D::Point2d(DBL_MAX, DBL_MAX)), size(0){}

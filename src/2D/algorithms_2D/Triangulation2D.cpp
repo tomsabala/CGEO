@@ -86,7 +86,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
 
             if (p.second)
             {
-                if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
+                if (p.first->oriePred(*first_pair.first, *second_pair.first) > 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     vertex_Stack->push(second_pair);
@@ -101,7 +101,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
 
             else
             {
-                if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
+                if (p.first->oriePred(*first_pair.first, *second_pair.first) < 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     vertex_Stack->push(second_pair);
@@ -128,7 +128,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
 
             if (p.second)
             {
-                if (p.first->oriePred(first_pair.first, second_pair.first) < 0)
+                if (p.first->oriePred(*first_pair.first, *second_pair.first) < 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     if(vertex_Stack->empty())
@@ -144,7 +144,7 @@ Triangulation2D::popFromStack(std::vector<Shapes2D::Triangle2d *> * res, std::st
             }
             else
             {
-                if (p.first->oriePred(first_pair.first, second_pair.first) > 0)
+                if (p.first->oriePred(*first_pair.first, *second_pair.first) > 0)
                 {
                     res->push_back(new Shapes2D::Triangle2d(*p.first, *first_pair.first, *second_pair.first));
                     if(vertex_Stack->empty())

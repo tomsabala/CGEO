@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include "../Exception2D.h"
 #include <vector>
 #include <string>
 
@@ -16,14 +15,12 @@ namespace Shapes2D {
         /*constructors*/
         Point2d();
         Point2d(double x, double y);
-        explicit Point2d(Point2d *p) noexcept(false);
 
         /* getter and setter */
         double getX() const;
         double getY() const;
         void setX(double val);
         void setY(double val);
-        void copyPoint(Point2d *p) noexcept(false);
 
         /* norm && distances methods */
         double norm() const;
@@ -34,18 +31,16 @@ namespace Shapes2D {
          */
 
         /* builtin method */
-        bool _eq_(Point2d *p) const noexcept(false);
         std::string toStr() const;
-        bool _lt_(Point2d& p) const;
-        bool _gt_(Point2d& p) const;
+
         /* shifting methods */
-        void rotate(double &deg, Point2d *p) noexcept(false);
-        Point2d* rotate(double &deg);
-        Point2d* adder(Point2d *p) const;
-        Point2d* subtract(Point2d *p) const;
+        void rotate(double &deg, const Point2d& p) noexcept(false);
+        void rotate(double &deg) noexcept(false);
+        void adder(const Point2d &p) ;
+        void subtract(const Point2d &p);
 
         /* orientation predict */
-        double oriePred(Point2d *q, Point2d *r) noexcept(false);
+        double oriePred(const Point2d &q, const Point2d &r) const noexcept(false);
 
 
         bool operator <(const Point2d & b) const

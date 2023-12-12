@@ -25,7 +25,7 @@ Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2
 
 
     for (int i=2; i<points.size(); ++i)
-        if (ret->pointContains(&points.at(i)) == -1)
+        if (ret->pointContains(points.at(i)) == -1)
         {
             std::swap(*ret, *findDisc_withOnePoint(points, i));
         }
@@ -50,7 +50,7 @@ SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d >& po
                                                         points.at(I));
 
     for (int i=1; i<I; ++i)
-        if (circle->pointContains(&points.at(i)) == -1)
+        if (circle->pointContains(points.at(i)) == -1)
         {
             std::swap(*circle, *findDisc_withTwoPoints(points, i, I));
          }
@@ -74,7 +74,7 @@ SmallestEnclosingDisk::findDisc_withTwoPoints(std::vector<Shapes2D::Point2d >& p
     auto *circ = new Shapes2D::Circle2d(points.at(I), points.at(J));
 
     for (int i=0; i<I; i++)
-        if (circ->pointContains(&points.at(i)) == -1)
+        if (circ->pointContains(points.at(i)) == -1)
             circ->setCircle(&points.at(I), &points.at(J), &points.at(i));
 
     return circ;

@@ -16,6 +16,8 @@ namespace Algorithms2d{
 
         Shapes2D::Polygon* divideAndConquerConvexHull(Shapes2D::Polygon poly);
 
+        ~ConvexHull() = default;
+
     private:
         static std::vector<Shapes2D::Point2d> sortByX(Shapes2D::Polygon* poly);
         static bool right_turn(std::stack<Shapes2D::Point2d> *s);

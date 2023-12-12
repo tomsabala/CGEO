@@ -96,7 +96,7 @@ bool ConvexHull::right_turn(std::stack<Shapes2D::Point2d> *s) {
     s->push(third);
 
     /* perform turn checking */
-    return first.oriePred(&second, &third) < 0;
+    return first.oriePred(second, third) < 0;
 }
 
 /**
@@ -121,12 +121,12 @@ Shapes2D::Polygon *ConvexHull::giftWrapConvexHull(Shapes2D::Polygon poly) {
         res.push_back(*pointOnHull);
         endPoint = poly.getByIndex(0);
         for (int j=1; j<poly.getSize(); j++){
-            if (endPoint->_eq_(pointOnHull) || res.back().oriePred(endPoint, poly.getByIndex(j)) > 0) {
+            if (endPoint == pointOnHull || res.back().oriePred(*endPoint, *poly.getByIndex(j)) > 0) {
                 endPoint = poly.getByIndex(j);
             }
         }
         pointOnHull = endPoint;
-    }while (!res[0]._eq_(endPoint));
+    }while (res[0] != *endPoint);
 
     return new Shapes2D::Polygon(res);
 }
@@ -143,9 +143,7 @@ Shapes2D::Polygon *ConvexHull::giftWrapConvexHull(Shapes2D::Polygon poly) {
  */
 Shapes2D::Polygon *ConvexHull::divideAndConquerConvexHull(Shapes2D::Polygon poly) {
     auto *res = (Shapes2D::Polygon *) malloc(sizeof (Shapes2D::Polygon));
-    if(res == nullptr){
-        throw Exception2D("failed to malloc memory\n");
-    }
+
     std::vector<Shapes2D::Point2d> points = sortByX(&poly);
     res = this->divideAndConquer_rec(points, 0, (int)points.size()-1);
     return res;
@@ -239,9 +237,9 @@ int ConvexHull::merge_inv(Shapes2D::Polygon *left_poly, Shapes2D::Polygon *right
     Shapes2D::Point2d *left = left_poly->getByIndex(l%n_left);
     Shapes2D::Point2d *right = right_poly->getByIndex(r%n_right);
 
-    if (left_up->oriePred(left, right) > 0 && left_down->oriePred(left, right) < 0)
+    if (left_up->oriePred(*left, *right) > 0 && left_down->oriePred(*left, *right) < 0)
         return 1;
-    if (right_up->oriePred(right, left) < 0 && right_down->oriePred(right, left) > 0)
+    if (right_up->oriePred(*right, *left) < 0 && right_down->oriePred(*right, *left) > 0)
         return -1;
     return 0;
 

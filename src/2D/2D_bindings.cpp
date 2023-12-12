@@ -21,8 +21,6 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
             .def(py::init<double, double>(), "standard constructor")
             .def_property("x", &Shapes2D::Point2d::getX, &Shapes2D::Point2d::setX)
             .def_property("y", &Shapes2D::Point2d::getY, &Shapes2D::Point2d::setY)
-            .def("copyPoint", &Shapes2D::Point2d::copyPoint, "copy point coordinates",
-            py::arg("point"))
             .def("norm", &Shapes2D::Point2d::norm, "calculate point norm")
             .def("dist", &Shapes2D::Point2d::dist, "calculate distance to another point",
             py::arg("point"))
@@ -41,21 +39,10 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
                 ret_y = ret_y.substr(0, ret_y.find('.')+3);
                 r += ret_y;
                 r += ")";
-                return r;})
-            .def("__lt__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._lt_(q);})
-            .def("__gt__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._gt_(q);})
-            .def("__eq__",
-                 [](const Shapes2D::Point2d& p, Shapes2D::Point2d q) {
-                     return p._eq_(&q);});
+                return r;});
 
     py::class_<Shapes2D::Segment2d>(h_shapes, "Segment")
-            .def(py::init<>(), "empty constructor")
-            .def(py::init<Shapes2D::Point2d*, Shapes2D::Point2d*>(), "standard constructor")
-            .def(py::init<Shapes2D::Segment2d*>(), "constructing segment from other segment")
+            .def(py::init<const Shapes2D::Point2d &, const Shapes2D::Point2d &>(), "standard constructor")
             .def_property("origin", &Shapes2D::Segment2d::getOrigin, &Shapes2D::Segment2d::setOrigin)
             .def_property("target", &Shapes2D::Segment2d::getTarget, &Shapes2D::Segment2d::setTarget)
             .def("getSlope", &Shapes2D::Segment2d::getSlope, "get the slope of the segment")
@@ -66,26 +53,22 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
                  py::arg("point"))
             .def("rotate", &Shapes2D::Segment2d::rotate, "rotate segment direction with given degree",
                  py::arg("degree"))
-            .def("__eq__", &Shapes2D::Segment2d::_eq_, "check given segment is equal to current segment",
-                 py::arg("segment"))
-            .def("copySegment", &Shapes2D::Segment2d::copySegment, "set origin and target w.r.t given segment",
-                 py::arg("segment"))
-            .def("oriePred", py::overload_cast<Shapes2D::Segment2d*>(&Shapes2D::Segment2d::oriePred, py::const_), "calculate orientation")
-            .def("oriePred", py::overload_cast<Shapes2D::Point2d*>(&Shapes2D::Segment2d::oriePred, py::const_), "calculate orientation")
+            .def("oriePred", py::overload_cast<const Shapes2D::Segment2d &>(&Shapes2D::Segment2d::oriePred, py::const_), "calculate orientation")
+            .def("oriePred", py::overload_cast<const Shapes2D::Point2d &>(&Shapes2D::Segment2d::oriePred, py::const_), "calculate orientation")
             .def("isParallel", &Shapes2D::Segment2d::isParallel, "check if two segments are parallel",
                  py::arg("segment"))
             .def("isVertical", &Shapes2D::Segment2d::isVertical, "check if two segments are vertical",
                  py::arg("segment"))
-            .def("dist", static_cast<double (Shapes2D::Segment2d::*)(Shapes2D::Segment2d*)>(&Shapes2D::Segment2d::dist), "calculate distance to segment if parallel")
-            .def("dist", static_cast<double (Shapes2D::Segment2d::*)(Shapes2D::Point2d*)>(&Shapes2D::Segment2d::dist), "calculate distance to point")
+            .def("dist", py::overload_cast<const Shapes2D::Segment2d &>(&Shapes2D::Segment2d::dist, py::const_), "calculate distance to segment if parallel")
+            .def("dist", py::overload_cast<const Shapes2D::Point2d &>(&Shapes2D::Segment2d::dist, py::const_), "calculate distance to point")
             .def("isIntersect", &Shapes2D::Segment2d::isIntersect, "check if two segments intersect",
                  py::arg("segment"))
             .def("__repr__",
                  [](Shapes2D::Segment2d &s) {
                      std::string r("Segment: ");
-                     r += s.getOrigin()->toStr();
+                     r += s.getOrigin().toStr();
                      r += " -->  ";
-                     r += s.getTarget()->toStr();
+                     r += s.getTarget().toStr();
                      return r;
                  });
 
@@ -119,7 +102,7 @@ PYBIND11_MODULE(EXTENSION_NAME, h) {
             .def("intersection", &Algorithms2d::SegmentIntersection2d::solve, "solve segment intersection");
 
     py::class_<Node>(h_algorithms, "Node")
-            .def(py::init<Shapes2D::Segment2d *>());
+            .def(py::init<Shapes2D::Segment2d>());
 
     py::class_<SegmentBalancedTree>(h_algorithms, "SegmentTree")
             .def("insert", &SegmentBalancedTree::insert, "insert a new segment to the tree")

@@ -79,9 +79,7 @@ Shapes2D::Point2d* Shapes2D::Polygon::getByIndex(int i) {
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMin() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLexMin_index());
     return res;
 }
@@ -93,7 +91,7 @@ int Shapes2D::Polygon::getLexMin_index() {
     if (getSize() == 0) return -1;
     int res = 0;
     for( auto i=0; i<getSize(); i++)
-        if (getByIndex(i)->_lt_(*getByIndex(res)))
+        if (getByIndex(i) < getByIndex(res))
             res = i;
     return res;
 }
@@ -104,9 +102,7 @@ int Shapes2D::Polygon::getLexMin_index() {
 Shapes2D::Point2d *Shapes2D::Polygon::getLexMax() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLexMax_index());
     return res;
 }
@@ -118,7 +114,7 @@ int Shapes2D::Polygon::getLexMax_index() {
     if (getSize() == 0) return -1;
     int res = 0;
     for(int i=0; i<getSize(); i++) {
-        if (getByIndex(res)->_lt_(*getByIndex(i))){
+        if (getByIndex(res) < getByIndex(i)){
             res = i;
         }
     }
@@ -147,9 +143,9 @@ std::vector<Shapes2D::Segment2d *> Shapes2D::Polygon::getEdges() {
     for(int i=0; i<getSize(); i++) {
         Segment2d* s;
         if (i == getSize()-1)
-            s = new Segment2d(&vertices.back(), &vertices.front());
+            s = new Segment2d(vertices.back(), vertices.front());
         else
-            s = new Segment2d(getByIndex(i), getByIndex(i+1));
+            s = new Segment2d(*getByIndex(i), *getByIndex(i+1));
         res.push_back(s);
     }
 
@@ -170,9 +166,9 @@ int Shapes2D::Polygon::getSize() {
 bool Shapes2D::Polygon::isConvex() {
     int n = getSize();
     if (n <= 2) return true;
-    bool step, sign = getByIndex(0)->oriePred(getByIndex(1), getByIndex(2)) > 0;
+    bool step, sign = getByIndex(0)->oriePred(*getByIndex(1), *getByIndex(2)) > 0;
     for(int i=0; i<n; i++) {
-        step = getByIndex(i%n)->oriePred(getByIndex((i+1)%n), getByIndex((i+2)%n)) > 0;
+        step = getByIndex(i%n)->oriePred(*getByIndex((i+1)%n), *getByIndex((i+2)%n)) > 0;
         if (step != sign) {
             return false;
         }
@@ -244,9 +240,7 @@ std::vector<Shapes2D::Point2d> Shapes2D::Polygon::getVertices() {
 Shapes2D::Point2d *Shapes2D::Polygon::getRightMost() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getRightMost_index());
     return res;
 }
@@ -272,9 +266,7 @@ int Shapes2D::Polygon::getRightMost_index() {
 Shapes2D::Point2d *Shapes2D::Polygon::getLeftMost() {
     if (getSize() == 0) return nullptr;
     auto *res = (Point2d*) malloc(sizeof(Point2d));
-    if (!res) {
-        throw (Exception2D("malloc failed\n"));
-    }
+
     *res = *getByIndex(getLeftMost_index());
     return res;
 }
@@ -305,9 +297,9 @@ bool Shapes2D::Polygon::isInPoly(Shapes2D::Point2d *p) {
 
     for(const Segment2d *e : edges)
     {
-        if (e->getUpper()->getY() > p->getY() && e->getLower()->getY() < p->getY())
+        if (e->getUpper().getY() > p->getY() && e->getLower().getY() < p->getY())
         {
-            if(e->getLower()->oriePred(e->getUpper(), p) > 0)
+            if(e->getLower().oriePred(e->getUpper(), *p) > 0)
                 res = !res;
         }
     }
@@ -336,7 +328,7 @@ int Shapes2D::Polygon::next_InnerCusp(Shapes2D::Polygon *poly, bool upper)
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() > b->getY() && c->getY() > b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -348,7 +340,7 @@ int Shapes2D::Polygon::next_InnerCusp(Shapes2D::Polygon *poly, bool upper)
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() < b->getY() && c->getY() < b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -435,7 +427,7 @@ int Shapes2D::Polygon::findDiagonalFromUpperInnerCusp(Shapes2D::Polygon *poly, i
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() < b->getY() && c->getY() < b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -470,7 +462,7 @@ int Shapes2D::Polygon::findDiagonalFromDownInnerCusp(Shapes2D::Polygon *poly, in
             if (poly->anyInnerCusp(i, [](Point2d *a, Point2d *b, Point2d *c) {
                 if (a->getY() > b->getY() && c->getY() > b->getY())
                 {
-                    if (a->oriePred(b, c) > 0)
+                    if (a->oriePred(*b, *c) > 0)
                         return true;
                 }
                 return false;
@@ -496,8 +488,7 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     if (downInnerCusp != -1)
     {
         int u = findDiagonalFromDownInnerCusp(poly, downInnerCusp);
-        if (u == -1)
-            throw (Exception2D("un expected error occurred\n"));
+
         Shapes2D::Polygon *poly1, *poly2;
         std::vector<Shapes2D::Point2d *> poly1_points, poly2_points;
 
@@ -529,8 +520,6 @@ std::vector<Shapes2D::Polygon *> Shapes2D::Polygon::decomposeY_Monotone(Shapes2D
     if (upperInnerCusp != -1)
     {
         int u = findDiagonalFromUpperInnerCusp(poly, upperInnerCusp);
-        if (u == -1)
-            throw (Exception2D("un expected error occurred\n"));
 
         Shapes2D::Polygon *poly1, *poly2;
         std::vector<Shapes2D::Point2d *> poly1_points, poly2_points;
