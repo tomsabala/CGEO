@@ -1,0 +1,288 @@
+<mxfile host="app.diagrams.net" version="21.0.0">
+  <diagram id="cgeo-arch" name="CGEO Architecture">
+    <mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1120" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ─────────────────────────────────────────
+             1)  User Code
+        ───────────────────────────────────────── -->
+        <mxCell id="s1bg" value=""
+          style="rounded=1;arcSize=4;fillColor=#EAF4FB;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="25" y="25" width="1650" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1lbl" value="1)  User Code"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=15;fontColor=#1B4F72;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="42" width="280" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1usr" value="User Application&#xa;Python script  ·  Jupyter notebook  ·  import cgeo"
+          style="rounded=1;arcSize=30;fillColor=#AED6F1;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="615" y="63" width="445" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────
+             2)  Python Package
+        ───────────────────────────────────────── -->
+        <mxCell id="s2bg" value=""
+          style="rounded=1;arcSize=3;fillColor=#ECFBF5;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="25" y="145" width="1650" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2lbl" value="2)  Python Package  (cgeo/)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=15;fontColor=#1B5E3B;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="162" width="500" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Wrapper Classes group — mirrors "per-competitor loop" style -->
+        <mxCell id="s2grp" value=""
+          style="rounded=1;arcSize=5;fillColor=#D4F0E3;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="196" width="840" height="252" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2gsub" value="Python Wrapper Classes"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=11;fontColor=#1B5E3B;"
+          vertex="1" parent="1">
+          <mxGeometry x="78" y="212" width="280" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s2pt" value="Point2D"
+          style="rounded=1;arcSize=35;fillColor=#FAFEFE;strokeColor=#B8C5C7;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="78" y="240" width="240" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2sg" value="Segment2D"
+          style="rounded=1;arcSize=35;fillColor=#FAFEFE;strokeColor=#B8C5C7;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="332" y="240" width="240" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2pg" value="Polygon"
+          style="rounded=1;arcSize=35;fillColor=#FAFEFE;strokeColor=#B8C5C7;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="586" y="240" width="240" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2ci" value="Circle"
+          style="rounded=1;arcSize=35;fillColor=#FAFEFE;strokeColor=#B8C5C7;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="78" y="304" width="240" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2tn" value="Triangle"
+          style="rounded=1;arcSize=35;fillColor=#FAFEFE;strokeColor=#B8C5C7;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="332" y="304" width="240" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s2an1" value="@handle_errors_for_class — all methods wrapped, exceptions re-raised as ValueError"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontStyle=2;fontColor=#6C6C6C;"
+          vertex="1" parent="1">
+          <mxGeometry x="78" y="372" width="800" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2an2" value="plots_2d/ — matplotlib visualization (polygon · circle · segments)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontStyle=2;fontColor=#6C6C6C;"
+          vertex="1" parent="1">
+          <mxGeometry x="78" y="394" width="800" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Algorithm API node -->
+        <mxCell id="s2api" value="Algorithm API&#xa;global_c_utils.py&#xa;grahamConvexHull  ·  segmentIntersection  ·  triangulate  ·  enclosingDisc"
+          style="rounded=1;arcSize=20;fillColor=#66C9B3;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="930" y="196" width="718" height="115" as="geometry"/>
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────
+             3)  pybind11 Binding Layer
+        ───────────────────────────────────────── -->
+        <mxCell id="s3bg" value=""
+          style="rounded=1;arcSize=3;fillColor=#FEFAEB;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="25" y="465" width="1650" height="162" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3lbl" value="3)  pybind11 Binding Layer  (cgeo._cgeo)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=15;fontColor=#5C4A1E;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="482" width="700" height="26" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s3sh" value="libShapes_2D&#xa;Point · Segment · Polygon · Circle · Triangle"
+          style="rounded=1;arcSize=20;fillColor=#F9E79F;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="514" width="512" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3mo" value="_cgeo.so&#xa;PYBIND11_MODULE"
+          style="rounded=1;arcSize=20;fillColor=#F5B041;strokeColor=none;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="599" y="514" width="332" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3al" value="libAlgorithms_2D&#xa;ConvexHullUtils · SegmentIntersect · TriangulationUtils · EnclosingDistUtils"
+          style="rounded=1;arcSize=20;fillColor=#F9E79F;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="963" y="514" width="690" height="84" as="geometry"/>
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────
+             4)  C++ Algorithms
+        ───────────────────────────────────────── -->
+        <mxCell id="s4bg" value=""
+          style="rounded=1;arcSize=3;fillColor=#F4EDF8;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="25" y="627" width="1650" height="270" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4lbl" value="4)  C++ Algorithms  (src/2D/algorithms_2D/)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=15;fontColor=#4A235A;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="644" width="620" height="26" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s4ch" value="ConvexHull2D&#xa;Graham scan  ·  O(n log n)"
+          style="rounded=1;arcSize=20;fillColor=#C9A8E0;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="678" width="355" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4si" value="SegmentIntersection2D&#xa;Bentley-Ottmann  ·  O((n+k) log n)"
+          style="rounded=1;arcSize=20;fillColor=#C9A8E0;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="432" y="678" width="382" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4tr" value="Triangulation2D&#xa;Y-monotone + stack sweep  ·  O(n)"
+          style="rounded=1;arcSize=20;fillColor=#C9A8E0;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="836" y="678" width="358" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4sd" value="SmallestEnclosingDisk&#xa;Welzl's algorithm  ·  O(n) expected"
+          style="rounded=1;arcSize=20;fillColor=#C9A8E0;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1216" y="678" width="412" height="82" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s4sbt" value="SegmentBalancedTree  (AVL Tree)  —  data_structures/&#xa;sweep-line status  ·  insert / remove  ·  getPred / getSucc"
+          style="rounded=1;arcSize=20;fillColor=#FAD7A0;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="308" y="788" width="688" height="72" as="geometry"/>
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────
+             5)  C++ Shape Primitives
+        ───────────────────────────────────────── -->
+        <mxCell id="s5bg" value=""
+          style="rounded=1;arcSize=3;fillColor=#EAF4FB;strokeColor=none;"
+          vertex="1" parent="1">
+          <mxGeometry x="25" y="897" width="1650" height="172" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5lbl" value="5)  C++ Shape Primitives  (src/2D/shapes_2D/)  ·  Core: oriePred(p,q,r) = cross product → CCW / CW / collinear  (ε = 1e-8)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;fontStyle=1;fontSize=12;fontColor=#1B4F72;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="914" width="1580" height="24" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s5pt" value="Point2d&#xa;x, y  ·  oriePred()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="55" y="948" width="238" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5sg" value="Segment2d&#xa;endpoints  ·  isIntersect()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="309" y="948" width="248" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5pg" value="Polygon&#xa;vertices  ·  isConvex()  ·  decomposeY_Monotone()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="573" y="948" width="310" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5ci" value="Circle2d&#xa;r · center  ·  circleFrom3Points()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="899" y="948" width="275" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5tn" value="Triangle2d&#xa;vertex[3]  ·  area()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1190" y="948" width="232" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s5ln" value="Line2d&#xa;slope  ·  getProjection()"
+          style="rounded=1;arcSize=25;fillColor=#7EBDE8;strokeColor=none;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1438" y="948" width="232" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────
+             EDGES
+        ───────────────────────────────────────── -->
+
+        <!-- User → Algorithm API (primary call path) -->
+        <mxCell id="e1" value="calls"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#566573;strokeWidth=2.5;fontSize=10;fontColor=#566573;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s1usr" target="s2api" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- User → Wrapper Classes (dashed) -->
+        <mxCell id="e2" value="creates shapes"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#566573;strokeWidth=2;fontSize=10;fontColor=#566573;fontStyle=2;dashed=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s1usr" target="s2grp" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Wrapper Classes → libShapes_2D -->
+        <mxCell id="e3" value="extracts C++ objects"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#D4AC0D;strokeWidth=2.5;fontSize=10;fontColor=#7D6608;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s2grp" target="s3sh" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Algorithm API → libAlgorithms_2D -->
+        <mxCell id="e4" value="invokes via _cgeo"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#D4AC0D;strokeWidth=2.5;fontSize=10;fontColor=#7D6608;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s2api" target="s3al" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- libAlgorithms_2D → C++ Algorithms (SegmentIntersection as center representative) -->
+        <mxCell id="e5" value="pybind11 wraps"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#E67E22;strokeWidth=2.5;fontSize=10;fontColor=#873600;fontStyle=2;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s3al" target="s4si" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- libShapes_2D → C++ Shape Primitives (routes via left margin) -->
+        <mxCell id="e6" value="pybind11 wraps"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#E67E22;strokeWidth=2.5;fontSize=10;fontColor=#873600;fontStyle=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+          edge="1" source="s3sh" target="s5pt" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="17" y="556"/>
+              <mxPoint x="17" y="983"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- SegmentIntersection2D → SegmentBalancedTree (AVL) -->
+        <mxCell id="e7" value="uses AVL status"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#7D3C98;strokeWidth=2.5;fontSize=10;fontColor=#6C3483;fontStyle=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s4si" target="s4sbt" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- C++ Algorithms → C++ Shapes -->
+        <mxCell id="e8" value="uses shape primitives"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1A5276;strokeWidth=2.5;fontSize=10;fontColor=#1A5276;fontStyle=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s4ch" target="s5pg" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- SmallestEnclosingDisk → Circle2d (dashed) -->
+        <mxCell id="e9" value="creates"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1A5276;strokeWidth=2;fontSize=10;fontColor=#1A5276;fontStyle=2;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="s4sd" target="s5ci" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
