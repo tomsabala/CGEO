@@ -1,14 +1,7 @@
-
-
 def getVectorType(vector):
+    """Return the type name if all items are the same type, 'null' if empty, 'mixed' otherwise."""
     if not vector:
         return "null"
 
-    types = set()
-    for item in vector:
-        types.add(type(item).__name__)
-
-    if len(types) == 1:
-        return types.pop()
-    else:
-        return "mixed"
+    types = {type(item).__name__ for item in vector}
+    return types.pop() if len(types) == 1 else "mixed"

@@ -1,81 +1,50 @@
-
+#include "SmallestEnclosingDisk.h"
 #include <random>
 #include <algorithm>
-#include "SmallestEnclosingDisk.h"
 
 using namespace Algorithms2d;
+using namespace Shapes2D;
 
-/* empty default constructor */
 SmallestEnclosingDisk::SmallestEnclosingDisk() = default;
 
-/**
- * we are getting a set of points in the plane,
- * and we wish to find to smallest enclosing disc surrounding these points
- * @param points : set of points in the plane
- * @return a Circle in the plane.
- */
-Shapes2D::Circle2d *SmallestEnclosingDisk::findDisc(std::vector<Shapes2D::Point2d >& points)
-{
-
+Circle2d* SmallestEnclosingDisk::findDisc(std::vector<Point2d>& points) {
     std::shuffle(points.begin(), points.end(), std::mt19937(std::random_device()()));
 
-    /* init ret */
-    auto *ret = new Shapes2D::Circle2d(points.at(0),
-                                       points.at(1));
+    auto* ret = new Circle2d(points.at(0), points.at(1));
 
-
-    for (int i=2; i<points.size(); ++i)
-        if (ret->pointContains(points.at(i)) == -1)
-        {
-            std::swap(*ret, *findDisc_withOnePoint(points, i));
+    for (size_t i = 2; i < points.size(); ++i) {
+        if (ret->pointContains(points.at(i)) == -1) {
+            Circle2d* newCircle = findDisc_withOnePoint(points, static_cast<int>(i));
+            std::swap(*ret, *newCircle);
+            delete newCircle;
         }
+    }
 
     return ret;
 }
 
-/**
- * * find smallest enclosing disc of a subset of points in `points`
- * such that points[permutation[I]] is strictly on its sphere.
- * @param points a set of points in the plane
- * @param permutation a subset of points indices to be included in the disc
- * @param I : point to be strictly added to the circle
- * @return a circle that includes all points with indices in permutation
- */
-Shapes2D::Circle2d *
-SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Shapes2D::Point2d >& points, int I)
-{
+Circle2d* SmallestEnclosingDisk::findDisc_withOnePoint(std::vector<Point2d>& points, int I) {
+    auto* circle = new Circle2d(points.at(0), points.at(I));
 
-    /* init circle */
-    auto *circle = new Shapes2D::Circle2d(points.at(0),
-                                                        points.at(I));
-
-    for (int i=1; i<I; ++i)
-        if (circle->pointContains(points.at(i)) == -1)
-        {
-            std::swap(*circle, *findDisc_withTwoPoints(points, i, I));
-         }
-
+    for (int i = 1; i < I; ++i) {
+        if (circle->pointContains(points.at(i)) == -1) {
+            Circle2d* newCircle = findDisc_withTwoPoints(points, i, I);
+            std::swap(*circle, *newCircle);
+            delete newCircle;
+        }
+    }
 
     return circle;
 }
 
-/**
- * find smallest enclosing disc of a subset of points in `points`
- * such that points[permutation[I]] and points[permutation[J]] are strictly on its sphere.
- * @param points a set of points in the plane
- * @param permutation a subset of points indices to be included in the disc
- * @param I, J : two point to be strictly added to the circle.
- * @return a circle that includes all points with indices in permutation
- */
-Shapes2D::Circle2d *
-SmallestEnclosingDisk::findDisc_withTwoPoints(std::vector<Shapes2D::Point2d >& points,
-                                              int I, int J) {
+Circle2d* SmallestEnclosingDisk::findDisc_withTwoPoints(std::vector<Point2d>& points, int I, int J) {
+    auto* circ = new Circle2d(points.at(I), points.at(J));
 
-    auto *circ = new Shapes2D::Circle2d(points.at(I), points.at(J));
-
-    for (int i=0; i<I; i++)
-        if (circ->pointContains(points.at(i)) == -1)
+    for (int i = 0; i < I; i++) {
+        if (circ->pointContains(points.at(i)) == -1) {
             circ->setCircle(&points.at(I), &points.at(J), &points.at(i));
+        }
+    }
 
     return circ;
 }

@@ -10,14 +10,12 @@ class Segment2D:
     def __init__(self, *args):
         if len(args) == 0:
             self._segment = _cgeo.libShapes_2D.Segment()
-        elif len(args) == 1:
-            assert(isinstance(args[0], Segment2D))
+        elif len(args) == 1 and isinstance(args[0], Segment2D):
             self._segment = _cgeo.libShapes_2D.Segment(args[0].origin, args[0].target)
-        elif len(args) == 2:
-            assert(isinstance(args[0], Point) and isinstance(args[1], Point))
+        elif len(args) == 2 and isinstance(args[0], Point) and isinstance(args[1], Point):
             self._segment = _cgeo.libShapes_2D.Segment(args[0].cPoint, args[1].cPoint)
         else:
-            raise ValueError('too many arguments')
+            raise ValueError('Expected no arguments, one Segment2D, or two Points')
 
     def __eq__(self, other: Segment2D) -> bool:
         return self._segment.__eq__(other.cSegment)
@@ -62,21 +60,11 @@ class Segment2D:
         newSegment._segment = cSegment
         return newSegment
 
-    def __originX(self) -> float:
-        return self.origin.x
-
-    def __originY(self) -> float:
-        return self.origin.y
-
-    def __targetX(self) -> float:
-        return self.target.x
-
-    def __targetY(self) -> float:
-        return self.target.y
-
     def getUpperPoint(self) -> _cgeo.libShapes_2D.Point:
         cPoint = self._segment.getUpper()
-        return self.origin if self.__originX() == cPoint.x and self.__originY() == cPoint.y else self.target
+        if self.origin.x == cPoint.x and self.origin.y == cPoint.y:
+            return self.origin
+        return self.target
 
     def adder(self, offsetPoint: Point) -> None:
         self._segment.adder(_cgeo.libShapes_2D.Point(offsetPoint.x, offsetPoint.y))
@@ -85,13 +73,11 @@ class Segment2D:
         self._segment.rotate(d)
 
     def oriePred(self, other: Union[Point, Segment2D]) -> float:
-        if not isinstance(other, (Point, Segment2D)):
-            raise TypeError('Invalid argument type. Expected Point or Segment2D.')
-
         if isinstance(other, Point):
             return self._segment.oriePred(other.cPoint)
-
-        return self._segment.oriePred(other.cSegment)
+        if isinstance(other, Segment2D):
+            return self._segment.oriePred(other.cSegment)
+        raise TypeError('Expected Point or Segment2D')
 
     def isParallel(self, other: Segment2D) -> bool:
         return self._segment.isParallel(other.cSegment)
@@ -100,13 +86,11 @@ class Segment2D:
         return self._segment.isVertical(other.cSegment)
 
     def dist(self, other: Union[Point, Segment2D]) -> float:
-        if not isinstance(other, (Point, Segment2D)):
-            raise TypeError('Invalid argument type. Expected Point or Segment2D.')
-
         if isinstance(other, Point):
             return self._segment.dist(other.cPoint)
-
-        return self._segment.dist(other.cSegment)
+        if isinstance(other, Segment2D):
+            return self._segment.dist(other.cSegment)
+        raise TypeError('Expected Point or Segment2D')
 
     def isIntersect(self, other: Segment2D) -> bool:
         return self._segment.isIntersect(other.cSegment)

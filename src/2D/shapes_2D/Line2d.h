@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Point2d.h"
+#include <optional>
+#include <utility>
 
 class Line2d {
 public:
@@ -9,26 +11,19 @@ public:
     bool vertical;
 
     Line2d(double m, const Shapes2D::Point2d& point, bool is_vertical);
+    Line2d(const Shapes2D::Point2d& point1, const Shapes2D::Point2d& point2);
 
-    __attribute__((unused)) Line2d(double m, double x, double y, bool is_vertical);
-    Line2d(const Shapes2D::Point2d &point1, const Shapes2D::Point2d &point2) noexcept(false);
+    [[nodiscard]] std::optional<double> getSlope() const;
+    [[nodiscard]] bool isVertical() const;
+    [[nodiscard]] bool isHorizon() const;
 
-    double* getSlope();
-    bool isVertical() const;
-    bool isHorizon();
+    [[nodiscard]] std::pair<bool, double> getY_fromX(double x) const;
+    [[nodiscard]] std::pair<bool, double> getX_fromY(double y) const;
+    [[nodiscard]] double dist(const Shapes2D::Point2d& point) const;
 
-    __attribute__((unused)) double* getY_intersect() const;
+    [[nodiscard]] Shapes2D::Point2d* line_intersection(const Line2d& other) const;
+    [[nodiscard]] Shapes2D::Point2d* getProjection(const Shapes2D::Point2d& point) const;
 
-    __attribute__((unused)) double* getX_intersect() const;
-
-    __attribute__((unused)) std::pair<bool, double> getY_fromX(double x) const;
-    std::pair<bool, double> getX_fromY(double y) const;
-    double dist(__attribute__((unused)) const Shapes2D::Point2d &);
-
-    Shapes2D::Point2d* line_intersection(Line2d* v);
-
-    __attribute__((unused)) Shapes2D::Point2d * getProjection(Shapes2D::Point2d *);
-
-    ~Line2d();
+    ~Line2d() = default;
 };
 

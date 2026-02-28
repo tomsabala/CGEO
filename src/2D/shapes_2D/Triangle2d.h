@@ -1,25 +1,26 @@
 #pragma once
 
 #include "Point2d.h"
-#include "Segment2d.h"
+#include <vector>
 
-namespace Shapes2D{
-
+namespace Shapes2D {
     class Triangle2d {
     public:
-        std::vector<Shapes2D::Point2d> vertex;
+        std::vector<Point2d> vertex;
 
-        Triangle2d(Shapes2D::Point2d p, Shapes2D::Point2d q, Shapes2D::Point2d t);
-        std::vector<Shapes2D::Point2d> getVertices();
-        Shapes2D::Point2d getA();
-        Shapes2D::Point2d getB();
-        Shapes2D::Point2d getC();
-        void setA(Shapes2D::Point2d p);
-        void setB(Shapes2D::Point2d p);
-        void setC(Shapes2D::Point2d p);
+        Triangle2d(Point2d p, Point2d q, Point2d t);
+
+        std::vector<Point2d> getVertices();
+        Point2d getA();
+        Point2d getB();
+        Point2d getC();
+        void setA(Point2d p);
+        void setB(Point2d p);
+        void setC(Point2d p);
+
         double area();
         bool isWide();
-        static bool isWide(Shapes2D::Point2d A, Shapes2D::Point2d B, Shapes2D::Point2d C);
+        static bool isWide(Point2d A, Point2d B, Point2d C);
 
         ~Triangle2d() = default;
     };
