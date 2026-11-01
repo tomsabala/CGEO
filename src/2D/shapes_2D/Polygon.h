@@ -5,6 +5,8 @@
 #include <vector>
 
 namespace Shapes2D {
+    using CuspPred = bool (*)(Point2d*, Point2d*, Point2d*);
+
     struct Polygon {
     private:
         std::vector<Point2d> vertices;
@@ -42,7 +44,7 @@ namespace Shapes2D {
         bool isConvex();
         bool isY_Monotone();
         bool isInnerCusp(int i);
-        bool anyInnerCusp(int i, bool (*func)(Point2d*, Point2d*, Point2d*));
+        bool anyInnerCusp(int i, CuspPred func);
         bool isInPoly(Point2d* p);
         static std::vector<Polygon*> decomposeY_Monotone(Polygon* poly);
 

@@ -148,7 +148,7 @@ bool Polygon::isInnerCusp(int i) {
     return (prev_y > curr_y && next_y > curr_y) || (prev_y < curr_y && next_y < curr_y);
 }
 
-bool Polygon::anyInnerCusp(int i, bool (*func)(Point2d*, Point2d*, Point2d*)) {
+bool Polygon::anyInnerCusp(int i, CuspPred func) {
     int n = getSize();
     int pred = (i == 0) ? n - 1 : i - 1;
     int succ = (i == n - 1) ? 0 : i + 1;
@@ -204,11 +204,13 @@ bool Polygon::isInPoly(Point2d* p) {
 int Polygon::next_InnerCusp(Polygon* poly, bool upper) {
     int n = poly->getSize();
 
-    auto upperCusp = [](Point2d* a, Point2d* b, Point2d* c) {
+    /* Explicit function-pointer type: two lambdas have unrelated closure types,
+       so a ternary over them is ill-formed (MSVC rejects it). */
+    CuspPred upperCusp = [](Point2d* a, Point2d* b, Point2d* c) {
         return a->getY() > b->getY() && c->getY() > b->getY() && a->oriePred(*b, *c) > 0;
     };
 
-    auto lowerCusp = [](Point2d* a, Point2d* b, Point2d* c) {
+    CuspPred lowerCusp = [](Point2d* a, Point2d* b, Point2d* c) {
         return a->getY() < b->getY() && c->getY() < b->getY() && a->oriePred(*b, *c) > 0;
     };
 
