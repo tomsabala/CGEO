@@ -20,60 +20,47 @@ This is an ongoing project, some features are done and ready, and some are under
 ## Features
 <p>You can find the followong algorithms available:
 
-* [Convex Hull](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/ConvexHull2D.cpp)
+* [Convex Hull](https://github.com/tomsabala/CGEO/blob/main/src/2D/algorithms_2D/ConvexHull2D.cpp)
     * [Gift-Wrapping](https://en.wikipedia.org/wiki/Gift_wrapping_algorithm) Convex Hull by Jarvis march
     * [Grahm-Scan](https://en.wikipedia.org/wiki/Graham_scan) Convex Hull by Ronald Graham
     * Devide & Conquer Convex Hull
-* [Segmentation Intersection](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SegmentIntersection2D.cpp)
-* [Polygon Triangulation](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/Triangulation2D.cpp)
+* [Segmentation Intersection](https://github.com/tomsabala/CGEO/blob/main/src/2D/algorithms_2D/SegmentIntersection2D.cpp)
+* [Polygon Triangulation](https://github.com/tomsabala/CGEO/blob/main/src/2D/algorithms_2D/Triangulation2D.cpp)
 * Shapes
     * 2D Basic Shapes
-        * [Point](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Point2d.cpp)
-        * [Line](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Line2d.cpp)
-        * [Segment](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Segment2d.cpp)
-        * [Polygon](https://github.com/tomsabala/CGEO/blob/main/2D/Shapes_2D/Polygon.cpp)
-* [Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/DataStructures/BBST.cpp)
-* [Smallest Enclosing Disc](https://github.com/tomsabala/CGEO/blob/main/2D/Algorithms_2D/SmallestEnclosingDisk.cpp)<p/>
+        * [Point](https://github.com/tomsabala/CGEO/blob/main/src/2D/shapes_2D/Point2d.cpp)
+        * [Line](https://github.com/tomsabala/CGEO/blob/main/src/2D/shapes_2D/Line2d.cpp)
+        * [Segment](https://github.com/tomsabala/CGEO/blob/main/src/2D/shapes_2D/Segment2d.cpp)
+        * [Polygon](https://github.com/tomsabala/CGEO/blob/main/src/2D/shapes_2D/Polygon.cpp)
+* [Balanced Binary Segment Tree](https://github.com/tomsabala/CGEO/blob/main/src/data_structures/SegmentBalancedTree.cpp)
+* [Smallest Enclosing Disc](https://github.com/tomsabala/CGEO/blob/main/src/2D/algorithms_2D/SmallestEnclosingDisk.cpp)<p/>
 
 All the algorithms are implemented using c++. 
 But a user can use this source code as a C++ extension for a Python program.
 
 The source code is wrapperd with [pybind11](https://pybind11.readthedocs.io/en/stable/), 
-and you can find multiple code-examples of python programs with the wrapped package via the following [link](https://github.com/tomsabala/CGEO/tree/main/examples/py_test).
+and you can find multiple code-examples of python programs with the wrapped package via the following [link](https://github.com/tomsabala/CGEO/tree/main/examples).
 
 
-## How To Run
-For some running examples you can checkout the [examples](CGEO/examples) directory which has some cool examples for each class and algorithm. And you can also run each one of it by yourself.
+## Install
 
-I suggest reading the relevant examples before trying to use the functionality by yourself.
+    pip install cgeo
 
-You can use this project in one of the following options: <br />
+Wheels are published for CPython 3.10–3.14 on Linux (x86_64, aarch64), macOS (arm64, x86_64) and
+Windows (x86_64). No compiler required.
 
------ 
+## Build from source
 
-As a submodule within your repository with the following steps:
-1) Link the repository to your own repo with `git submodule add https://github.com/tomsabala/CGEO`.
-2) Enter the `CGEO` directory.<br />
-<t/>2.1) Update the pybind11 extension with `git submodule update --init`. <br/>
-<t/>2.2) Build the package with `./run.sh`. <br />
+    git clone git@github.com:tomsabala/CGEO.git
+    cd CGEO
+    pip install -e ".[test]"
+    pytest tests
 
------
+The C++ core can also be built on its own, which produces the `cgeo_core` static library and the
+`_cgeo` extension module:
 
-Clone this repo, to your local machine:
-1) Clone repo: `git clone git@github.com:tomsabala/CGEO.git`.
-2) Enter the `CGEO` directory.<br />
-<t/>2.1) Update the pybind11 extension with `git submodule update --init`. <br />
-<t/>2.2) Build the package with `./run.sh`.
-
-
-You can import the library in any `*.py` file with `from CGEO.build import libGeo_2D`.
-In order to run your `file.py` program: 
-1) Set the path for user defined modules with `export PYTHONPATH=.`.
-2) Execute program `python file.py`.
-
-::notice that the `run.sh` shell script includes some linux os commands. If you are under windows OS, build the library using the suitable commands.
-
-After scanning dependencies and build are finish, you can use it as an extension in your own python environment.
+    cmake -B build -DCMAKE_BUILD_TYPE=Release
+    cmake --build build -j
 
 <!--- 
 ## Some Nice Examples

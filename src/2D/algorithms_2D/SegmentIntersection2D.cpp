@@ -94,7 +94,7 @@ void SegmentIntersection2d::handleEventPoint(EventMap::iterator e, EventMap* eve
  * @return vector<int>, all indices of segments that has answer the indicator
  */
 segmentsVector
-SegmentIntersection2d::findInteriorMap(std::multimap<Point, int, event_comp>::iterator e,
+SegmentIntersection2d::findInteriorMap(EventMap::iterator e,
                                        SegmentBalancedTree *status)
                                        {
     auto *segment_node = status->search_p(e->first);
@@ -143,17 +143,17 @@ SegmentIntersection2d::findInteriorMap(std::multimap<Point, int, event_comp>::it
 }
 
 
-bool SegmentIntersection2d::isInterior(const Segment & s, const Point & p) {
+bool SegmentIntersection2d::isInterior(const Segment2d & s, const Point2d & p) {
     if(!s.containPoint(p)) return false; /* point is not on the segment */
     return s.getUpper() != p && s.getLower() != p; /* check that the point is truly interior */
 }
 
 
-void SegmentIntersection2d::handle_segments( Segment & s,  Segment & t,
-                                            const Point & p,
-                                            std::multimap<Point , int, event_comp> *events) {
+void SegmentIntersection2d::handle_segments( Segment2d & s,  Segment2d & t,
+                                            const Point2d & p,
+                                            EventMap *events) {
 
-    auto * intersect_result = new std::pair<bool, Point *>();
+    auto * intersect_result = new std::pair<bool, Point2d *>();
     intersect(intersect_result, s, t, false); /* compute the intersection point */
 
     /* segment do intersect and the point haven't been discovered yet */
@@ -167,22 +167,6 @@ void SegmentIntersection2d::handle_segments( Segment & s,  Segment & t,
     delete intersect_result;
 }
 
-/**
- * debug functionality
- */
-__attribute__((unused)) void
-SegmentIntersection2d::print_status(SegmentBalancedTree *status)
-{
-    status->walkInOrder();
-}
-
-__attribute__((unused)) void
-SegmentIntersection2d::print_events(
-        std::multimap<Point , int, event_comp> *events) {
-    for(auto & event : *events){
-        std::cout<<event.first.toStr() << '\n';
-    }
-}
 
 /**
  * base function. receive a segments vector and return all intersection points
@@ -203,14 +187,14 @@ void SegmentIntersection2d::intersect(segmentsVector &segments,
     Upper_end_point.clear();
     Lower_end_point.clear();
 
-    auto *events = new std::multimap<Point, int, event_comp>();
+    auto *events = new EventMap();
     auto *status = new SegmentBalancedTree();
 
     // Insert upper and lower points
     for (int k = 0; k < segments.size(); ++k)
     {
-        Point lower_point;
-        Point upper_point;
+        Point2d lower_point;
+        Point2d upper_point;
         if (segments[k].getOrigin().getY() != segments[k].getTarget().getY())
         {
             lower_point = segments[k].getLower();
@@ -227,12 +211,12 @@ void SegmentIntersection2d::intersect(segmentsVector &segments,
         if(Lower_end_point.find(lower_pair) != Lower_end_point.end())
             Lower_end_point[lower_pair].emplace_back(segments[k], k);
         else
-            Lower_end_point[lower_pair] = std::vector<std::pair<Segment , int>>{std::make_pair(segments[k], k)};
+            Lower_end_point[lower_pair] = std::vector<SegmentIndexPair>{std::make_pair(segments[k], k)};
 
         if(Upper_end_point.find(upper_pair) != Upper_end_point.end())
             Upper_end_point[upper_pair].emplace_back(segments[k], k);
         else
-            Upper_end_point[upper_pair] = std::vector<std::pair<Segment , int>>{std::make_pair(segments[k], k)};
+            Upper_end_point[upper_pair] = std::vector<SegmentIndexPair>{std::make_pair(segments[k], k)};
 
         if(checked_points.find(upper_pair) == checked_points.end()){
             events->insert(std::make_pair(upper_point, k));

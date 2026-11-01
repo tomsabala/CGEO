@@ -1,14 +1,15 @@
 import json
+from pathlib import Path
 
 from shapely.geometry import Polygon as sPolygon
 
-from py_src.cgeo.modules.polygon import Polygon, Point
-from py_src.cgeo.utilities.c_utilities.global_c_utils import grahamConvexHull
-from py_src.cgeo.utilities.get_random_polygon import generateRandomPolygonPoints, toConvexContour
+from cgeo.modules.polygon import Polygon, Point
+from cgeo.utilities.c_utilities.global_c_utils import grahamConvexHull
+from cgeo.utilities.get_random_polygon import generateRandomPolygonPoints, toConvexContour
 
 
 def _getPolygonSizeTests():
-    with open('polygon_size_tests.json', 'r') as file:
+    with open(Path(__file__).with_name('polygon_size_tests.json'), 'r') as file:
         polygonSizeTests = json.load(file)
     return polygonSizeTests
 

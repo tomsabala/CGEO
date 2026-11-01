@@ -8,9 +8,9 @@ namespace Shapes2D {
     class Circle2d {
     private:
         double r;
-        Point2d* c;
+        Point2d c;
 
-        static std::pair<double, Point2d*> circleFrom3Points(const Point2d&, const Point2d&, const Point2d&);
+        static std::pair<double, Point2d> circleFrom3Points(const Point2d&, const Point2d&, const Point2d&);
 
     public:
         Circle2d();
@@ -21,7 +21,7 @@ namespace Shapes2D {
 
         [[nodiscard]] double getRadius() const;
         void setRadius(double radius);
-        Point2d* getCenter();
+        [[nodiscard]] const Point2d& getCenter() const;
         void setCenter(Point2d* p);
         void setCircle(Point2d* p, Point2d* q, Point2d* t);
 
@@ -34,7 +34,5 @@ namespace Shapes2D {
         int segmentContains(Segment2d* s);
         int circleContains(Circle2d* circ);
         int polyContains(Polygon* poly);
-
-        ~Circle2d();
     };
 }

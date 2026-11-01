@@ -1,27 +1,33 @@
-cmake_minimum_required(VERSION 3.16.3)
-project(CGEO C CXX)
-set(CMAKE_CXX_STANDARD 14)
+cmake_minimum_required(VERSION 3.18)
+project(CGEO CXX)
 
-add_subdirectory( extern/pybind11 EXCLUDE_FROM_ALL)
-add_subdirectory(src/2D/algorithms_2D)
-add_subdirectory(src/data_structures)
-add_subdirectory(src/2D/shapes_2D)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-add_library(_cgeo MODULE src/2D/2D_bindings.cpp
-        src/main.cpp)
+file(GLOB_RECURSE CGEO_CORE_SOURCES CONFIGURE_DEPENDS
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/2D/shapes_2D/*.cpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/2D/algorithms_2D/*.cpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/3D/*.cpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/src/data_structures/*.cpp")
 
-target_link_libraries(_cgeo PRIVATE Shapes2D)
-target_link_libraries(_cgeo PRIVATE Algorithms2D)
-target_link_libraries(_cgeo PRIVATE Datastructures2D)
-target_link_libraries(_cgeo PUBLIC pybind11::module)
+add_library(cgeo_core STATIC ${CGEO_CORE_SOURCES})
+target_include_directories(cgeo_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
-pybind11_add_module(Point2D MODULE src/2D/shapes_2D/Point2d.cpp)
+option(CGEO_BUILD_PYTHON "Build the pybind11 extension module" ON)
 
-add_definitions( -DEXTENSION_NAME=_cgeo )
+if(CGEO_BUILD_PYTHON)
+    find_package(Python 3.10 COMPONENTS Interpreter Development.Module REQUIRED)
+    find_package(pybind11 CONFIG QUIET)
+    if(NOT pybind11_FOUND)
+        include(FetchContent)
+        FetchContent_Declare(pybind11
+            GIT_REPOSITORY https://github.com/pybind/pybind11.git
+            GIT_TAG v3.1.0)
+        FetchContent_MakeAvailable(pybind11)
+    endif()
 
-install(TARGETS _cgeo
-        PUBLIC_HEADER
-        DESTINATION lib
-        LIBRARY DESTINATION lib
-        )
-
+    pybind11_add_module(_cgeo src/2D/2D_bindings.cpp)
+    target_link_libraries(_cgeo PRIVATE cgeo_core)
+    target_compile_definitions(_cgeo PRIVATE EXTENSION_NAME=_cgeo)
+endif()

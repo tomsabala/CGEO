@@ -1,36 +1,37 @@
-# Prerequisites
-*.d
+# Build output
+build/
+dist/
+wheelhouse/
+*.egg-info/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
+# Compiled extensions and objects
 *.so
 *.dylib
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+*.pyd
+*.o
+*.obj
 *.a
 *.lib
+*.d
+*.gch
+*.pch
 
-# Executables
-*.exe
-*.out
-*.app
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
 
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
 
-.idea
-extern/*
+# Tooling / editors
+.gitnexus/
+.claude/skills/gitnexus/
+.idea/
+.vscode/
+.DS_Store

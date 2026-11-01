@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=77", "pybind11>=2.13,<4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cgeo"
+version = "0.2.0"
+description = "Computational geometry primitives and algorithms with a C++ core"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE.md"]
+authors = [{ name = "Tom Sabala", email = "sabala144@gmail.com" }]
+keywords = ["computational-geometry", "convex-hull", "triangulation", "sweep-line", "pybind11"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.5", "numpy>=1.21"]
+test = ["pytest>=7.4", "shapely>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/tomsabala/CGEO"
+Repository = "https://github.com/tomsabala/CGEO"
+Issues = "https://github.com/tomsabala/CGEO/issues"
+
+[tool.setuptools.packages.find]
+include = ["cgeo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+
+[tool.cibuildwheel]
+build = ["cp310-*", "cp311-*", "cp312-*", "cp313-*", "cp314-*"]
+skip = ["*_i686", "*_ppc64le", "*_s390x", "*_armv7l", "*_riscv64", "pp*", "cp3??t-*"]
+build-verbosity = 1
+test-requires = ["pytest"]
+test-sources = ["tests"]
+test-command = "pytest tests/test_smoke.py"
