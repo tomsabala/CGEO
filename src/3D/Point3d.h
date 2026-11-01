@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <cmath>
 #include <valarray>
 #define eps     0.00000001
 namespace Shapes3d{

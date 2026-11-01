@@ -1,6 +1,8 @@
 #pragma once
 
+#include <functional>
 #include <map>
+#include <string>
 #include <unordered_set>
 #include "../shapes_2D/Segment2d.h"
 #include "../../data_structures/SegmentBalancedTree.h"

@@ -1,6 +1,7 @@
 
 #pragma once
 #include "Point3d.h"
+#include <utility>
 
 namespace Shapes3d{
     class Face3d {

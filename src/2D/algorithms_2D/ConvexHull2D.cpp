@@ -1,5 +1,6 @@
 #include "ConvexHull2D.h"
 #include <algorithm>
+#include <functional>
 
 using namespace Algorithms2d;
 using namespace Shapes2D;

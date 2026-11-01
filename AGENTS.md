@@ -22,9 +22,14 @@ vendored pybind11 submodule under `extern/`. Anything referring to those is stal
 from pip (`build-system.requires`); CMake takes it from `find_package(pybind11 CONFIG)` and falls
 back to `FetchContent` only when pip's copy is absent.
 
-Importing `cgeo` from the repository root with a non-editable install fails: the source directory
-`cgeo/` shadows the installed package and has no compiled `_cgeo`. Run tests from anywhere else,
-or install with `-e`.
+With a **non-editable** install, anything that puts the repository root on `sys.path` imports the
+source directory `cgeo/`, which has no compiled `_cgeo`, and fails. So run `pytest tests`, never
+`python -m pytest tests` (`-m` prepends the cwd). CI does the same, for the same reason. An
+editable install (`pip install -e .`) builds `_cgeo` into the source tree and sidesteps it.
+
+Standard C++ headers must be included explicitly in the translation unit that needs them. GCC 11
+pulls `<functional>` in through `<algorithm>`; GCC 13+, Apple clang and MSVC do not, and a missing
+include shows up only in CI.
 
 ## Layout
 

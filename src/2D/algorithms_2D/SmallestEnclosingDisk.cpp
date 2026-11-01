@@ -1,6 +1,7 @@
 #include "SmallestEnclosingDisk.h"
 #include <random>
 #include <algorithm>
+#include <utility>
 
 using namespace Algorithms2d;
 using namespace Shapes2D;

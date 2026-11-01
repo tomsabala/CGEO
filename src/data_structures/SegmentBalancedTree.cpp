@@ -1,5 +1,7 @@
 
 #include "SegmentBalancedTree.h"
+#include <algorithm>
+#include <cmath>
 
 void SegmentBalancedTree::insert(const Shapes2D::Segment2d &s) {
     if (search(s) != nullptr) {

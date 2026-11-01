@@ -27,7 +27,10 @@ jobs:
       - name: Install
         run: python -m pip install --upgrade pip && python -m pip install ".[test]"
       - name: Test
-        run: python -m pytest tests -q
+        # `pytest`, not `python -m pytest`: the latter puts the repo root on
+        # sys.path, where the source `cgeo/` package shadows the installed one
+        # and has no compiled `_cgeo`.
+        run: pytest tests -q
 
   cmake:
     name: CMake build

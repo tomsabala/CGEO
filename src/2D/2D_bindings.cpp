@@ -1,6 +1,9 @@
 #include "2D_bindings.h"
 #include "pybind11/pybind11.h"
 #include "pybind11/stl.h"
+#include <cmath>
+#include <string>
+#include <vector>
 
 double round_to(double value, double precision = 1.0)
 {
