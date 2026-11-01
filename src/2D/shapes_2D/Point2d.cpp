@@ -3,6 +3,11 @@
 
 using namespace Shapes2D;
 
+namespace {
+    /* M_PI is a POSIX extension; MSVC does not define it without _USE_MATH_DEFINES. */
+    constexpr double kPi = 3.14159265358979323846;
+}
+
 Point2d::Point2d() : x(0), y(0) {}
 
 Point2d::Point2d(double ax, double ay) : x(ax), y(ay) {}
@@ -32,7 +37,7 @@ std::string Point2d::toStr() const {
 
 void Point2d::rotate(double &deg) noexcept(false) {
     deg = fmod(deg, 360);
-    double radians = 2 * M_PI - deg * M_PI / 180;
+    double radians = 2 * kPi - deg * kPi / 180;
     double c = cos(radians);
     double s = sin(radians);
     double newX = x * c - y * s;
@@ -43,7 +48,7 @@ void Point2d::rotate(double &deg) noexcept(false) {
 
 void Point2d::rotate(double &deg, const Point2d& p) noexcept(false) {
     deg = fmod(deg, 360);
-    double radians = 2 * M_PI - deg * M_PI / 180;
+    double radians = 2 * kPi - deg * kPi / 180;
     double c = cos(radians);
     double s = sin(radians);
     double dx = x - p.x;
